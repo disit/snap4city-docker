@@ -42,6 +42,15 @@ services:
       OWN_SSO_USERINFO_ENDPOINT: "http://keycloak:8088/auth/realms/master/protocol/openid-connect/userinfo"
       OWN_LDAPSERVER: "ldap-server"
       OWN_LDAPBASEDN: "dc=ldap,dc=snap4demo,dc=com"
+  dashboard-backend:
+    image: disitlab/dashboard-backend:v0
+    environment:
+      url: "jdbc:mysql://dashboarddb:3306"
+      database: "Dashboard"
+      user: "user"
+      psw: "passwordx"
+    depends_on: 
+      - dashboarddb
   personaldata:
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     image: disitlab/personaldata:v0
@@ -49,7 +58,16 @@ services:
 #      - /home/debian/snap4city/PersonalDataManager/target/datamanager-0.0.1.war:/usr/local/tomcat/webapps/datamanager.war
       - ./datamanager-logs:/datamanager
     environment:
-      "spring.profiles.active": "local"
+      "spring.profiles.active": "deploy"
+      "profiledb.datasource.url": "jdbc:mysql://dashboarddb:3306/profiledb"
+      "profiledb.datasource.username": "user"
+      "profiledb.datasource.password": "passwordx"
+      "spring.openidconnect.userinfo_endpoint": "http://keycloak:8088/auth/realms/master/protocol/openid-connect/userinfo"
+      "spring.openidconnect.userinfo_endpoint_test": ""
+      "spring.ldap.url": "ldap://ldap-server:389"
+      "spring.ldap.basicdn": "dc=ldap,dc=snap4demo,dc=com"
+      "spring.ldap.managerdn": "cn=admin,dc=ldap,dc=snap4demo,dc=com"
+      "spring.ldap.password": "secret"
       logFileFolder: ""
     ports:
       - 8080:8080

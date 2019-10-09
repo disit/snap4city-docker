@@ -43,6 +43,7 @@ module.exports = {
     wsServerRetryTime: 120,
     wsReconnectTimeout: 1200,
 
+    myPersonalDataUrl: "http://personaldata:8080/datamanager",
 //    eventLogUri: 'http://192.168.1.43/RsyslogAPI/rsyslog.php',
 
     keycloakBaseUri: keycloak_base_uri,
