@@ -17,8 +17,8 @@ services:
       DBB_LDAPSERVER: "ldap-server"
       DBB_LDAPPORT: "389"
       DBB_LDAPTOOLNAME: "Dashboard"
-      DBB_LDAPBASEDN: "dc=ldap,dc=snap4demo,dc=com"
-      DBB_LDAPADMINDN: "cn=admin,dc=ldap,dc=snap4demo,dc=com"
+      DBB_LDAPBASEDN: "dc=ldap,dc=organization,dc=com"
+      DBB_LDAPADMINDN: "cn=admin,dc=ldap,dc=organization,dc=com"
       DBB_LDAPADMINPWD: "secret"
       DBB_SSOCLIENTSECRET: "fd4b64fc-eabd-41e8-aef4-34c9f6864b2c"
       DBB_SSOENDPOINTSFROMURL: "no"
@@ -40,7 +40,7 @@ services:
       OWN_DB_PWD: "passwordx"
       OWN_SSO_USERINFO_ENDPOINT: "http://keycloak:8088/auth/realms/master/protocol/openid-connect/userinfo"
       OWN_LDAPSERVER: "ldap-server"
-      OWN_LDAPBASEDN: "dc=ldap,dc=snap4demo,dc=com"
+      OWN_LDAPBASEDN: "dc=ldap,dc=organization,dc=com"
     depends_on:
       - dashboarddb
       - keycloak 
@@ -67,8 +67,8 @@ services:
       DBB_LDAPSERVER: "ldap-server"
       DBB_LDAPPORT: "389"
       DBB_LDAPTOOLNAME: "Dashboard"
-      DBB_LDAPBASEDN: "dc=ldap,dc=snap4demo,dc=com"
-      DBB_LDAPADMINDN: "cn=admin,dc=ldap,dc=snap4demo,dc=com"
+      DBB_LDAPBASEDN: "dc=ldap,dc=organization,dc=com"
+      DBB_LDAPADMINDN: "cn=admin,dc=ldap,dc=organization,dc=com"
       DBB_LDAPADMINPWD: "secret"
       DBB_SSOCLIENTSECRET: "fd4b64fc-eabd-41e8-aef4-34c9f6864b2c"
       DBB_SSOENDPOINTSFROMURL: "no"
@@ -90,7 +90,7 @@ services:
       OWN_DB_PWD: "passwordx"
       OWN_SSO_USERINFO_ENDPOINT: "http://keycloak:8088/auth/realms/master/protocol/openid-connect/userinfo"
       OWN_LDAPSERVER: "ldap-server"
-      OWN_LDAPBASEDN: "dc=ldap,dc=snap4demo,dc=com"
+      OWN_LDAPBASEDN: "dc=ldap,dc=organization,dc=com"
     command: /bin/sh -c "cd /var/www/html/dashboardSmartCity/ScheduledTasks/; php Personal_Data_FeedDashboardWizard.php"
   personaldata:
     image: disitlab/personaldata:v0
@@ -106,8 +106,8 @@ services:
       "spring.openidconnect.userinfo_endpoint": "http://keycloak:8088/auth/realms/master/protocol/openid-connect/userinfo"
       "spring.openidconnect.userinfo_endpoint_test": ""
       "spring.ldap.url": "ldap://ldap-server:389"
-      "spring.ldap.basicdn": "dc=ldap,dc=snap4demo,dc=com"
-      "spring.ldap.managerdn": "cn=admin,dc=ldap,dc=snap4demo,dc=com"
+      "spring.ldap.basicdn": "dc=ldap,dc=organization,dc=com"
+      "spring.ldap.managerdn": "cn=admin,dc=ldap,dc=organization,dc=com"
       "spring.ldap.password": "secret"
       logFileFolder: ""
     ports:
@@ -151,11 +151,11 @@ services:
     ports:
       - "3306:3306"
   ldap-server:
-    image: disitlab/snap4demo-openldap:v0 
+    image: disitlab/preconf-openldap:v0 
 #    image: osixia/openldap
     environment:
-      LDAP_ORGANISATION: "snap4demo"
-      LDAP_DOMAIN: "ldap.snap4demo.com"
+      LDAP_ORGANISATION: "organization"
+      LDAP_DOMAIN: "ldap.organization.com"
       LDAP_ADMIN_PASSWORD: "secret"
     ports:
       - "389:389"
@@ -169,7 +169,7 @@ services:
     depends_on:
       - "ldap-server"
   keycloak:
-      image: disitlab/snap4demo-keycloak:v0 
+      image: disitlab/preconf-keycloak:v0 
 #      image: jboss/keycloak:4.8.3.Final 
       command: ["-Djboss.socket.binding.port-offset=8"]
       ports:
@@ -178,6 +178,6 @@ services:
         KEYCLOAK_USER: admin
         KEYCLOAK_PASSWORD: admin 
       depends_on:
-        - "ldap-server"
+        - ldap-server
 volumes:
   dashboarddb:
