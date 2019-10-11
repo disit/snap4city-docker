@@ -4,7 +4,8 @@ services:
     image: disitlab/dashboard-builder:v0
     ports:
       - "80:80"
-#    volumes:
+    volumes:
+       - ./dashboard-builder-conf:/var/www/html/dashboardSmartCity/conf
 #      - /home/debian/dashboard-builder/dashboard_frontend:/var/www/html/dashboardSmartCity
 #      - /home/debian/snap4city/Ownership-API:/var/www/html/ownership-api
     environment:
@@ -46,17 +47,15 @@ services:
       - keycloak 
   dashboard-backend:
     image: disitlab/dashboard-backend:v0
-    environment:
-      url: "jdbc:mysql://dashboarddb:3306"
-      database: "Dashboard"
-      user: "user"
-      psw: "passwordx"
+    volumes:
+      - ./dashboard-backend-conf/config.properties:/usr/app/config.properties
     depends_on: 
       - dashboarddb
   dashboard-cron:
     image: disitlab/dashboard-builder:v0
     volumes:
-      - /home/debian/dashboard-builder/dashboard_frontend:/var/www/html/dashboardSmartCity
+       - ./dashboard-builder-conf:/var/www/html/dashboardSmartCity/conf
+ #     - /home/debian/dashboard-builder/dashboard_frontend:/var/www/html/dashboardSmartCity
     environment:
       DBB_HOST: "dashboarddb"
       DBB_USER: "user"
@@ -96,7 +95,6 @@ services:
     image: disitlab/personaldata:v0
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     volumes:
-#      - /home/debian/snap4city/PersonalDataManager/target/datamanager-0.0.1.war:/usr/local/tomcat/webapps/datamanager.war
       - ./datamanager-logs:/datamanager
     environment:
       "spring.profiles.active": "deploy"
