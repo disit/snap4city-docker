@@ -28,8 +28,10 @@ services:
     image: disitlab/dashboard-builder:v0
     volumes:
        - ./dashboard-builder-conf:/var/www/html/dashboardSmartCity/conf
+       - ./dashboard-cron-conf/crontab:/etc/cron.d/crontab
  #     - /home/debian/dashboard-builder/dashboard_frontend:/var/www/html/dashboardSmartCity
-    command: /bin/sh -c "cd /var/www/html/dashboardSmartCity/ScheduledTasks/; php Personal_Data_FeedDashboardWizard.php"
+#    command: /bin/sh -c "cd /var/www/html/dashboardSmartCity/ScheduledTasks/; php Personal_Data_FeedDashboardWizard.php"
+    command: /bin/sh -c "cron -f"
   personaldata:
     image: disitlab/personaldata:v0
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
