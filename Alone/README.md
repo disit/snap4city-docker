@@ -1,4 +1,5 @@
 # How to run
+warning: this is still BETA version
 
 ```
 cd snap4city-docker/Alone
