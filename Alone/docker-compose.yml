@@ -9,7 +9,7 @@ services:
        - ./notificator-conf:/var/www/html/notificator/conf
 #      - /home/debian/dashboard-builder/dashboard_frontend:/var/www/html/dashboardSmartCity
 #      - /home/debian/snap4city/Ownership-API:/var/www/html/ownership-api
-       - /home/debian/notificator/www:/var/www/html/notificator
+#       - /home/debian/notificator/www:/var/www/html/notificator
     environment:
       OWN_DB_HOST: "dashboarddb"
       OWN_DB_USER: "user"
