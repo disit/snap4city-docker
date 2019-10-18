@@ -1,5 +1,5 @@
 # How to run
-warning: this is still BETA version
+warning: **this is BETA version**
 
 ```
 cd snap4city-docker/Alone
@@ -12,4 +12,4 @@ then you have to set in the client hosts file (/etc/hosts or the windows equival
 ```
 
 wait the logs are stabilized and the db is created then open on the browser http://dashboard/dashboardSmartCity 
-to login use the credentials provaided on https://www.snap4city.org/drupal/node/487
+to login use the credentials provided on https://www.snap4city.org/drupal/node/487
