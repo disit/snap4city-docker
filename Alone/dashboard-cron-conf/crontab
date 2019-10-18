@@ -1,1 +1,2 @@
-* * * * * root /var/www/html/dashboardSmartCity/ScheduledTasks/run-iotapp.sh > /proc/1/fd/1 2>/proc/1/fd/2
+* * * * * root export PATH=$PATH:/usr/local/bin; /var/www/html/dashboardSmartCity/ScheduledTasks/run-iotapp.sh > /proc/1/fd/1 2>/proc/1/fd/2
+* * * * * root echo "path: $PATH" > /proc/1/fd/1 2>/proc/1/fd/2
