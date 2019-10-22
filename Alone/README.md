@@ -7,6 +7,9 @@ docker-compose up
 ```
 on the host are mapped ports:
 - 80 for main interface
+- 389, 636 for ldap server
+- 1880 for nodered application
+- 9000 for dashboard builder websocket server
 - 8080 for personaldata service
 - 8088 for keycloak access
 - 3306 to access to mysql (for debugging)
