@@ -20,4 +20,4 @@ then you have to set in the client hosts file (/etc/hosts or the windows equival
 wait the logs are stabilized and the db is created then open on the browser http://dashboard/dashboardSmartCity 
 to login use the credentials provided on https://www.snap4city.org/drupal/node/487
 
-**Note:** when connecting to the server you need to use http://dashboard/... and NOT http://localhost/... or http://<ip of server>/... because the hostname in the connection is used to select the proper menu to be shown to the user and you will get an empty menu.
+**Note:** when connecting to the server you need to use `http://dashboard/...` and NOT `http://localhost/...` or `http://<ip of server>/...` because the hostname in the connection is used to select the proper menu to be shown to the user and you will get an empty menu.
