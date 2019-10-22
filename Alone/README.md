@@ -12,7 +12,7 @@ on the host are mapped ports:
 - 3306 to access to mysql (for debugging)
 - 6443 for phpldapadmin
 
-then you have to set in the client hosts file (/etc/hosts or the windows equivalent C:\Windows\System32\drivers\etc\hosts) a row with
+**IMPORTANT:** you have to change in the client running the browser the hosts file (/etc/hosts or the windows equivalent C:\Windows\System32\drivers\etc\hosts) adding a row with
 ```
 <docker machine ip>  dashboard keycloak wsserver iotapp personaldata 
 ```
