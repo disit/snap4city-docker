@@ -17,10 +17,16 @@ on the host are mapped ports:
 
 **IMPORTANT:** you have to change in the client running the browser the hosts file (/etc/hosts or the windows equivalent C:\Windows\System32\drivers\etc\hosts) adding a row with
 ```
-<docker machine ip>  dashboard keycloak wsserver iotapp personaldata 
+<docker machine ip>  dashboard keycloak wsserver iotapp personaldata myldap
 ```
 
 wait the logs are stabilized and the db is created then open on the browser http://dashboard/dashboardSmartCity 
 to login use the credentials provided on https://www.snap4city.org/drupal/node/487
+
+to administrate the ldap server use https://myldap:6443/phpldapadmin and login with 
+```
+user: cn=admin,dc=ldap,dc=organization,dc=com 
+password: secret
+```
 
 **Note:** when connecting to the server you need to use `http://dashboard/...` and NOT `http://localhost/...` or `http://<ip of server>/...` because the hostname in the connection is used to select the proper menu to be shown to the user and otherwise you will get an empty menu.
