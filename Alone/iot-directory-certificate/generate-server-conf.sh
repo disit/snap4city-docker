@@ -1,6 +1,6 @@
-export IOTDIR_SERVER_COMMON_NAME=iotobsf-altair
-export IOTDIR_SERVER_PK12_PASSWORD=h8d83jfmf088dhdhf
-export IOTDIR_SERVER_TRUSTSTORE_PASSWORD=yusgdgd77d8djdnd
+export IOTDIR_SERVER_COMMON_NAME=<orion_broker_common_name>
+export IOTDIR_SERVER_PK12_PASSWORD=<pk12_password>
+export IOTDIR_SERVER_TRUSTSTORE_PASSWORD=<server_truststore_password>
 
 rm -r caCerts.jks 
 rm -r tomcat.keystore 

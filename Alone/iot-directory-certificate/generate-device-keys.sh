@@ -1,5 +1,5 @@
 export IOTDIR_CA_CRL_URI=URI:http://dashboard/example_ca.crl
-export IOTDIR_CA_PASSWORD=pass:a56h78jhd7bd4j9hgvj
+export IOTDIR_CA_PASSWORD=pass:<ca_password>
 
 cd $3
 export IOTDIR_CLIENT_COMMON_NAME=$1

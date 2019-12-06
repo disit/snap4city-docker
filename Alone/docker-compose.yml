@@ -1,12 +1,15 @@
 version: "3"
 services:
   dashboard:
-    image: disitlab/dashboard-builder:v0
+    image: disitlab/dashboard-builder:v1
     ports:
       - "80:80"
     volumes:
        - ./dashboard-builder-conf:/var/www/html/dashboardSmartCity/conf
        - ./notificator-conf:/var/www/html/notificator/conf
+       - ./iot-directory-conf:/var/www/html/iot-directory/conf
+       - ./iot-directory-certificate:/var/www/certificate
+       - ./iot-directory-log:/var/www/log
 #      - /home/debian/dashboard-builder/dashboard_frontend:/var/www/html/dashboardSmartCity
 #      - /home/debian/snap4city/Ownership-API:/var/www/html/ownership-api
 #       - /home/debian/notificator/www:/var/www/html/notificator
@@ -59,7 +62,7 @@ services:
       - dashboarddb
       - keycloak 
   wsserver:
-    image: disitlab/websocketserver:v0
+    image: disitlab/websocketserver:v1
     ports:
       - 9000:9000
     volumes:
@@ -83,6 +86,7 @@ services:
       - ./database/dashboard.sql:/docker-entrypoint-initdb.d/0_init.sql
       - ./database/profiledb.sql:/docker-entrypoint-initdb.d/1_init.sql
       - ./database/notificator.sql:/docker-entrypoint-initdb.d/2_init.sql
+      - ./database/iot-directory.sql:/docker-entrypoint-initdb.d/3_init.sql
     environment:
       TZ: "Europe/Rome"
       MYSQL_ALLOW_EMPTY_PASSWORD: "no"
@@ -93,7 +97,7 @@ services:
     ports:
       - "3306:3306"
   ldap-server:
-    image: disitlab/preconf-openldap:v0 
+    image: disitlab/preconf-openldap:v1 
 #    image: osixia/openldap
     environment:
       LDAP_ORGANISATION: "organization"
