@@ -1,0 +1,43 @@
+version: "3.7"
+services:
+   orionbrokerfilter:
+      image: disitlab/orionbrokerfilter:v0
+      depends_on:
+        - orion
+      ports:
+        - "8443:8443"
+      volumes:
+        - ./orionbrokerfilter-logs:/usr/local/tomcat/logs/orionbrokerfilter
+        - ./tomcat-conf:/usr/local/tomcat/credentials
+      environment:
+        "spring.profiles.active": "deploy"
+        "spring.openidconnect.clientid": "orionbrokerfilter"
+        "spring.openidconnect.username": "rootfilter"
+        "spring.openidconnect.password": "<password>"
+        "spring.openidconnect.token_endpoint": "https://www.snap4city.org/auth/realms/master/protocol/openid-connect/token"
+        "spring.ownership_endpoint": "http://dashboard/ownership-api/v1/list"
+        "spring.delegation_endpoint": "http://dashboard:8080/datamanager/api/v1/apps"
+        "spring.servicemapkb_endpoint": "http://kbssm/WebAppGrafo/sparql"
+        "spring.orionbroker_endpoint": "http://orion:1026"
+        "spring.elapsingcache.minutes": "3"
+        "cors.origins.accepted": "http://test"
+        "spring.prefixelementID": "<Organization>:<BrokerName>"
+        "connection.timeout": "10000"
+        "JAVA_OPTS": "-DlogFileFolder=/usr/local/tomcat/logs -DtruststorePass=<mytruststorepass> -DkeystorePass=<mykeystorepass>"
+      extra_hosts:
+        - "dashboard:192.168.0.10"
+        - "kbssm:192.168.0.206"
+      restart: always
+   orion:
+      image: fiware/orion
+      depends_on:
+        - mongo
+      ports:
+        - "1026:1026"
+      command: -dbhost mongo
+      restart: always
+   mongo:
+      image: mongo:3.6
+      restart: always
+      volumes:
+        - ./orion-mongodb:/data/db
