@@ -3,6 +3,7 @@ warning: **this is BETA version**
 
 ```
 cd snap4city-docker/Alone
+chmod a+w iotapp-nr
 docker-compose up
 ```
 on the host are mapped ports:
