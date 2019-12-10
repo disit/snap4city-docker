@@ -314,7 +314,27 @@ CREATE TABLE `limits` (
 
 LOCK TABLES `limits` WRITE;
 /*!40000 ALTER TABLE `limits` DISABLE KEYS */;
-INSERT INTO `limits` VALUES ('any','any','any','DashboardID',5);
+INSERT INTO `limits` VALUES ('any','any','any','AppID',0);
+INSERT INTO `limits` VALUES ('any','any','any','BrokerID',1);
+INSERT INTO `limits` VALUES ('any','any','any','DashboardID',10);
+INSERT INTO `limits` VALUES ('any','any','any','IOTID',5);
+INSERT INTO `limits` VALUES ('any','any','any','ModelID',1);
+INSERT INTO `limits` VALUES ('any','any','AreaManager','AppID',3);
+INSERT INTO `limits` VALUES ('any','any','AreaManager','DAAppID',3);
+INSERT INTO `limits` VALUES ('any','any','AreaManager','PortiaID',1);
+INSERT INTO `limits` VALUES ('any','any','RootAdmin','BrokerID',999);
+INSERT INTO `limits` VALUES ('any','any','RootAdmin','DAAppID',10);
+INSERT INTO `limits` VALUES ('any','any','RootAdmin','DashboardID',100);
+INSERT INTO `limits` VALUES ('any','any','RootAdmin','IOTID',999);
+INSERT INTO `limits` VALUES ('any','any','RootAdmin','ModelID',999);
+INSERT INTO `limits` VALUES ('any','any','RootAdmin','PortiaID',1);
+INSERT INTO `limits` VALUES ('any','any','ToolAdmin','AppID',10);
+INSERT INTO `limits` VALUES ('any','any','ToolAdmin','BrokerID',20);
+INSERT INTO `limits` VALUES ('any','any','ToolAdmin','DAAppID',3);
+INSERT INTO `limits` VALUES ('any','any','ToolAdmin','DashboardID',50);
+INSERT INTO `limits` VALUES ('any','any','ToolAdmin','IOTID',20);
+INSERT INTO `limits` VALUES ('any','any','ToolAdmin','ModelID',20);
+INSERT INTO `limits` VALUES ('any','any','ToolAdmin','PortiaID',1);
 /*!40000 ALTER TABLE `limits` ENABLE KEYS */;
 UNLOCK TABLES;
 
