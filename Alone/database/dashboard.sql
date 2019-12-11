@@ -1130,7 +1130,7 @@ CREATE TABLE `Organizations` (
 
 LOCK TABLES `Organizations` WRITE;
 /*!40000 ALTER TABLE `Organizations` DISABLE KEYS */;
-INSERT INTO `Organizations` VALUES (1,'Firenze','https://servicemap.disit.org/WebAppGrafo/api/v1/','43.769710, 11.255751',11,'ita'),(4,'DISIT','https://servicemap.disit.org/WebAppGrafo/api/v1/','43.769710, 11.255751',11,'ita'),(5,'Toscana','https://servicemap.disit.org/WebAppGrafo/api/v1/','43.769710, 11.255751',11,'ita'),(6,'Other','https://servicemap.disit.org/WebAppGrafo/api/v1/','43.769710, 11.255751',11,'ita'),(7,'Organization','https://servicemap.disit.org/WebAppGrafo/api/v1/','43.769710, 11.255751',11,'eng');
+INSERT INTO `Organizations` VALUES (1,'Firenze','https://servicemap.disit.org/WebAppGrafo/api/v1/','43.769710, 11.255751',11,'ita'),(4,'DISIT','https://servicemap.disit.org/WebAppGrafo/api/v1/','43.769710, 11.255751',11,'ita'),(5,'Toscana','https://servicemap.disit.org/WebAppGrafo/api/v1/','43.769710, 11.255751',11,'ita'),(6,'Other','https://servicemap.disit.org/WebAppGrafo/api/v1/','43.769710, 11.255751',11,'ita'),(7,'Organization','https://www.disit.org/ServiceMap/api/v1/','43.769710, 11.255751',11,'eng');
 /*!40000 ALTER TABLE `Organizations` ENABLE KEYS */;
 UNLOCK TABLES;
 

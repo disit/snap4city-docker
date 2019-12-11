@@ -1,4 +1,4 @@
-CREATE SCHEMA `iotdb` DEFAULT CHARACTER SET latin1;
+CREATE SCHEMA `iotdb` DEFAULT CHARACTER SET utf8;
 GRANT ALL ON iotdb.* TO 'user'@'%' IDENTIFIED BY 'passwordx';
 
 USE `iotdb`;

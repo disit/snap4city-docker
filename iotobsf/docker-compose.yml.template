@@ -11,22 +11,22 @@ services:
         - ./tomcat-conf:/usr/local/tomcat/credentials
       environment:
         "spring.profiles.active": "deploy"
-        "spring.openidconnect.clientid": "orionbrokerfilter"
+        "spring.openidconnect.clientid": "orionfilter"
         "spring.openidconnect.username": "rootfilter"
         "spring.openidconnect.password": "<password>"
-        "spring.openidconnect.token_endpoint": "https://www.snap4city.org/auth/realms/master/protocol/openid-connect/token"
+        "spring.openidconnect.token_endpoint": "http://keycloak:8088/auth/realms/master/protocol/openid-connect/token"
         "spring.ownership_endpoint": "http://dashboard/ownership-api/v1/list"
-        "spring.delegation_endpoint": "http://dashboard:8080/datamanager/api/v1/apps"
-        "spring.servicemapkb_endpoint": "http://kbssm/WebAppGrafo/sparql"
+        "spring.delegation_endpoint": "http://personaldata:8080/datamanager/api/v1/apps"
+        "spring.servicemapkb_endpoint": "http://www.disit.org/ServiceMap/sparql" #to be removed in next version
         "spring.orionbroker_endpoint": "http://orion:1026"
         "spring.elapsingcache.minutes": "3"
         "cors.origins.accepted": "http://test"
         "spring.prefixelementID": "<Organization>:<BrokerName>"
         "connection.timeout": "10000"
-        "JAVA_OPTS": "-DlogFileFolder=/usr/local/tomcat/logs -DtruststorePass=<mytruststorepass> -DkeystorePass=<mykeystorepass>"
+        "JAVA_OPTS": "-DlogFileFolder=/usr/local/tomcat/logs -Dmytruststorepass=<mytruststorepass> -Dmykeystorepass=<mykeystorepass>"
       extra_hosts:
-        - "dashboard:192.168.0.10"
-        - "kbssm:192.168.0.206"
+        - "dashboard:192.168.1.119"
+        - "personaldata:192.168.1.119"
       restart: always
    orion:
       image: fiware/orion
@@ -36,6 +36,8 @@ services:
         - "1026:1026"
       command: -dbhost mongo
       restart: always
+      extra_hosts:
+        - "iotapp:192.168.1.119"
    mongo:
       image: mongo:3.6
       restart: always
