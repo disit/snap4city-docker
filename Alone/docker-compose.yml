@@ -38,16 +38,17 @@ services:
 #    command: /bin/sh -c "cd /var/www/html/dashboardSmartCity/ScheduledTasks/; php Personal_Data_FeedDashboardWizard.php"
     command: /bin/sh -c "cron -f"
   personaldata:
-    image: disitlab/personaldata:v0
+    image: disitlab/personaldata:v1
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     volumes:
-      - ./datamanager-logs:/datamanager
+      - ./datamanager-logs:/usr/local/tomcat/logs/datamanager
     environment:
       "spring.profiles.active": "deploy"
+      "JAVA_OPTS": "-DlogFileFolder=/usr/local/tomcat/logs"
       "profiledb.datasource.url": "jdbc:mysql://dashboarddb:3306/profiledb"
       "profiledb.datasource.username": "user"
       "profiledb.datasource.password": "passwordx"
-      "spring.openidconnect.userinfo_endpoint": "http://keycloak:8088/auth/realms/master/protocol/openid-connect/userinfo"
+      "spring.openidconnect.userinfo_endpoint": "http://keycloak:8088/auth/"
       "spring.openidconnect.userinfo_endpoint_test": ""
       "spring.ldap.url": "ldap://ldap-server:389"
       "spring.ldap.basicdn": "dc=ldap,dc=organization,dc=com"
