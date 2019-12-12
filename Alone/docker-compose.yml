@@ -71,7 +71,7 @@ services:
       - dashboarddb
       - keycloak 
   iotapp:
-    image: disitlab/snap4city-nodered-adv:v45
+    image: disitlab/snap4city-nodered-adv:v51
     volumes:
       - ./iotapp-nr:/data
     ports:
