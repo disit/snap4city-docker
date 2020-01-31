@@ -1,1556 +1,0 @@
-2020-01-27 04:00:35pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-27 04:00:35pm: \n\naction:get_param_values
-2020-01-27 04:00:35pm: 
- action=get_all_private_event_value 
-
-2020-01-27 04:00:35pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-27 04:00:35pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:30:50am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-28 09:30:50am: \n\naction:get_param_values
-2020-01-28 09:30:53am: 
- action=get_all_private_event_value 
-
-2020-01-28 09:30:54am: 
- action:get_logged_ou. Ok, got Organization
-2020-01-28 09:30:54am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:30:59am: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 09:31:37am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'alldevices.php'
-2020-01-28 09:31:37am: \n\naction:get_param_values
-2020-01-28 09:31:38am: 
- action=get_all_device_admin 
-
-2020-01-28 09:31:38am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 09:31:38am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:31:42am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-28 09:31:42am: \n\naction:get_param_values
-2020-01-28 09:31:43am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 09:31:43am: 
- action=get_all_models_DataTable 
-
-2020-01-28 09:31:43am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:31:53am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-28 09:31:53am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 09:31:54am: 
- action=get_all_contextbroker 
-
-2020-01-28 09:31:54am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:34:02am: 
- registration is possible\n\r action: insert ok. INSERT INTO contextbroker(name, ip, kind, protocol, version, port, latitude, longitude, login, password, accesslink, accessport, path, visibility, sha, organization, urlnificallback) VALUES('iotbsf', 'iotbsf', 'internal', 'ngsi', '', '1026', '43.77357', '11.26167', '', '', 'iotbsf','8443', '', 'private', '', 'Organization', 'http://nifi:1030/ingestngsi')
- the registration of the ownership succeded{"elementId":"Organization:iotbsf","elementName":"Organization:iotbsf","elementUrl":"iotbsf","elementType":"BrokerID","username":"userrootadmin","id":16477}
- Received request of nificallback_create for ip:iotbsf port:1026 cbname:iotbsf
- Payload to send is:{"description": "iotbsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "http://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://iotbsf:1026/v2/subscriptions
- Response is:
- Error returned or not reachable\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='FAILED' WHERE name='iotbsf';
-2020-01-28 09:34:02am: 
- action=get_all_contextbroker 
-
-2020-01-28 09:37:28am: 
- the registration of the ownership succeded{"elementId":"Organization:iotbsf","elementName":"Organization:iotbsf","elementUrl":"orion","elementType":"BrokerID"}\n\r action: update ok. UPDATE contextbroker SET name = 'iotbsf', kind = 'internal', ip = 'orion', port = '1026', protocol = 'ngsi', version = '', latitude = '43.77357', longitude = '11.26167', login = '', password = '', accesslink = 'orion', accessport = '8443', path = '', visibility = '', sha = '', organization='Organization', urlnificallback='http://nifi:1030/ingestngsi'  WHERE name = 'iotbsf' and organization='Organization';\n\r urlnificallback is changed to: http://nifi:1030/ingestngsi from http://nifi:1030/ingestngsi
- Received request of nificallback_create for ip:orion port:1026 cbname:iotbsf
- Payload to send is:{"description": "iotbsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "http://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://orion:1026/v2/subscriptions
- Response is:
- Response subscription_id is:5e3000d80ca1aa98f6be73be\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='5e3000d80ca1aa98f6be73be' WHERE name='iotbsf';
-2020-01-28 09:37:28am: 
- action=get_all_contextbroker 
-
-2020-01-28 09:38:38am: 
- the registration of the ownership succeded{"elementId":"Organization:iotbsf","elementName":"Organization:iotbsf","elementUrl":"orionbrokerfilter","elementType":"BrokerID"}\n\r action: update ok. UPDATE contextbroker SET name = 'iotbsf', kind = 'internal', ip = 'orion', port = '1026', protocol = 'ngsi', version = '', latitude = '43.77357', longitude = '11.26167', login = '', password = '', accesslink = 'orionbrokerfilter', accessport = '8443', path = '', visibility = '', sha = '', organization='Organization', urlnificallback='http://nifi:1030/ingestngsi'  WHERE name = 'iotbsf' and organization='Organization';
-2020-01-28 09:38:38am: 
- action=get_all_contextbroker 
-
-2020-01-28 09:39:27am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'alldevices.php'
-2020-01-28 09:39:28am: \n\naction:get_param_values
-2020-01-28 09:39:28am: 
- action=get_all_device_admin 
-
-2020-01-28 09:39:28am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 09:39:28am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:39:34am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 09:39:34am: \n\naction:get_param_values
-2020-01-28 09:39:34am: 
- action=get_all_device 
-
-2020-01-28 09:39:34am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 09:39:34am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:39:37am: [
-{"username":"userrootadmin","elementId":"Organization:iotbsf","elementType":"BrokerID","elementName":"Organization:iotbsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 10:34:02"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 09:40:56am: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotbsf/Organization/test1 https://www.disit.org/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model custom is NOT of type authenticated
- Device iotbsf/test1 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotbsf/Organization/test1
-
- the registration of the ownership succededOrganization:iotbsf:test1 {"elementId":"Organization:iotbsf:test1","elementName":"test1","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotbsf\/Organization\/test1","elementDetails":{"k1":"18038d9d-2d85-4c16-8124-2c7c6bb780f8","k2":"e6fb3ca5-2e07-4278-bac7-b02f800c3547","contextbroker":"iotbsf"},"elementType":"IOTID","username":"userrootadmin","id":16478}
- attribute wind correctly inserted
-2020-01-28 09:40:56am: 
- action=get_all_device 
-
-2020-01-28 09:46:25am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-28 09:46:25am: 
- action=get_all_contextbroker 
-
-2020-01-28 09:46:25am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 09:46:25am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:48:01am:  Received request of nificallback_delete for ip:orion port:1026 subscription_id:5e3000d80ca1aa98f6be73be cbname:iotbsf
- Delete url is:http://orion:1026/v2/subscriptions/5e3000d80ca1aa98f6be73be
- Response is:HTTP/1.0 204 No Content 
- Deletion of the ownership invoked on Organization:iotbsf BrokerID
- the deletion of the ownership succeded\n\r action: delete ok. DELETE FROM contextbroker WHERE name = 'iotbsf' and organization='Organization';
-2020-01-28 09:48:01am: 
- action=get_all_contextbroker 
-
-2020-01-28 09:51:09am: 
- registration is possible\n\r action: insert ok. INSERT INTO contextbroker(name, ip, kind, protocol, version, port, latitude, longitude, login, password, accesslink, accessport, path, visibility, sha, organization, urlnificallback) VALUES('iotobsf', 'orion', 'internal', 'ngsi', '', '1026', '43.78993', '11.22185', '', '', 'orionbrokerfilter','8443', '', 'private', '', 'Organization', 'http://nifi:1030/ingestngsi')
- the registration of the ownership succeded{"elementId":"Organization:iotobsf","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementType":"BrokerID","username":"userrootadmin","id":16479}
- Received request of nificallback_create for ip:orion port:1026 cbname:iotobsf
- Payload to send is:{"description": "iotobsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "http://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://orion:1026/v2/subscriptions
- Response is:
- Response subscription_id is:5e30040d0ca1aa98f6be73bf\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='5e30040d0ca1aa98f6be73bf' WHERE name='iotobsf';
-2020-01-28 09:51:09am: 
- action=get_all_contextbroker 
-
-2020-01-28 09:51:17am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 09:51:17am: \n\naction:get_param_values
-2020-01-28 09:51:17am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 09:51:17am: 
- action=get_all_device 
-
-2020-01-28 09:51:17am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:51:21am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'alldevices.php'
-2020-01-28 09:51:21am: \n\naction:get_param_values
-2020-01-28 09:51:21am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 09:51:21am: 
- action=get_all_device_admin 
-
-2020-01-28 09:51:22am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:51:24am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 09:51:24am: \n\naction:get_param_values
-2020-01-28 09:51:24am: 
- action=get_all_device 
-
-2020-01-28 09:51:24am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 09:51:24am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 09:51:27am: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 10:51:08"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 09:55:57am: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1 https://www.disit.org/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model custom is NOT of type authenticated
- Device iotobsf/wind1 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1
-
- the registration of the ownership succededOrganization:iotobsf:wind1 {"elementId":"Organization:iotobsf:wind1","elementName":"wind1","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind1","elementDetails":{"k1":"f176f89d-a2c9-4a87-b7d0-faf1a0ec473a","k2":"7caaa0e3-c5a3-4aa8-85db-c9223bafbe47","contextbroker":"iotobsf"},"elementType":"IOTID","username":"userrootadmin","id":16480}
- attribute wind correctly inserted
-2020-01-28 09:55:57am: 
- action=get_all_device 
-
-2020-01-28 10:32:02am: 
- action:get_cb. ok 
-2020-01-28 10:33:14am: 
- Error returner in checkRegisterOwnershipNo username found null
-2020-01-28 10:33:59am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 10:33:59am: \n\naction:get_param_values
-2020-01-28 10:33:59am: 
- action=get_all_device 
-
-2020-01-28 10:33:59am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 10:33:59am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 10:34:02am: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 10:51:08"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 10:34:38am: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2 https://www.disit.org/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model custom is NOT of type authenticated
- Device iotobsf/wind2 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2
-
- the registration of the ownership succededOrganization:iotobsf:wind2 {"elementId":"Organization:iotobsf:wind2","elementName":"wind2","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind2","elementDetails":{"k1":"dd4089cf-9fe1-407f-b67f-9c7c92339e5c","k2":"bd0e77ce-3624-4c37-918a-c149241b533d","contextbroker":"iotobsf"},"elementType":"IOTID","username":"userrootadmin","id":16481}
- attribute wind correctly inserted
-2020-01-28 10:34:39am: 
- action=get_all_device 
-
-2020-01-28 10:58:41am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-28 10:58:41am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 10:58:48am: 
- action=get_all_contextbroker 
-
-2020-01-28 10:58:48am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 10:59:46am: 
- registration is possible\n\r action: insert ok. INSERT INTO contextbroker(name, ip, kind, protocol, version, port, latitude, longitude, login, password, accesslink, accessport, path, visibility, sha, organization, urlnificallback) VALUES('iotobsf', 'orion', 'internal', 'ngsi', '', '1026', '43.77308', '11.25275', '', '', 'orionbrokerfilter','8443', '', 'private', '', 'Organization', 'http://nifi:1030/ingestngsi')
- the registration of the ownership succeded{"elementId":"Organization:iotobsf","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementType":"BrokerID","username":"userrootadmin","id":16477}
- Received request of nificallback_create for ip:orion port:1026 cbname:iotobsf
- Payload to send is:{"description": "iotobsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "http://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://orion:1026/v2/subscriptions
- Response is:
- Response subscription_id is:5e301421f38dd968b8e9a717\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='5e301421f38dd968b8e9a717' WHERE name='iotobsf';
-2020-01-28 10:59:46am: 
- action=get_all_contextbroker 
-
-2020-01-28 11:00:00am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 11:00:00am: \n\naction:get_param_values
-2020-01-28 11:00:00am: 
- action=get_all_device 
-
-2020-01-28 11:00:00am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 11:00:00am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 11:00:05am: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 11:59:44"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 11:00:40am: 
- registration is possible
- no URI has been generated by the KB
- no registration in the context broker
-2020-01-28 11:08:56am: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 11:59:44"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 11:09:25am: 
- registration is possible
- no URI has been generated by the KB
- no registration in the context broker
-2020-01-28 11:19:10am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-28 11:19:10am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 11:19:15am: 
- action=get_all_contextbroker 
-
-2020-01-28 11:19:15am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 11:20:17am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 11:20:17am: \n\naction:get_param_values
-2020-01-28 11:20:18am: 
- action=get_all_device 
-
-2020-01-28 11:20:18am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 11:20:18am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 11:20:20am: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 11:59:44"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 11:20:51am: 
- registration is possible
- no URI has been generated by the KB
- no registration in the context broker
-2020-01-28 11:46:08am: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 11:59:44"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 11:46:43am: 
- registration is possible
- no URI has been generated by the KB
- no registration in the context broker
-2020-01-28 11:54:35am: 
- action:get_cb. ok 
-2020-01-28 11:55:00am: 
- Error returner in checkRegisterOwnershipNo username found null
-2020-01-28 11:55:32am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 11:55:32am: \n\naction:get_param_values
-2020-01-28 11:55:33am: 
- action=get_all_device 
-
-2020-01-28 11:55:33am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 11:55:33am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 11:55:35am: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 11:59:44"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 11:56:03am: 
- registration is possible
- no URI has been generated by the KB
- no registration in the context broker
-2020-01-28 01:53:11pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 01:53:11pm: \n\naction:get_param_values
-2020-01-28 01:53:11pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 01:53:11pm: 
- action=get_all_device 
-
-2020-01-28 01:53:11pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 01:53:14pm: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 11:59:44"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 01:53:55pm: 
- registration is possible
- no URI has been generated by the KB
- no registration in the context broker
-2020-01-28 01:55:36pm: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 11:59:44"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 01:55:39pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 01:55:40pm: \n\naction:get_param_values
-2020-01-28 01:55:40pm: 
- action=get_all_device 
-
-2020-01-28 01:55:40pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 01:55:40pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 01:55:42pm: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 11:59:44"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 01:56:24pm: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model custom is NOT of type authenticated
- Device iotobsf/wind1 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1
-
- the registration of the ownership succededOrganization:iotobsf:wind1 {"elementId":"Organization:iotobsf:wind1","elementName":"wind1","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind1","elementDetails":{"k1":"48ee0d50-812a-4e30-8e23-a9da0371e0c3","k2":"f216d27e-d43c-45f2-8423-2a576a2d93c8","contextbroker":"iotobsf"},"elementType":"IOTID","username":"userrootadmin","id":16478}
- attribute wind correctly inserted
-2020-01-28 01:56:24pm: 
- action=get_all_device 
-
-2020-01-28 01:57:50pm: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 11:59:44"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 01:58:25pm: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model custom is NOT of type authenticated
- Device iotobsf/wind2 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2
-
- the registration of the ownership succededOrganization:iotobsf:wind2 {"elementId":"Organization:iotobsf:wind2","elementName":"wind2","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind2","elementDetails":{"k1":"cb8a3382-5339-4373-8b6f-090a992b9698","k2":"a38fd6d5-c06e-46db-bb84-e8b860566c7c","contextbroker":"iotobsf"},"elementType":"IOTID","username":"userrootadmin","id":16479}
- attribute wind correctly inserted
-2020-01-28 01:58:25pm: 
- action=get_all_device 
-
-2020-01-28 02:14:03pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'alldevices.php'
-2020-01-28 02:14:04pm: \n\naction:get_param_values
-2020-01-28 02:14:04pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 02:14:04pm: 
- action=get_all_device_admin 
-
-2020-01-28 02:14:04pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 02:16:51pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'alldevices.php'
-2020-01-28 02:16:51pm: \n\naction:get_param_values
-2020-01-28 02:16:51pm: 
- action=get_all_device_admin 
-
-2020-01-28 02:16:51pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 02:16:51pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 02:16:53pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 02:16:53pm: \n\naction:get_param_values
-2020-01-28 02:16:53pm: 
- action=get_all_device 
-
-2020-01-28 02:16:53pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 02:16:53pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 02:16:56pm: [
-{"username":"userrootadmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 11:59:44"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 02:16:56pm: 
- action:get_device_attributes. access to SELECT * FROM event_values WHERE cb = 'iotobsf' AND device = 'wind1'
-2020-01-28 02:17:21pm: 
- an URI has been generated by the KB\n response from the ngsi context broker 
- ok updated in the context broker
- Device iotobsf/wind1 correctly updated
- the registration of the ownership succededOrganization:iotobsf:wind1 {"elementId":"Organization:iotobsf:wind1","elementName":"wind1","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind1","elementDetails":{"k1":"48ee0d50-812a-4e30-8e23-a9da0371e0c3","k2":"f216d27e-d43c-45f2-8423-2a576a2d93c8","contextbroker":"iotobsf"},"elementType":"IOTID"}
- attribute wind correctly updated
- old attributes correctly updated
- new attributes correctly inserted
-2020-01-28 02:17:21pm: 
- action=get_all_device 
-
-2020-01-28 02:29:17pm: 
- the device has been deleted from the KB\n response from the ngsi context broker 
- ok deletion from the context broker
- the deletion of the ownership succeded
-2020-01-28 02:29:18pm: 
- action=get_all_device 
-
-2020-01-28 05:38:28pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-28 05:38:39pm: 
- action=get_all_contextbroker 
-
-2020-01-28 05:38:39pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 05:38:39pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 05:39:30pm: 
- registration is possible\n\r action: insert ok. INSERT INTO contextbroker(name, ip, kind, protocol, version, port, latitude, longitude, login, password, accesslink, accessport, path, visibility, sha, organization, urlnificallback) VALUES('iotobsf', 'orion', 'internal', 'ngsi', '', '1026', '43.77407', '11.25549', '', '', 'orionbrokerfilter','8443', '', 'private', '', 'Organization', 'http://nifi:1030/ingestngsi')
- the registration of the ownership succeded{"elementId":"Organization:iotobsf","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementType":"BrokerID","username":"usertooladmin","id":16477}
- Received request of nificallback_create for ip:orion port:1026 cbname:iotobsf
- Payload to send is:{"description": "iotobsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "http://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://orion:1026/v2/subscriptions
- Response is:
- Response subscription_id is:5e3071d1a5976a2bec953911\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='5e3071d1a5976a2bec953911' WHERE name='iotobsf';
-2020-01-28 05:39:30pm: 
- action=get_all_contextbroker 
-
-2020-01-28 05:39:35pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-28 05:39:35pm: \n\naction:get_param_values
-2020-01-28 05:39:35pm: 
- action=get_all_device 
-
-2020-01-28 05:39:35pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 05:39:35pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 05:39:57pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-28 05:39:57pm: \n\naction:get_param_values
-2020-01-28 05:39:57pm: 
- action=get_all_models_DataTable 
-
-2020-01-28 05:39:57pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 05:39:57pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 05:39:59pm: [
-{"username":"usertooladmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-28 18:39:29"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 05:41:05pm: 
- action=get_all_models_DataTable 
-
-2020-01-28 05:41:15pm: \n identified 1 delegations\n[]
-2020-01-28 05:41:18pm: 
- cb Organization:wind-sensor: Visibility correctly updated
- the registration of the delegation succededhttp://personaldata:8080/datamanager/api/v1/username/usertooladmin/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiJhYTYwM2NiOS0yMjgxLTQ4OTUtYTc2NC05NzQyMjYzZDhhY2QiLCJleHAiOjE1ODAyMzMzMzgsIm5iZiI6MCwiaWF0IjoxNTgwMjMzMjc4LCJpc3MiOiJodHRwOi8va2V5Y2xvYWs6ODA4OC9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJlOWIyNmNkYS0zMjBiLTRmNjUtYjNiNy1lNGZmNjY3NDQ4YzgiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwaHAtaW90LWRpcmVjdG9yeSIsIm5vbmNlIjoiMzJmZTg0YTA3MmI0OTVjYWFiYjVkYmRiZTVlYTM4YWYiLCJhdXRoX3RpbWUiOjE1ODAyMzMwNzgsInNlc3Npb25fc3RhdGUiOiIzMGEzZDFkMS01MTQxLTQzMDAtYjBmNC1lZDJmMDIwNTUxYzQiLCJhY3IiOiIwIiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsIlRvb2xBZG1pbiJdLCJuYW1lIjoidXNlclRvb2xBZG1pbiIsInByZWZlcnJlZF91c2VybmFtZSI6InVzZXJ0b29sYWRtaW4iLCJmYW1pbHlfbmFtZSI6InVzZXJUb29sQWRtaW4ifQ.kxNJjzkqLowKKNdH03BUh9GxilqGJQG1ZxNNhpN6iwjKQaDHh1EcQlreuCxX8wteI0wM5tzXIRJmmVmJgQ21su_voc43yGFjnyvFNMo8Lgzc0tviXZEmIBPDE9iVPydb-QrwazKseCRdKxuLm3G0wEsHc56jHHFQnbwenVUUHs3AAYh-HHrZ3Vw5H8rtxePQfR8NiqgDRNd3kAceLXIwIBOIo4XXsbRrpUizvHfvF_PINlj6-fgemXqcCpKcps_hpaUA-GohQgdPVmAl__mmwi8rt_bMvpq3Yf0-UFzhK2I5NAivWA2Xljqvo9zBpP2dIYBLxXNKnuwtBpN6_66Xtw&sourceRequest=iotdirectory result {"id":957,"usernameDelegator":"usertooladmin","usernameDelegated":"ANONYMOUS","elementId":"Organization:wind-sensor","elementType":"ModelID","insertTime":1580233278619} msg {"elementId":"Organization:wind-sensor","elementType":"ModelID","usernameDelegated":"ANONYMOUS"}
-2020-01-28 05:41:22pm: 
- action=get_all_models_DataTable 
-
-2020-01-28 05:41:22pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-28 05:41:22pm: \n\naction:get_param_values
-2020-01-28 05:41:22pm: 
- action=get_all_models_DataTable 
-
-2020-01-28 05:41:22pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-28 05:41:22pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 05:41:46pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-28 05:41:46pm: \n\naction:get_param_values
-2020-01-28 05:41:47pm: 
- action=get_all_private_event_value 
-
-2020-01-28 05:41:47pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-28 05:41:47pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-28 05:41:50pm: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-28 05:42:11pm: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind-sensor is NOT of type authenticated
- Device iotobsf/wind1 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1
-
- the registration of the ownership succededOrganization:iotobsf:wind1 {"elementId":"Organization:iotobsf:wind1","elementName":"wind1","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind1","elementDetails":{"k1":"56abc539-293a-4b40-bd60-d3869efb5cf9","k2":"6f1b7978-e84a-4a02-b16e-284a98f0ab72","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16479}
- attribute wind correctly inserted
-2020-01-28 05:42:11pm: 
- action=get_all_private_event_value 
-
-2020-01-28 05:42:33pm: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind-sensor is NOT of type authenticated
- Device iotobsf/wind2 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2
-
- the registration of the ownership succededOrganization:iotobsf:wind2 {"elementId":"Organization:iotobsf:wind2","elementName":"wind2","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind2","elementDetails":{"k1":"2acdd7c3-4570-4273-9418-fb77a42dba37","k2":"07d103fa-c5ac-4f30-adfc-58f13b0055ce","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16480}
- attribute wind correctly inserted
-2020-01-28 05:42:33pm: 
- action=get_all_private_event_value 
-
-2020-01-28 05:45:34pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-28 05:45:34pm: \n\naction:get_param_values
-2020-01-28 05:45:34pm: 
- action=get_all_private_event_value 
-
-2020-01-28 05:45:34pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-28 05:45:34pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 11:51:59am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-29 11:51:59am: \n\naction:get_param_values
-2020-01-29 11:51:59am: 
- action:get_logged_ou. Ok, got Organization
-2020-01-29 11:52:00am: 
- action=get_all_private_event_value 
-
-2020-01-29 11:52:00am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 01:27:40pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-29 01:27:40pm: \n\naction:get_param_values
-2020-01-29 01:27:40pm: 
- action=get_all_device 
-
-2020-01-29 01:27:40pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-29 01:27:40pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 01:27:45pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-29 01:27:45pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-29 01:27:45pm: 
- action=get_all_contextbroker 
-
-2020-01-29 01:27:45pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 01:27:48pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-29 01:27:48pm: \n\naction:get_param_values
-2020-01-29 01:27:48pm: 
- action=get_all_device 
-
-2020-01-29 01:27:48pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-29 01:27:48pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 01:27:50pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'alldevices.php'
-2020-01-29 01:27:50pm: \n\naction:get_param_values
-2020-01-29 01:27:51pm: 
- action=get_all_device_admin 
-
-2020-01-29 01:27:51pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-29 01:27:51pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 03:45:09pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-29 03:45:14pm: 
- action=get_all_contextbroker 
-
-2020-01-29 03:45:14pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-29 03:45:14pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 03:46:10pm: 
- registration is possible\n\r action: insert ok. INSERT INTO contextbroker(name, ip, kind, protocol, version, port, latitude, longitude, login, password, accesslink, accessport, path, visibility, sha, organization, urlnificallback) VALUES('iotobsf', 'orion', 'internal', 'ngsi', '', '1026', '43.77258', '11.24657', '', '', 'orionbrokerfilter','8443', '', 'private', '', 'Organization', 'http://nifi:1030/ingestngsi')
- the registration of the ownership succeded{"elementId":"Organization:iotobsf","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementType":"BrokerID","username":"usertooladmin","id":16477}
- Received request of nificallback_create for ip:orion port:1026 cbname:iotobsf
- Payload to send is:{"description": "iotobsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "http://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://orion:1026/v2/subscriptions
- Response is:
- Response subscription_id is:5e31a8c14bcc12d0290b9e67\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='5e31a8c14bcc12d0290b9e67' WHERE name='iotobsf';
-2020-01-29 03:46:10pm: 
- action=get_all_contextbroker 
-
-2020-01-29 03:46:20pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-29 03:46:20pm: \n\naction:get_param_values
-2020-01-29 03:46:20pm: 
- action=get_all_models_DataTable 
-
-2020-01-29 03:46:20pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-29 03:46:20pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 03:46:23pm: [
-{"username":"usertooladmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-29 16:46:08"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-29 03:47:18pm: 
- action=get_all_models_DataTable 
-
-2020-01-29 03:47:22pm: \n identified 1 delegations\n[]
-2020-01-29 03:47:27pm: 
- cb Organization:wind-model: Visibility correctly updated
- the registration of the delegation succededhttp://personaldata:8080/datamanager/api/v1/username/usertooladmin/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiI2NDU1NGVkZS1lMjZkLTRkMDYtOWY3My02NGMyNzdjNWU0M2YiLCJleHAiOjE1ODAzMTI5MDcsIm5iZiI6MCwiaWF0IjoxNTgwMzEyODQ3LCJpc3MiOiJodHRwOi8vZGFzaGJvYXJkL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6ImU5YjI2Y2RhLTMyMGItNGY2NS1iM2I3LWU0ZmY2Njc0NDhjOCIsInR5cCI6IkJlYXJlciIsImF6cCI6InBocC1pb3QtZGlyZWN0b3J5Iiwibm9uY2UiOiIwYzc1ZDk1MDI2ZjEwZTMwNjk3ZDZmMmExZmFhYzI0NiIsImF1dGhfdGltZSI6MTU4MDMxMjY5OSwic2Vzc2lvbl9zdGF0ZSI6ImZlYjY2ZDdhLWYxZDItNGE0OS04NzQ4LTJkZThhYWZmMTI3NyIsImFjciI6IjAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiVG9vbEFkbWluIl0sIm5hbWUiOiJ1c2VyVG9vbEFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcnRvb2xhZG1pbiIsImZhbWlseV9uYW1lIjoidXNlclRvb2xBZG1pbiJ9.ZdgTBkxxUrEM2T40cavRviiupA9njALVKjp6eoCQUjJhBvxk2KEIiRGuK9gxLQboQKpd2a7y5nq5hYKJR3GOjafv0FQvvjC6EITa8_d8X4F-Knemn9wharCx0WmshHllCSjfUyBAAvDUbbPgOCV_MW-wsWyY9FKDUPcVnlWXC4MVFCtYhQJSlj6lRhbwZdSW7-vovv-HRpNTPMWIFDDqBDdA_iF6lR_LCA_uHMLCWuT4amGKJdm4C_5NiwmltqhcA2XNHiS3ZtqOgvLdusqkOltrevRpGjTsaOEEDTmD_rzgvMAq5onSE9ANX0xxrEIUTLVLb9FkophzHvRuNlhfEw&sourceRequest=iotdirectory result {"id":957,"usernameDelegator":"usertooladmin","usernameDelegated":"ANONYMOUS","elementId":"Organization:wind-model","elementType":"ModelID","insertTime":1580312847281} msg {"elementId":"Organization:wind-model","elementType":"ModelID","usernameDelegated":"ANONYMOUS"}
-2020-01-29 03:47:30pm: 
- action=get_all_models_DataTable 
-
-2020-01-29 03:47:30pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-29 03:47:30pm: \n\naction:get_param_values
-2020-01-29 03:47:31pm: 
- action=get_all_models_DataTable 
-
-2020-01-29 03:47:31pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-29 03:47:31pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 03:47:40pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-29 03:47:41pm: 
- action=get_all_contextbroker 
-
-2020-01-29 03:47:41pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-29 03:47:41pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 03:48:10pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-29 03:48:10pm: \n\naction:get_param_values
-2020-01-29 03:48:10pm: 
- action=get_all_private_event_value 
-
-2020-01-29 03:48:10pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-29 03:48:10pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 03:48:12pm: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-29 03:48:25pm: 
- registration is possible
- no URI has been generated by the KB
- no registration in the context broker
-2020-01-29 03:50:07pm: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind-model is NOT of type authenticated
- Device iotobsf/wind1 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1
-
- the registration of the ownership succededOrganization:iotobsf:wind1 {"elementId":"Organization:iotobsf:wind1","elementName":"wind1","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind1","elementDetails":{"k1":"819ed236-cf74-4830-a60a-4396b7019b83","k2":"27ebf88f-904a-4ed2-83da-4fb60376369f","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16479}
- attribute wind correctly inserted
-2020-01-29 03:50:07pm: 
- action=get_all_private_event_value 
-
-2020-01-29 03:50:22pm: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind-model is NOT of type authenticated
- Device iotobsf/wind2 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2
-
- the registration of the ownership succededOrganization:iotobsf:wind2 {"elementId":"Organization:iotobsf:wind2","elementName":"wind2","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind2","elementDetails":{"k1":"246c579e-d737-472f-a303-cba3af709931","k2":"6f568663-1b08-468e-b7ac-dd93b4fbf6d1","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16480}
- attribute wind correctly inserted
-2020-01-29 03:50:23pm: 
- action=get_all_private_event_value 
-
-2020-01-29 03:50:34pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-29 03:50:34pm: \n\naction:get_param_values
-2020-01-29 03:50:34pm: 
- action=get_all_private_event_value 
-
-2020-01-29 03:50:34pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-29 03:50:35pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-29 04:02:06pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-29 04:02:06pm: \n\naction:get_param_values
-2020-01-29 04:02:06pm: 
- action=get_all_private_event_value 
-
-2020-01-29 04:02:06pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-29 04:02:07pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 11:40:35am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-30 11:40:37am: 
- action=get_all_contextbroker 
-
-2020-01-30 11:40:37am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 11:40:37am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 11:41:33am: 
- registration is possible\n\r action: insert ok. INSERT INTO contextbroker(name, ip, kind, protocol, version, port, latitude, longitude, login, password, accesslink, accessport, path, visibility, sha, organization, urlnificallback) VALUES('iotobsf', 'orion', 'internal', 'ngsi', '', '1026', '43.77903', '11.24588', '', '', 'orionbrokerfilter','8443', '', 'private', '', 'Organization', 'http://nifi:1030/ingestngsi')
- the registration of the ownership succeded{"elementId":"Organization:iotobsf","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementType":"BrokerID","username":"usertooladmin","id":16477}
- Received request of nificallback_create for ip:orion port:1026 cbname:iotobsf
- Payload to send is:{"description": "iotobsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "http://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://orion:1026/v2/subscriptions
- Response is:
- Response subscription_id is:5e32c0ed17dbf94d7cdb3b9f\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='5e32c0ed17dbf94d7cdb3b9f' WHERE name='iotobsf';
-2020-01-30 11:41:34am: 
- action=get_all_contextbroker 
-
-2020-01-30 11:41:46am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-30 11:41:46am: \n\naction:get_param_values
-2020-01-30 11:41:46am: 
- action=get_all_models_DataTable 
-
-2020-01-30 11:41:46am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 11:41:46am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 11:41:48am: [
-{"username":"usertooladmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-30 12:41:32"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-30 11:42:36am: 
- action=get_all_models_DataTable 
-
-2020-01-30 11:42:46am: \n identified 1 delegations\n[]
-2020-01-30 11:42:49am: 
- cb Organization:wind-model: Visibility correctly updated
- the registration of the delegation succededhttp://personaldata:8080/datamanager/api/v1/username/usertooladmin/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiI3NGFhYjFlMi05Y2UzLTRhMjUtODRjOS02YzdiODY0NjIxZjkiLCJleHAiOjE1ODAzODQ2MjksIm5iZiI6MCwiaWF0IjoxNTgwMzg0NTY5LCJpc3MiOiJodHRwOi8vZGFzaGJvYXJkL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6ImU5YjI2Y2RhLTMyMGItNGY2NS1iM2I3LWU0ZmY2Njc0NDhjOCIsInR5cCI6IkJlYXJlciIsImF6cCI6InBocC1pb3QtZGlyZWN0b3J5Iiwibm9uY2UiOiJlNWJmMGY5NzFiYzg1N2UzYTQ1MmM3ZTJiNzFjNWJmYSIsImF1dGhfdGltZSI6MTU4MDM4NDQyNSwic2Vzc2lvbl9zdGF0ZSI6ImQyODEzYmE3LTVjMDEtNGU4Yi1iZjNiLTU1NmIxY2VhZDkwNCIsImFjciI6IjAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiVG9vbEFkbWluIl0sIm5hbWUiOiJ1c2VyVG9vbEFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcnRvb2xhZG1pbiIsImZhbWlseV9uYW1lIjoidXNlclRvb2xBZG1pbiJ9.T-T6y6EqtcqQ3l8_nZsjQDIA7twKAm7SIRTtNP-4SKzq5_FSamhzH-ewjtDeb7XJsrdWn93e0EwinusY3s9KMjoj99z1p31RSuLhtphIFLL3HKEo--324cfJEybHfjUsZQCvhAwO2vX4RRB6Pst-wHvRmhpHFnCXBqGQXDuoTXMOOg_2Q8W1rL0ZZeiQ6Gj7sNIcf92uf9U2PBBueVlRE8-B3e5jxI6Ue_uj_hiP0Ly2rCXODiBfVoS8-PAxEqAPJQhMK1hhB6TzN53IPEf2Gaiic6baXBCblET6TgcLaiDr9GYVWL14rhVYb1TSFEUpbo_j0nm5fRbj7kLt6Hm3Bw&sourceRequest=iotdirectory result {"id":957,"usernameDelegator":"usertooladmin","usernameDelegated":"ANONYMOUS","elementId":"Organization:wind-model","elementType":"ModelID","insertTime":1580384569341} msg {"elementId":"Organization:wind-model","elementType":"ModelID","usernameDelegated":"ANONYMOUS"}
-2020-01-30 11:42:52am: 
- action=get_all_models_DataTable 
-
-2020-01-30 11:42:53am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-30 11:42:53am: \n\naction:get_param_values
-2020-01-30 11:42:53am: 
- action=get_all_models_DataTable 
-
-2020-01-30 11:42:53am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 11:42:53am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 11:43:20am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-30 11:43:20am: \n\naction:get_param_values
-2020-01-30 11:43:21am: 
- action=get_all_private_event_value 
-
-2020-01-30 11:43:21am: 
- action:get_logged_ou. Ok, got Organization
-2020-01-30 11:43:21am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 11:43:23am: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-30 11:43:24am: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-30 11:43:37am: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind-model is NOT of type authenticated
- Device iotobsf/wind1 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1
-
- the registration of the ownership succededOrganization:iotobsf:wind1 {"elementId":"Organization:iotobsf:wind1","elementName":"wind1","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind1","elementDetails":{"k1":"ece89975-bbb2-4102-98f7-17bde7719c94","k2":"2be94919-c8e4-4e02-aa7a-681c5d4bb2de","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16479}
- attribute wind correctly inserted
-2020-01-30 11:43:38am: 
- action=get_all_private_event_value 
-
-2020-01-30 11:43:55am: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind-model is NOT of type authenticated
- Device iotobsf/wind2 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2
-
- the registration of the ownership succededOrganization:iotobsf:wind2 {"elementId":"Organization:iotobsf:wind2","elementName":"wind2","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind2","elementDetails":{"k1":"897486f4-4f9a-411e-a923-983f2490e70d","k2":"684264b6-d072-4389-b5a5-cba117f5dfd9","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16480}
- attribute wind correctly inserted
-2020-01-30 11:43:56am: 
- action=get_all_private_event_value 
-
-2020-01-30 11:59:49am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-30 11:59:49am: \n\naction:get_param_values
-2020-01-30 11:59:50am: 
- action:get_logged_ou. Ok, got Organization
-2020-01-30 11:59:50am: 
- action=get_all_private_event_value 
-
-2020-01-30 11:59:50am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 12:00:41pm: \n\naction:get_param_values
-2020-01-30 12:00:41pm: 
- action=get_all_private_event_value 
-
-2020-01-30 12:00:41pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-30 12:00:41pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 04:38:01pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-30 04:38:02pm: 
- action=get_all_contextbroker 
-
-2020-01-30 04:38:02pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 04:38:02pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 04:38:52pm: 
- registration is possible\n\r action: insert ok. INSERT INTO contextbroker(name, ip, kind, protocol, version, port, latitude, longitude, login, password, accesslink, accessport, path, visibility, sha, organization, urlnificallback) VALUES('iotobsf', 'orion', 'internal', 'ngsi', '', '1026', '43.77308', '11.24931', '', '', 'orionbrokerfilter','8443', '', 'private', '', 'Organization', 'http://nifi:1030/ingestngsi')
- the registration of the ownership succeded{"elementId":"Organization:iotobsf","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementType":"BrokerID","username":"usertooladmin","id":16477}
- Received request of nificallback_create for ip:orion port:1026 cbname:iotobsf
- Payload to send is:{"description": "iotobsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "http://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://orion:1026/v2/subscriptions
- Response is:
- Response subscription_id is:5e33069b32b1799c28eb4491\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='5e33069b32b1799c28eb4491' WHERE name='iotobsf';
-2020-01-30 04:38:52pm: 
- action=get_all_contextbroker 
-
-2020-01-30 04:38:56pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-30 04:38:56pm: \n\naction:get_param_values
-2020-01-30 04:38:57pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 04:38:57pm: 
- action=get_all_models_DataTable 
-
-2020-01-30 04:38:57pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 04:39:00pm: [
-{"username":"usertooladmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-30 17:38:51"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-30 04:39:56pm: 
- action=get_all_models_DataTable 
-
-2020-01-30 04:40:16pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-30 04:40:16pm: \n\naction:get_param_values
-2020-01-30 04:40:16pm: 
- action=get_all_private_event_value 
-
-2020-01-30 04:40:16pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-30 04:40:16pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 04:40:18pm: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-30 04:40:53pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-30 04:40:53pm: \n\naction:get_param_values
-2020-01-30 04:40:53pm: 
- action=get_all_models_DataTable 
-
-2020-01-30 04:40:53pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 04:40:53pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 04:40:56pm: \n identified 1 delegations\n[]
-2020-01-30 04:41:13pm: 
- the registration of the delegation succededhttp://personaldata:8080/datamanager/api/v1/username/usertooladmin/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiI1NjFkZDcxNi1kN2IwLTQwNWEtYjM5ZC00MWM5NGE0NWJjYjEiLCJleHAiOjE1ODA0MDI1MzMsIm5iZiI6MCwiaWF0IjoxNTgwNDAyNDczLCJpc3MiOiJodHRwOi8vZGFzaGJvYXJkL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6ImU5YjI2Y2RhLTMyMGItNGY2NS1iM2I3LWU0ZmY2Njc0NDhjOCIsInR5cCI6IkJlYXJlciIsImF6cCI6InBocC1pb3QtZGlyZWN0b3J5Iiwibm9uY2UiOiJiOWJjZDhhNDZmYWQ2OTkyYzA2ZDFlM2Q4NDM1Y2QxMSIsImF1dGhfdGltZSI6MTU4MDQwMjQ0NSwic2Vzc2lvbl9zdGF0ZSI6IjM3ZTQ1MzM3LTdmYTktNGI4ZS1hNDg3LWQ0YjA2M2ZiZDFmYiIsImFjciI6IjAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiVG9vbEFkbWluIl0sIm5hbWUiOiJ1c2VyVG9vbEFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcnRvb2xhZG1pbiIsImZhbWlseV9uYW1lIjoidXNlclRvb2xBZG1pbiJ9.Mhdc6ai1j7p5WUXax49vCb9ivboL3QNTJElKk0qEfeV7v92BfE-OeymU08b7Pb-sMw-UI_PqWQLAsJPvWsd14hhZ4vLpsS9eEbA6Ae8pMGcicjA-25aFtjpIewH5V4XJfuqNqrXoAV8mdu5tL3GsL4Hq2mBWKDPa_D2LEqJdwx54BuHsSB7a69dYTX_5yS8fYs-Qjv_uaUBYkjViVwB4UQ9iRWwOFvpf-8eakuvyW-11vHfk8ZMu2M3h_y6FjMhGs4_o82IwGyVumYrMLSwqpJCgVB-4aVBE5KIC_Qn-AmoYvep3XRD_mdRTFdcU_wWcvl7nVNSw7rEpQj-0WIBPVg&sourceRequest=iotdirectory result {"id":957,"usernameDelegator":"usertooladmin","elementId":"Organization:wind-model","elementType":"ModelID","insertTime":1580402473724,"groupnameDelegated":"ou=Organization,dc=ldap,dc=organization,dc=com"} msg {"elementId":"Organization:wind-model","elementType":"ModelID","groupnameDelegated":"ou=Organization,dc=ldap,dc=organization,dc=com"}
-2020-01-30 04:41:20pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-30 04:41:20pm: \n\naction:get_param_values
-2020-01-30 04:41:21pm: 
- action=get_all_models_DataTable 
-
-2020-01-30 04:41:21pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 04:41:21pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 04:41:37pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-30 04:41:37pm: \n\naction:get_param_values
-2020-01-30 04:41:38pm: 
- action=get_all_private_event_value 
-
-2020-01-30 04:41:38pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-30 04:41:38pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 04:41:39pm: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-30 04:41:56pm: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind-model is NOT of type authenticated
- Device iotobsf/wind1 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1
-
- the registration of the ownership succededOrganization:iotobsf:wind1 {"elementId":"Organization:iotobsf:wind1","elementName":"wind1","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind1","elementDetails":{"k1":"06695378-a946-4310-9937-42dd73aa417f","k2":"41df982c-e616-4548-a8ce-720bc14f3bf5","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16479}
- attribute wind correctly inserted
-2020-01-30 04:41:57pm: 
- action=get_all_private_event_value 
-
-2020-01-30 04:42:10pm: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind-model is NOT of type authenticated
- Device iotobsf/wind2 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2
-
- the registration of the ownership succededOrganization:iotobsf:wind2 {"elementId":"Organization:iotobsf:wind2","elementName":"wind2","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind2","elementDetails":{"k1":"0e9b3b80-be9b-4b42-884d-21ff3dc2ddba","k2":"dabd17c3-e92c-4359-9554-662085265fdb","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16480}
- attribute wind correctly inserted
-2020-01-30 04:42:11pm: 
- action=get_all_private_event_value 
-
-2020-01-30 04:42:30pm: \n\naction:get_param_values
-2020-01-30 04:42:30pm: 
- action=get_all_private_event_value 
-
-2020-01-30 04:42:30pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-30 04:42:30pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 09:23:00pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-30 09:23:01pm: 
- action=get_all_contextbroker 
-
-2020-01-30 09:23:01pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 09:23:01pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 09:24:24pm: 
- registration is possible\n\r action: insert ok. INSERT INTO contextbroker(name, ip, kind, protocol, version, port, latitude, longitude, login, password, accesslink, accessport, path, visibility, sha, organization, urlnificallback) VALUES('iotobsf', 'orion', 'internal', 'ngsi', '', '1026', '43.77605', '11.24519', '', '', 'orionbrokerfilter','8443', '', 'private', '', 'Organization', 'url://nifi:1030/ingestngsi')
- the registration of the ownership succeded{"elementId":"Organization:iotobsf","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementType":"BrokerID","username":"usertooladmin","id":16477}
- Received request of nificallback_create for ip:orion port:1026 cbname:iotobsf
- Payload to send is:{"description": "iotobsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "url://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://orion:1026/v2/subscriptions
- Response is:{"error":"BadRequest","description":"Invalid URL parsing notification url"}
- Error returned or not reachable\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='FAILED' WHERE name='iotobsf';
-2020-01-30 09:24:24pm: 
- action=get_all_contextbroker 
-
-2020-01-30 09:24:32pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-30 09:24:32pm: \n\naction:get_param_values
-2020-01-30 09:24:32pm: 
- action=get_all_models_DataTable 
-
-2020-01-30 09:24:32pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 09:24:32pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 09:24:37pm: [
-{"username":"usertooladmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-30 22:24:23"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-30 09:25:47pm: 
- action=get_all_models_DataTable 
-
-2020-01-30 09:25:55pm: \n identified 1 delegations\n[]
-2020-01-30 09:26:05pm: 
- cb Organization:wind model: Visibility correctly updated
- the registration of the delegation succededhttp://personaldata:8080/datamanager/api/v1/username/usertooladmin/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiI4ODAwNTJjNC05ZGMzLTRhOGEtYjE5OS03NzgyZjIxY2Y5ODEiLCJleHAiOjE1ODA0MTk2MjUsIm5iZiI6MCwiaWF0IjoxNTgwNDE5NTY1LCJpc3MiOiJodHRwOi8vZGFzaGJvYXJkL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6ImU5YjI2Y2RhLTMyMGItNGY2NS1iM2I3LWU0ZmY2Njc0NDhjOCIsInR5cCI6IkJlYXJlciIsImF6cCI6InBocC1pb3QtZGlyZWN0b3J5Iiwibm9uY2UiOiIwMTljNGY4MzcwYjIyMGNiMzYzODg5ZTY3OWM5YmY0OSIsImF1dGhfdGltZSI6MTU4MDQxOTM1Mywic2Vzc2lvbl9zdGF0ZSI6ImVjMTU0ZDczLTFmOTYtNGE3OC1iMDhjLWY0NjcwZmUxNTYwMiIsImFjciI6IjAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiVG9vbEFkbWluIl0sIm5hbWUiOiJ1c2VyVG9vbEFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcnRvb2xhZG1pbiIsImZhbWlseV9uYW1lIjoidXNlclRvb2xBZG1pbiJ9.BX_c-_iE-fyza_PULCVvo2ukGUZ2-8HUg-IVYKDIL-vCX01pdGXWMozkctI91lgLgD9-_AZh9YOeytRBWOEED1MEZVYLBBxs3-rFSxWssBNmw2gyeF4NiCHF5kiFxsUWlU25w1XoBnRSe2S-_R0seU60fs_CIOI1QJC4hoFF8YPahD4VufvTl4r-K3qzZbzG2NrQORfIJmiLZkO4YW7OOWWnO8f7C8v3ZBKXabe3NVjybGcexrcKgI6BdwV79LWnB5CnQEKTpNEeC2wXKh_PNex-dQzp6jES6UEDHVnDgUORZHcrohXvZuvgr6R-RFZBzNP2JJ7IWbXEMk1oHLYoeg&sourceRequest=iotdirectory result {"id":957,"usernameDelegator":"usertooladmin","usernameDelegated":"ANONYMOUS","elementId":"Organization:wind model","elementType":"ModelID","insertTime":1580419565619} msg {"elementId":"Organization:wind model","elementType":"ModelID","usernameDelegated":"ANONYMOUS"}
-2020-01-30 09:26:08pm: 
- action=get_all_models_DataTable 
-
-2020-01-30 09:26:09pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-30 09:26:09pm: \n\naction:get_param_values
-2020-01-30 09:26:09pm: 
- action=get_all_models_DataTable 
-
-2020-01-30 09:26:09pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 09:26:09pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 09:27:02pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-30 09:27:02pm: \n\naction:get_param_values
-2020-01-30 09:27:02pm: 
- action=get_all_private_event_value 
-
-2020-01-30 09:27:02pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-30 09:27:02pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 09:27:05pm: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-30 09:27:26pm: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind model is NOT of type authenticated
- Device iotobsf/wind1 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1
-
- the registration of the ownership succededOrganization:iotobsf:wind1 {"elementId":"Organization:iotobsf:wind1","elementName":"wind1","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind1","elementDetails":{"k1":"5e874845-7939-4b6f-9df9-4e6407499f06","k2":"595d6401-2473-4681-b6db-0bfd94d24aad","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16479}
- attribute wind correctly inserted
-2020-01-30 09:27:26pm: 
- action=get_all_private_event_value 
-
-2020-01-30 09:27:53pm: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind model is NOT of type authenticated
- Device iotobsf/wind2 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2
-
- the registration of the ownership succededOrganization:iotobsf:wind2 {"elementId":"Organization:iotobsf:wind2","elementName":"wind2","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind2","elementDetails":{"k1":"d357eb0c-a285-4f31-8188-d47b4ca2980e","k2":"3b925a3a-173c-4cbf-9bef-09fef1a167b8","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16480}
- attribute wind correctly inserted
-2020-01-30 09:27:53pm: 
- action=get_all_private_event_value 
-
-2020-01-30 09:29:56pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-30 09:29:56pm: \n\naction:get_param_values
-2020-01-30 09:29:56pm: 
- action=get_all_private_event_value 
-
-2020-01-30 09:29:56pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-30 09:29:56pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 09:34:58pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-30 09:34:59pm: 
- action=get_all_contextbroker 
-
-2020-01-30 09:34:59pm: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-30 09:34:59pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-30 09:35:27pm: 
- the registration of the ownership succeded{"elementId":"Organization:iotobsf","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementType":"BrokerID"}\n\r action: update ok. UPDATE contextbroker SET name = 'iotobsf', kind = 'internal', ip = 'orion', port = '1026', protocol = 'ngsi', version = '', latitude = '43.77605', longitude = '11.24519', login = '', password = '', accesslink = 'orionbrokerfilter', accessport = '8443', path = '', visibility = '', sha = '', organization='Organization', urlnificallback='http://nifi:1030/ingestngsi'  WHERE name = 'iotobsf' and organization='Organization';\n\r urlnificallback is changed to: http://nifi:1030/ingestngsi from url://nifi:1030/ingestngsi
- Received request of nificallback_create for ip:orion port:1026 cbname:iotobsf
- Payload to send is:{"description": "iotobsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "http://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://orion:1026/v2/subscriptions
- Response is:
- Response subscription_id is:5e334c1ef4c564f94ef517ad\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='5e334c1ef4c564f94ef517ad' WHERE name='iotobsf';
-2020-01-30 09:35:27pm: 
- action=get_all_contextbroker 
-
-2020-01-31 11:37:49am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-31 11:37:50am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-31 11:37:52am: 
- action=get_all_contextbroker 
-
-2020-01-31 11:37:52am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 11:39:07am: 
- registration is possible\n\r action: insert ok. INSERT INTO contextbroker(name, ip, kind, protocol, version, port, latitude, longitude, login, password, accesslink, accessport, path, visibility, sha, organization, urlnificallback) VALUES('iotobsf', 'orion', 'internal', 'ngsi', '', '1026', '43.77506', '11.24245', '', '', 'orionbrokerfilter','8443', '', 'private', '', 'Organization', 'http://nifi:1030/ingestngsi')
- the registration of the ownership succeded{"elementId":"Organization:iotobsf","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementType":"BrokerID","username":"usertooladmin","id":16477}
- Received request of nificallback_create for ip:orion port:1026 cbname:iotobsf
- Payload to send is:{"description": "iotobsf nifi","subject": {	"entities": [{ "idPattern": ".*",	"typePattern": ".*"	}],"condition": {"attrs": []}},"notification": {	"http": {"url": "http://nifi:1030/ingestngsi" }},"expires": "2030-01-01T00:00:00.00Z"}
- Post url is:http://orion:1026/v2/subscriptions
- Response is:
- Response subscription_id is:5e3411d9180d68ac049bbb24\n\r action: subscribe ok. UPDATE contextbroker SET subscription_id='5e3411d9180d68ac049bbb24' WHERE name='iotobsf';
-2020-01-31 11:39:07am: 
- action=get_all_contextbroker 
-
-2020-01-31 11:39:14am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-31 11:39:15am: \n\naction:get_param_values
-2020-01-31 11:39:15am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-31 11:39:15am: 
- action=get_all_models_DataTable 
-
-2020-01-31 11:39:15am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 11:40:53am: [
-{"username":"usertooladmin","elementId":"Organization:iotobsf","elementType":"BrokerID","elementName":"Organization:iotobsf","elementUrl":"orionbrokerfilter","elementDetails":null,"created":"2020-01-31 12:39:03"}
-]
-\n identified 1 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-31 11:41:41am: 
- action=get_all_models_DataTable 
-
-2020-01-31 11:41:49am: \n identified 1 delegations\n[]
-2020-01-31 11:41:58am: 
- cb Organization:wind-model: Visibility correctly updated
- the registration of the delegation succededhttp://personaldata:8080/datamanager/api/v1/username/usertooladmin/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiIwY2UwMjRkMi02MDcwLTQ0ZTgtODEyMi0wMjMzMThjZWJkOGIiLCJleHAiOjE1ODA0NzA5NzIsIm5iZiI6MCwiaWF0IjoxNTgwNDcwOTEyLCJpc3MiOiJodHRwOi8vZGFzaGJvYXJkL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6ImU5YjI2Y2RhLTMyMGItNGY2NS1iM2I3LWU0ZmY2Njc0NDhjOCIsInR5cCI6IkJlYXJlciIsImF6cCI6InBocC1pb3QtZGlyZWN0b3J5Iiwibm9uY2UiOiI1MzhlMDU1YWE3ZWRmZGQyOTg0OWFhY2ZmM2UwOTBiZiIsImF1dGhfdGltZSI6MTU4MDQ3MDY1NCwic2Vzc2lvbl9zdGF0ZSI6IjY3MWYxNjA0LWNlYjItNDUyMC1hZmRhLTI2MTIzYjhiNWRhNiIsImFjciI6IjAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiVG9vbEFkbWluIl0sIm5hbWUiOiJ1c2VyVG9vbEFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcnRvb2xhZG1pbiIsImZhbWlseV9uYW1lIjoidXNlclRvb2xBZG1pbiJ9.Jo6a2oEpPhfgum_3bjLtsBSlVK3tRCOHv4tVG-hzK4Pm7wXRw76yGoTo9HlrVmK_zKGJMompaqlUEbdLd2Zw9sbkRTUyutXl_iWk0lGlxGk8n4kFqauvuuGXruBQkmLfpb2yH_rmkfX42hi8Ee3XMrCNdYOjgxYGQIFwaC1-vt6aoCrTIxn-YgYpM9IFjSxGirwG5Ur3R98hGJPsjXk7Ts4qKnMyKjFKgSZXF2yrnlhTMbSxd1UkTfaRDiTI8nsiEHzkCIanOBsRJn9RnvkHztiI-1t3LX1606Sp4WQDacKpdAu971Xtv6IzZyQGhy-sCtPMIZbN4ATDx03YHRi_4A&sourceRequest=iotdirectory result {"id":957,"usernameDelegator":"usertooladmin","usernameDelegated":"ANONYMOUS","elementId":"Organization:wind-model","elementType":"ModelID","insertTime":1580470915523} msg {"elementId":"Organization:wind-model","elementType":"ModelID","usernameDelegated":"ANONYMOUS"}
-2020-01-31 11:42:00am: 
- cb Organization:wind-model: Visibility correctly updated
- error in the delegationhttp://personaldata:8080/datamanager/api/v1/username/usertooladmin/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiJlZjI4N2RhZS1mNTFiLTRjNzEtODBkZi00N2I2NDk0MTNjMWUiLCJleHAiOjE1ODA0NzA5NzgsIm5iZiI6MCwiaWF0IjoxNTgwNDcwOTE4LCJpc3MiOiJodHRwOi8vZGFzaGJvYXJkL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6ImU5YjI2Y2RhLTMyMGItNGY2NS1iM2I3LWU0ZmY2Njc0NDhjOCIsInR5cCI6IkJlYXJlciIsImF6cCI6InBocC1pb3QtZGlyZWN0b3J5Iiwibm9uY2UiOiI1MzhlMDU1YWE3ZWRmZGQyOTg0OWFhY2ZmM2UwOTBiZiIsImF1dGhfdGltZSI6MTU4MDQ3MDY1NCwic2Vzc2lvbl9zdGF0ZSI6IjY3MWYxNjA0LWNlYjItNDUyMC1hZmRhLTI2MTIzYjhiNWRhNiIsImFjciI6IjAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiVG9vbEFkbWluIl0sIm5hbWUiOiJ1c2VyVG9vbEFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcnRvb2xhZG1pbiIsImZhbWlseV9uYW1lIjoidXNlclRvb2xBZG1pbiJ9.Kp0uYXraLTvqlyLGRC8Ro6PIyhcJxsnnnkM_tSNsUu8YHGIdwowD5GeMhtTuHqyyyJox0DtzJceJzijmZxXDlsbtYOkCG10ppd8Cp0INe0QibE7osMiSymJvZwxTkeTyMFxBPA50ENHOzyM7D4LYho1KxoJVfbOixIB6HKqXwgIcUVM_CZYcv84JsNbr2404AWNiHyOxCNysGt4-7T1siAW55zCp1uAiwHPBSfTfz2N4KDQN2LZoftp0w6M1X8MqhsJt7_6dm88niwwIgdOL1j4JeDs9a33aOzUwU6jHAmU6kMPKcpJ4jIzKf2wFNTSncPobIRzVodN4oSpTO066Fw&sourceRequest=iotdirectory result The passed DELEGATION is already present msg {"elementId":"Organization:wind-model","elementType":"ModelID","usernameDelegated":"ANONYMOUS"}
-2020-01-31 11:42:01am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-31 11:42:01am: \n\naction:get_param_values
-2020-01-31 11:42:13am: 
- action=get_all_models_DataTable 
-
-2020-01-31 11:42:13am: 
- action:get_all_ou. Ok, got n-entries:1
-2020-01-31 11:42:14am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 11:44:03am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-31 11:44:03am: \n\naction:get_param_values
-2020-01-31 11:44:03am: 
- action=get_all_private_event_value 
-
-2020-01-31 11:44:04am: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 11:44:04am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 11:44:05am: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-31 11:44:19am: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind-model is NOT of type authenticated
- Device iotobsf/wind1 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1
-
- the registration of the ownership succededOrganization:iotobsf:wind1 {"elementId":"Organization:iotobsf:wind1","elementName":"wind1","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind1","elementDetails":{"k1":"d12636b2-7dd3-4cb0-9750-ab23e520e35c","k2":"172b7b7a-ee8d-461c-8534-99bda84600f2","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16479}
- attribute wind correctly inserted
-2020-01-31 11:44:20am: 
- action=get_all_private_event_value 
-
-2020-01-31 11:44:35am: 
- registration is possible
- an URI has been generated by the KB: http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2 http://dashboard/ServiceMap/api/v1/iot/insert\n response from the ngsi context broker 
- ok registration in the context broker
- the model wind-model is NOT of type authenticated
- Device iotobsf/wind2 correctly inserted with urihttp://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2
-
- the registration of the ownership succededOrganization:iotobsf:wind2 {"elementId":"Organization:iotobsf:wind2","elementName":"wind2","elementUrl":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind2","elementDetails":{"k1":"320e24e8-be36-4f4e-9ea7-e7d79d72e444","k2":"3644011e-5223-42f0-8f4e-68bb4c5d6040","contextbroker":"iotobsf"},"elementType":"IOTID","username":"usermanager","id":16480}
- attribute wind correctly inserted
-2020-01-31 11:44:36am: 
- action=get_all_private_event_value 
-
-2020-01-31 11:46:15am: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-31 11:46:15am: \n\naction:get_param_values
-2020-01-31 11:46:16am: 
- action=get_all_private_event_value 
-
-2020-01-31 11:46:16am: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 11:46:16am: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 02:49:38pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'value.php'
-2020-01-31 02:49:39pm: 
- action=get_all_event_value 
-
-2020-01-31 02:49:39pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 02:49:39pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 02:49:46pm: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-31 02:50:00pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'value.php'
-2020-01-31 02:50:01pm: 
- action=get_all_event_value 
-
-2020-01-31 02:50:01pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 02:50:01pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 02:50:04pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-31 02:50:04pm: \n\naction:get_param_values
-2020-01-31 02:50:04pm: 
- action=get_all_device 
-
-2020-01-31 02:50:04pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 02:50:04pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 02:50:08pm: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-31 02:51:20pm: \n identified 3 delegations\n[]
-2020-01-31 02:51:34pm: 
- the registration of the delegation succededhttp://personaldata:8080/datamanager/api/v1/username/usermanager/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiJkNGY0Y2E5OC1lZGQ1LTQ4OTUtOGVmMi1hMzI4MzcwNzc0ZDUiLCJleHAiOjE1ODA0ODIzNTQsIm5iZiI6MCwiaWF0IjoxNTgwNDgyMjk0LCJpc3MiOiJodHRwOi8vZGFzaGJvYXJkL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6ImVkMTY2MWQzLTE5NzUtNGY0Yi1hMjNlLThiMmRhOTIwMzVlNSIsInR5cCI6IkJlYXJlciIsImF6cCI6InBocC1pb3QtZGlyZWN0b3J5Iiwibm9uY2UiOiI5MDM3MWYyZDMzMTJiNWIzYWY5N2M3ZTQwNjhjMDQ5MiIsImF1dGhfdGltZSI6MTU4MDQ3MTAzMywic2Vzc2lvbl9zdGF0ZSI6IjQ2ZmY3NmM4LTg1NzMtNGJhYy1hY2NlLTc1ZWU1NTQwMmRlMyIsImFjciI6IjAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiTWFuYWdlciJdLCJuYW1lIjoidXNlck1hbmFnZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VybWFuYWdlciIsImZhbWlseV9uYW1lIjoidXNlck1hbmFnZXIifQ.NSbHc-bHk3JbZJtrWuEvBmxkdEI3ulQVEZol8w45urcYUgbOcgEVghFShOJLss9G7ZK4EmrZBBLOlIY9IkKNuLTQ78s406Iken6DJz6uK-HCwnyokUTgTcypGLNaNGG2BBXQ9gszHvZjMKTpDl1_syyFtJVpDYmOLVstT7pJ-Vxy5u3vALXXukFHZ8Gym9vzgfW6o4lh1HH-8TRqjqCDhGa7CpYZQyq-VIC78CGOXeq-GEWwYlwS37WA9lFZHqC8_jqQIs-NEwM-lGBCVzps2pazp_qqsOLJLzXdHWuQqDZ5x82SObW59t2MT_AXXLpt1qxyfDxPUiTt2jZfkjIdPg&sourceRequest=iotdirectory result {"id":958,"usernameDelegator":"usermanager","usernameDelegated":"userareamanager","variableName":"wind","elementId":"http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind1/wind","elementType":"ServiceURI","insertTime":1580482294092,"delegationDetails":"{\"k1\":\"ab6ee5fd-4de2-4d14-b4e0-280eb12d63df\",\"k2\":\"67abcd15-e20c-40bb-b945-9ba737c013d2\"}"} msg {"elementId":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind1\/wind","variableName":"wind","elementType":"ServiceURI","usernameDelegated":"userareamanager","delegationDetails":{"k1":"ab6ee5fd-4de2-4d14-b4e0-280eb12d63df","k2":"67abcd15-e20c-40bb-b945-9ba737c013d2"}}
- the registration of the delegation succededhttp://personaldata:8080/datamanager/api/v1/username/usermanager/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiJkNGY0Y2E5OC1lZGQ1LTQ4OTUtOGVmMi1hMzI4MzcwNzc0ZDUiLCJleHAiOjE1ODA0ODIzNTQsIm5iZiI6MCwiaWF0IjoxNTgwNDgyMjk0LCJpc3MiOiJodHRwOi8vZGFzaGJvYXJkL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6ImVkMTY2MWQzLTE5NzUtNGY0Yi1hMjNlLThiMmRhOTIwMzVlNSIsInR5cCI6IkJlYXJlciIsImF6cCI6InBocC1pb3QtZGlyZWN0b3J5Iiwibm9uY2UiOiI5MDM3MWYyZDMzMTJiNWIzYWY5N2M3ZTQwNjhjMDQ5MiIsImF1dGhfdGltZSI6MTU4MDQ3MTAzMywic2Vzc2lvbl9zdGF0ZSI6IjQ2ZmY3NmM4LTg1NzMtNGJhYy1hY2NlLTc1ZWU1NTQwMmRlMyIsImFjciI6IjAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiTWFuYWdlciJdLCJuYW1lIjoidXNlck1hbmFnZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VybWFuYWdlciIsImZhbWlseV9uYW1lIjoidXNlck1hbmFnZXIifQ.NSbHc-bHk3JbZJtrWuEvBmxkdEI3ulQVEZol8w45urcYUgbOcgEVghFShOJLss9G7ZK4EmrZBBLOlIY9IkKNuLTQ78s406Iken6DJz6uK-HCwnyokUTgTcypGLNaNGG2BBXQ9gszHvZjMKTpDl1_syyFtJVpDYmOLVstT7pJ-Vxy5u3vALXXukFHZ8Gym9vzgfW6o4lh1HH-8TRqjqCDhGa7CpYZQyq-VIC78CGOXeq-GEWwYlwS37WA9lFZHqC8_jqQIs-NEwM-lGBCVzps2pazp_qqsOLJLzXdHWuQqDZ5x82SObW59t2MT_AXXLpt1qxyfDxPUiTt2jZfkjIdPg&sourceRequest=iotdirectory result {"id":959,"usernameDelegator":"usermanager","usernameDelegated":"userareamanager","elementId":"Organization:iotobsf:wind1","elementType":"IOTID","insertTime":1580482294156,"delegationDetails":"{\"k1\":\"ab6ee5fd-4de2-4d14-b4e0-280eb12d63df\",\"k2\":\"67abcd15-e20c-40bb-b945-9ba737c013d2\"}"} msg {"elementId":"Organization:iotobsf:wind1","elementType":"IOTID","usernameDelegated":"userareamanager","delegationDetails":{"k1":"ab6ee5fd-4de2-4d14-b4e0-280eb12d63df","k2":"67abcd15-e20c-40bb-b945-9ba737c013d2"}}
-2020-01-31 02:51:43pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-31 02:51:43pm: \n\naction:get_param_values
-2020-01-31 02:51:43pm: 
- action=get_all_device 
-
-2020-01-31 02:51:43pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 02:51:43pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 02:51:48pm: \n identified 5 delegations\n[]
-2020-01-31 02:51:57pm: 
- the registration of the delegation succededhttp://personaldata:8080/datamanager/api/v1/username/usermanager/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiIwZWQ2Yzc0My1lYjk3LTQzMTQtOTMzYy0xZjU4M2RjYTI2MDYiLCJleHAiOjE1ODA0ODIzNzcsIm5iZiI6MCwiaWF0IjoxNTgwNDgyMzE3LCJpc3MiOiJodHRwOi8vZGFzaGJvYXJkL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6ImVkMTY2MWQzLTE5NzUtNGY0Yi1hMjNlLThiMmRhOTIwMzVlNSIsInR5cCI6IkJlYXJlciIsImF6cCI6InBocC1pb3QtZGlyZWN0b3J5Iiwibm9uY2UiOiI5MDM3MWYyZDMzMTJiNWIzYWY5N2M3ZTQwNjhjMDQ5MiIsImF1dGhfdGltZSI6MTU4MDQ3MTAzMywic2Vzc2lvbl9zdGF0ZSI6IjQ2ZmY3NmM4LTg1NzMtNGJhYy1hY2NlLTc1ZWU1NTQwMmRlMyIsImFjciI6IjAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiTWFuYWdlciJdLCJuYW1lIjoidXNlck1hbmFnZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VybWFuYWdlciIsImZhbWlseV9uYW1lIjoidXNlck1hbmFnZXIifQ.NtQlSMleK8la6bTfnC9D3TzuDQQa_hqvMlpXRB8f0vSbWzTmhbZcqwPIbChTyTB3xfQbCvIsXRgrTt4pziaaENkbvJBcJ82fuM-0JexBNjA6K5dY1euHFK3nN1uIBdC4Mr3ib_0qW1mCtyFeEVMkLYtRcYfsilRHr48cq1_rAGHmX_JA0oTpLxrrgLTtYqW3-q3Ugp57dQ_RhdfjfISbh5KR_UYJueywZjkk0bnmuSH4zoHbd7kE0RyEvacjUnoH84Ta5xS1v5VgShE9XCiFtv-G1eUg-6rOVlzk5nRRGiCQHNBHQRzBeoyuWnrzKth_i_oPG9Rq1WrTNwjZq0OrIg&sourceRequest=iotdirectory result {"id":960,"usernameDelegator":"usermanager","usernameDelegated":"userareamanager","variableName":"wind","elementId":"http://www.disit.org/km4city/resource/iot/iotobsf/Organization/wind2/wind","elementType":"ServiceURI","insertTime":1580482317245,"delegationDetails":"{\"k1\":\"a0154ea0-75b3-4459-85e6-f979ca21e7d6\",\"k2\":\"2e0df84f-8a55-46e9-92e1-55dfadf54d49\"}"} msg {"elementId":"http:\/\/www.disit.org\/km4city\/resource\/iot\/iotobsf\/Organization\/wind2\/wind","variableName":"wind","elementType":"ServiceURI","usernameDelegated":"userareamanager","delegationDetails":{"k1":"a0154ea0-75b3-4459-85e6-f979ca21e7d6","k2":"2e0df84f-8a55-46e9-92e1-55dfadf54d49"}}
- the registration of the delegation succededhttp://personaldata:8080/datamanager/api/v1/username/usermanager/delegation?accessToken=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIybklPODdSRWlVUVNmX3l1Y1NBUVhPQTNKT3BfRjdPRFRyNzBQTUd3SElrIn0.eyJqdGkiOiIwZWQ2Yzc0My1lYjk3LTQzMTQtOTMzYy0xZjU4M2RjYTI2MDYiLCJleHAiOjE1ODA0ODIzNzcsIm5iZiI6MCwiaWF0IjoxNTgwNDgyMzE3LCJpc3MiOiJodHRwOi8vZGFzaGJvYXJkL2F1dGgvcmVhbG1zL21hc3RlciIsInN1YiI6ImVkMTY2MWQzLTE5NzUtNGY0Yi1hMjNlLThiMmRhOTIwMzVlNSIsInR5cCI6IkJlYXJlciIsImF6cCI6InBocC1pb3QtZGlyZWN0b3J5Iiwibm9uY2UiOiI5MDM3MWYyZDMzMTJiNWIzYWY5N2M3ZTQwNjhjMDQ5MiIsImF1dGhfdGltZSI6MTU4MDQ3MTAzMywic2Vzc2lvbl9zdGF0ZSI6IjQ2ZmY3NmM4LTg1NzMtNGJhYy1hY2NlLTc1ZWU1NTQwMmRlMyIsImFjciI6IjAiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiTWFuYWdlciJdLCJuYW1lIjoidXNlck1hbmFnZXIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VybWFuYWdlciIsImZhbWlseV9uYW1lIjoidXNlck1hbmFnZXIifQ.NtQlSMleK8la6bTfnC9D3TzuDQQa_hqvMlpXRB8f0vSbWzTmhbZcqwPIbChTyTB3xfQbCvIsXRgrTt4pziaaENkbvJBcJ82fuM-0JexBNjA6K5dY1euHFK3nN1uIBdC4Mr3ib_0qW1mCtyFeEVMkLYtRcYfsilRHr48cq1_rAGHmX_JA0oTpLxrrgLTtYqW3-q3Ugp57dQ_RhdfjfISbh5KR_UYJueywZjkk0bnmuSH4zoHbd7kE0RyEvacjUnoH84Ta5xS1v5VgShE9XCiFtv-G1eUg-6rOVlzk5nRRGiCQHNBHQRzBeoyuWnrzKth_i_oPG9Rq1WrTNwjZq0OrIg&sourceRequest=iotdirectory result {"id":961,"usernameDelegator":"usermanager","usernameDelegated":"userareamanager","elementId":"Organization:iotobsf:wind2","elementType":"IOTID","insertTime":1580482317313,"delegationDetails":"{\"k1\":\"a0154ea0-75b3-4459-85e6-f979ca21e7d6\",\"k2\":\"2e0df84f-8a55-46e9-92e1-55dfadf54d49\"}"} msg {"elementId":"Organization:iotobsf:wind2","elementType":"IOTID","usernameDelegated":"userareamanager","delegationDetails":{"k1":"a0154ea0-75b3-4459-85e6-f979ca21e7d6","k2":"2e0df84f-8a55-46e9-92e1-55dfadf54d49"}}
-2020-01-31 02:51:59pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-31 02:51:59pm: \n\naction:get_param_values
-2020-01-31 02:51:59pm: 
- action=get_all_device 
-
-2020-01-31 02:51:59pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 02:51:59pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:01:30pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'value.php'
-2020-01-31 03:01:30pm: 
- action=get_all_event_value 
-
-2020-01-31 03:01:30pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:01:30pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:01:34pm: \n identified 7 delegations\n[{"userDelegated":"userareamanager","delegationId":958,"k1":"","k2":""}]
-2020-01-31 03:01:45pm: 
- action=get_all_event_value 
-
-2020-01-31 03:01:45pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'value.php'
-2020-01-31 03:01:46pm: 
- action=get_all_event_value 
-
-2020-01-31 03:01:46pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:01:46pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:02:07pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-31 03:02:08pm: \n\naction:get_param_values
-2020-01-31 03:02:08pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:02:08pm: 
- action=get_all_private_event_value 
-
-2020-01-31 03:02:08pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:02:24pm: \n identified 7 delegations\n[{"userDelegated":"userareamanager","delegationId":958,"k1":"","k2":""}]
-2020-01-31 03:02:45pm: 
- action=get_all_private_event_value 
-
-2020-01-31 03:02:45pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-31 03:02:46pm: \n\naction:get_param_values
-2020-01-31 03:02:46pm: 
- action=get_all_private_event_value 
-
-2020-01-31 03:02:46pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:02:46pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:03:00pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-31 03:03:01pm: \n\naction:get_param_values
-2020-01-31 03:03:01pm: 
- action=get_all_private_event_value 
-
-2020-01-31 03:03:01pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:03:01pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:03:05pm: 
- action=get_all_delegated_event_value 
-
-2020-01-31 03:03:21pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-31 03:03:21pm: \n\naction:get_param_values
-2020-01-31 03:03:22pm: 
- action=get_all_device 
-
-2020-01-31 03:03:22pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:03:22pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:03:42pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-31 03:03:43pm: 
- action=get_all_contextbroker 
-
-2020-01-31 03:03:43pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:03:43pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:03:51pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-31 03:03:51pm: \n\naction:get_param_values
-2020-01-31 03:03:51pm: 
- action=get_all_device 
-
-2020-01-31 03:03:51pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:03:51pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:07:59pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-31 03:07:59pm: \n\naction:get_param_values
-2020-01-31 03:08:00pm: 
- action=get_all_private_event_value 
-
-2020-01-31 03:08:00pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:08:00pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:08:02pm: \n identified 7 delegations\n[{"userDelegated":"userareamanager","delegationId":958,"k1":"","k2":""}]
-2020-01-31 03:08:14pm: 
- action=get_all_private_event_value 
-
-2020-01-31 03:08:14pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-31 03:08:14pm: \n\naction:get_param_values
-2020-01-31 03:08:15pm: 
- action=get_all_private_event_value 
-
-2020-01-31 03:08:15pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:08:15pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:08:16pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'value.php'
-2020-01-31 03:08:17pm: 
- action=get_all_event_value 
-
-2020-01-31 03:08:17pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:08:17pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:08:23pm: \n identified 7 delegations\n[{"userDelegated":"userareamanager","delegationId":958,"k1":"","k2":""}]
-2020-01-31 03:08:30pm: 
- action=get_all_event_value 
-
-2020-01-31 03:08:30pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'value.php'
-2020-01-31 03:08:30pm: 
- action=get_all_event_value 
-
-2020-01-31 03:08:30pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:08:31pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:10:11pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-31 03:10:11pm: \n\naction:get_param_values
-2020-01-31 03:10:12pm: 
- action=get_all_private_event_value 
-
-2020-01-31 03:10:12pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:10:12pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:10:15pm: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-31 03:10:27pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-31 03:10:27pm: \n\naction:get_param_values
-2020-01-31 03:10:27pm: 
- action=get_all_device 
-
-2020-01-31 03:10:27pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:10:27pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:10:29pm: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-31 03:10:51pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-31 03:10:51pm: \n\naction:get_param_values
-2020-01-31 03:10:51pm: 
- action=get_all_device 
-
-2020-01-31 03:10:51pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:10:51pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:10:54pm: [
-]
-\n identified 0 private objects \n
- action:get_cb. ok [
-]
-\n identified 0 private objects \n
-2020-01-31 03:11:41pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'value.php'
-2020-01-31 03:11:41pm: 
- action=get_all_event_value 
-
-2020-01-31 03:11:41pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:11:41pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:11:43pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'mydevices.php'
-2020-01-31 03:11:43pm: \n\naction:get_param_values
-2020-01-31 03:11:43pm: 
- action=get_all_private_event_value 
-
-2020-01-31 03:11:43pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:11:43pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:12:32pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'devices.php'
-2020-01-31 03:12:32pm: \n\naction:get_param_values
-2020-01-31 03:12:32pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:12:32pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:12:33pm: 
- action=get_all_device 
-
-2020-01-31 03:12:36pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'contextbroker.php'
-2020-01-31 03:12:37pm: 
- action=get_all_contextbroker 
-
-2020-01-31 03:12:37pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:12:37pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
-2020-01-31 03:12:43pm: 
- action: get_functionality ok SELECT * FROM functionalities WHERE link = 'model.php'
-2020-01-31 03:12:43pm: \n\naction:get_param_values
-2020-01-31 03:12:43pm: 
- action:get_logged_ou. Ok, got Organization
-2020-01-31 03:12:43pm: 
- action=get_all_models_DataTable 
-
-2020-01-31 03:12:43pm: 
- action:get_group_for_ou. Ok, got n-entries: 0
