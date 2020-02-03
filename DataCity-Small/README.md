@@ -58,3 +58,11 @@ password: secret
 
 **Note:** when connecting to the server you need to use `http://dashboard/...` and NOT `http://localhost/...` or `http://<ip of server>/...` because the hostname in the connection is used to select the proper menu to be shown to the user and otherwise you will get an empty menu.
 
+## Setting up the broker
+TBD
+
+## Adding a nodered app
+TBD
+
+## Adding an orion broker
+TBD
