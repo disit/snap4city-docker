@@ -65,7 +65,28 @@ Consider that the orionbrokerfilter currently supports the NGSI api v1 and if yo
 
 The iot-directory-certificate directory it is already configured for the iot-directory.
 
-TBC...
+1. login as a ToolAdmin or RootAdmin (e.g. predefined users usertooladmin or userrootadmin)
+2. select the menu on the left "IOT Direcory and Devices" and then "IOT Brokers"
+3. press "New IOT Broker" button on the left
+4. Info tab
+    - Kind: *Internal*
+    - Name: *iotobsf* (if you change this name nifi has to be reconfigured)
+    - IP: *orion* (the name of the container running orion)
+    - Port: *1026*
+    - Protocol: *ngsi*
+    - Access Link: *orionbrokerfilter* (the name of the orion filter)
+    - Access Port: *8443*
+    - Ownership: *Private*
+5. Geo-Position tab
+    - press in any position on the map
+6. Security tab leave it blank
+7. Subscription tab
+    - Url Orion Callback: *http://nifi:1030/ingestngsi*
+8. press the Confirm button.
+
+The iotapp nr1 contains a simple demo flow to test the setup that is based on two wind sensors
+
+TBC
 
 ## Adding a nodered app
 TBD
