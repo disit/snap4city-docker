@@ -20,6 +20,7 @@ on the host are mapped ports:
 - 80 for main interface accessible via http://dashboard/dashboardSmartCity
 - 389, 636 for ldap server
 - 1880 for nodered application 1
+- 1881 for nodered application 2
 - 9000 for dashboard builder websocket server
 - 8080 for personaldata service
 - 8088 for keycloak access
@@ -29,6 +30,7 @@ on the host are mapped ports:
 - 8443 for orionbrokerfilter
 - 9200 for elasticsearch
 - 5601 for kibana
+- 9090 for nifi
 
 in this version many services are proxied from the apache2 server running on "dashboard" container:
 - http://dashboard/auth/... for keycloak
@@ -42,7 +44,7 @@ these settings can be changed if needed in the apache-proxy.conf file, in partic
 
 **IMPORTANT:** you have to change in the client running the browser the hosts file (/etc/hosts or the windows equivalent C:\Windows\System32\drivers\etc\hosts) adding a row with
 ```
-<docker machine ip>  dashboard keycloak wsserver iotapp personaldata myldap
+<docker machine ip>  dashboard keycloak wsserver iotapp personaldata myldap nifi kibana elasticsearch
 ```
 
 wait the logs are stabilized and the db is created then open on the browser http://dashboard/dashboardSmartCity 
