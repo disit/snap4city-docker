@@ -84,9 +84,42 @@ The iot-directory-certificate directory it is already configured for the iot-dir
     - Url Orion Callback: *http://nifi:1030/ingestngsi*
 8. press the Confirm button.
 
-The iotapp nr1 contains a simple demo flow to test the setup that is based on two wind sensors
+The iotapp nr1 (accessible to usermanager or userrootadmin) contains a simple demo flow to test the setup, this app is based on two wind sensors (wind1 and wind2). The following are the steps to add them:
 
-TBC
+1. select on the left menu option "IOT Device Models" and the press the "New Model" button
+2. General Info tab
+    - Name: *wind model* (change as you like)
+    - Description: *wind model* (change as you like)
+    - DeviceType: *WindSensor*
+    - Producer: *DISIT* (change ad you like)
+3. IOT Broker tab
+    - ContextBroker: **iotobsf**
+    - Protocol: **ngsi**
+    - Format: **json**
+4. Values tab, press "Add Value"
+    - Value Name: **wind**
+    - Data Type: **float**
+    - Value type: **wind**
+    - Editable: **false**
+    - Value unit: **km/h**
+5. Press Confirm to create the model.
+6. On the row of the newly added model click on "MYOWNPRIVATE" to change visibility
+7. Click on the "Visibility" tab and select "Make It Public" button and Close
+8. Logout and login as "usermanager"
+9. Select "IOT Directory adn Devices" menu on the left and select "My IOT Devices"
+10. Press "Add New Device" button
+11. Write Name: **wind1**, select a point on the map, and press "Submit Device"
+12. Write Name: **wind2**, select a point on the map, select wind model, and press "Submit Device"
+13. Take note of the KEY1 and KEY2 set for the two devices, you have to set them in the IOTApp to allow access
+14. Select on the left menu the "IOT Applications"/"Iot Application nodered 1"
+15. Double click the "wind1" node and set the key1 and key2 with the proper values.
+16. Do the same with "wind2"
+17. Deploy the app, and then press on the inject button, if all is ok you should see "success" below the wind1 and wind2 nodes
+18. Select "My Dashboards in My Organization" and press the "New dashboard" button
+19. Write a title for your dashboard and select "Data and trends" and press the Next button
+20. You should see the two sensors wind1 and wind2 in the list, select them and press Next.
+21. Press the "Create dashboard/widgets" button
+22. If all it is OK you should see the two trends that contain the same random data.
 
 ## Adding a nodered app
 TBD
