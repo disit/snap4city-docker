@@ -59,7 +59,13 @@ password: secret
 **Note:** when connecting to the server you need to use `http://dashboard/...` and NOT `http://localhost/...` or `http://<ip of server>/...` because the hostname in the connection is used to select the proper menu to be shown to the user and otherwise you will get an empty menu.
 
 ## Setting up the broker
-TBD
+This configuration includes the "orion" container running the orion context broken accessible from port 1026. It is also included the "orionbrokerfilter" container that is filtering and performing authentication checks on api calls to orion. 
+Access to the orion port should be allowed only to orionbrokerfilter and the dashboard and it should not be accessible from outside. 
+Consider that the orionbrokerfilter currently supports the NGSI api v1 and if you want to use api v2 you need to make it directly accessible.
+
+The iot-directory-certificate directory it is already configured for the iot-directory.
+
+TBC...
 
 ## Adding a nodered app
 TBD
