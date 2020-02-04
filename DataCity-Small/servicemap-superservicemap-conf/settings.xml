@@ -12,5 +12,8 @@
   <label id="urlMySqlDB">
     <value>jdbc:mysql://dashboarddb/</value>
   </label>
+  <label id="tmpcachexp">
+    <value>36000</value>
+  </label>
 </setting>
 
