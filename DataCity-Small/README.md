@@ -5,7 +5,8 @@ warning: **this is DEVELOPMENT version it may not work**
 git clone https://github.com/disit/snap4city-docker
 cd snap4city-docker/DataCity-Small
 
-# setup directories write permissions
+# setup directories write permissions and sets vm.max_map_count=262144 for elasticsearch
+# consider adding this option into /etc/sysctl.conf otherwise have to be set after each reboot
 ./setup.sh
 
 #bring all services up
