@@ -1,7 +1,7 @@
 version: "3"
 services:
   dashboard:
-    image: disitlab/dashboard-builder:v2
+    image: disitlab/dashboard-builder:v3
     ports:
       - "80:80"
     volumes:
@@ -32,7 +32,7 @@ services:
     depends_on: 
       - dashboarddb
   dashboard-cron:
-    image: disitlab/dashboard-builder:v2
+    image: disitlab/dashboard-builder:v3
     volumes:
        - ./dashboard-builder-conf:/var/www/html/dashboardSmartCity/conf
        - ./dashboard-cron-conf/crontab:/crontab
@@ -185,11 +185,12 @@ services:
       - ./database/dashboard.sql:/docker-entrypoint-initdb.d/0_init.sql
       - ./database/dashboard-wizard-min.sql:/docker-entrypoint-initdb.d/1_init.sql
       - ./database/dashboard-menu.sql:/docker-entrypoint-initdb.d/2_init.sql
-      - ./database/profiledb.sql:/docker-entrypoint-initdb.d/3_init.sql
-      - ./database/notificator.sql:/docker-entrypoint-initdb.d/4_init.sql
-      - ./database/iot-directory.sql:/docker-entrypoint-initdb.d/5_init.sql
-      - ./database/servicemap.sql:/docker-entrypoint-initdb.d/6_init.sql
-      - ./database/superservicemap.sql:/docker-entrypoint-initdb.d/7_init.sql
+      - ./database/dashboard-mobmenu.sql:/docker-entrypoint-initdb.d/3_init.sql
+      - ./database/profiledb.sql:/docker-entrypoint-initdb.d/4_init.sql
+      - ./database/notificator.sql:/docker-entrypoint-initdb.d/5_init.sql
+      - ./database/iot-directory.sql:/docker-entrypoint-initdb.d/6_init.sql
+      - ./database/servicemap.sql:/docker-entrypoint-initdb.d/7_init.sql
+      - ./database/superservicemap.sql:/docker-entrypoint-initdb.d/8_init.sql
     environment:
       TZ: "Europe/Rome"
       MYSQL_ALLOW_EMPTY_PASSWORD: "no"
