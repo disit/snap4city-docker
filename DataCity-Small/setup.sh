@@ -14,4 +14,5 @@ chmod a+w servicemap-iot-conf/logs/delete
 chmod a+w nifi/conf
 chmod a+w nifi/conf/flow.xml.gz
 chmod a+w nifi/extensions
+chmod a+w ckan-conf
 sysctl -w vm.max_map_count=262144

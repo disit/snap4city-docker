@@ -42,8 +42,12 @@ module.exports = {
     wsServerRetryActive: 'yes',
     wsServerRetryTime: 120,
     wsReconnectTimeout: 1200,
+    myPersonalDataUrl: "http://dashboard/datamanager/api/v1/",
+    ascapiUrl: "http://dashboard/ServiceMap/api/v1",
+    dashboardSmartCityUrl: "http://dashboard/dashboardSmartCity/",
+    socketIOUrl: "http://dashboard",
+    socketIOPath: "/synoptics/socket.io",
 
-    myPersonalDataUrl: "http://dashboard/datamanager",
 //    eventLogUri: 'http://192.168.1.43/RsyslogAPI/rsyslog.php',
 
     keycloakBaseUri: keycloak_base_uri,

@@ -227,6 +227,7 @@
 						<match-value>amqp</match-value>
 						<match-value>mqtt</match-value>
 						<match-value>ngsi</match-value>
+                                                <match-value>ngsi w/MultiService</match-value>
 					</match>	
 				</pick-validator>
 			</validate>
@@ -290,6 +291,7 @@
                             </pick-validator>
                         </validate>
                         
+                        <!--
                         <validate ref="attribute-valueunit">
                             <pick-validator ref="basic">
                                 <same-cardinality id="attribute-valueunit.same-cardinality.attribute-valuename" lev="SEVERE" ref="attribute-valuename"/> 
@@ -300,6 +302,7 @@
                                 </match>
                             </pick-validator>
                         </validate>
+                        -->
 
                         <validate ref="latitude">
                             <pick-validator ref="basic">
@@ -598,11 +601,36 @@
 			<query>s</query>                        
 		</data>
                 
+                <data id="air-quality-uri" type="uri" builder="const" loader="volatile">http://www.disit.org/km4city/schema#Air_quality_monitoring_station</data>
+                <data id="airQualityDocet" type="uri" builder="switch" loader="volatile"> 
+                    <switch ref="value_type_mapping_array">
+            		<case><if ref="air-quality-uri" /><then ref="air-quality-uri" /> </case>
+                    </switch>
+                </data>  
+                
+                <data id="subnature-uri" type="uri" builder="jsonp" loader="volatile">
+			<source ref="request-body"/>
+			<query>subnature</query>
+		</data>
+                                                
+                <data id="subnature-name" type="string" builder="jsonp" loader="volatile">
+			<source ref="request-body"/>
+			<query>subnature</query>
+		</data>
+                
+                <data id="built-subnature-uri" type="uri" builder="template" loader="volatile">
+                        <template>http://www.disit.org/km4city/schema#{0}</template>
+			<param index="0" value="subnature-name"/>
+		</data>
+                
                 <data id="readytouse_value_type_mapping_array" type="uri" builder="alternative" loader="volatile">
-			<alternative ref="value_type_mapping_array"/>
+			<alternative ref="subnature-uri"/>
+                        <alternative ref="built-subnature-uri"/>
+                        <alternative ref="airQualityDocet"/>
+                        <alternative ref="value_type_mapping_array"/>
                         <alternative ref="device-type-old"/>
-		</data>                                         	                 
-                       
+		</data>              	                                       
+                
                 <data id="graph-uri.service-uri.is-a.value_type_mapping_array" type="quad" builder="bean" loader="virtuoso">
 			<member name="graph" ref="graph-uri"/> 
 			<member name="subject" ref="service-uri"/> 
@@ -1121,6 +1149,61 @@
                         <member name="filler" ref="device-ownership"/>
 		</data> 
                 -->
+                
+                <!-- Static attributes -->
+                
+                <data id="static-attributes-query" type="string" builder="template" loader="volatile">                    
+                    <template>
+                        select distinct ?uri ?label ?type '{'
+						'{' 
+							select ?uri ?label ?type '{' ?uri rdfs:domain &lt;{0}&gt; ; rdfs:label ?label . optional '{' ?uri rdfs:range ?type '}' . filter(lang(?label) = "en") '}'  
+						'}'union '{'
+							values (?uri  ?label ?type ) '{' 
+								(schema:addressLocality "Locality" UNDEF) 
+								(schema:addressRegion "Region" UNDEF) 
+								(schema:streetAddress "Street address" UNDEF) 
+								(km4c:houseNumber "Street number" UNDEF) 
+								(km4c:isInRoad UNDEF UNDEF) 
+								(dcterms:description "Description" xsd:string)
+								(km4c:minCapacity "Minumum capacity" xsd:string)
+								(km4c:maxCapacity "Maximum capacity" xsd:string)
+								(km4c:maintenanceUrl "Maintenance url" xsd:string)
+								(schema:url "Use url" xsd:string)
+								(foaf:name "Name" UNDEF)
+							'}'
+							optional '{' ?uri rdfs:label ?label FILTER(LANG(?label)="en")'}'
+							optional '{' ?uri rdfs:range ?type filter(?type!=rdfs:Literal)'}' . 
+						'}'  
+						'}' order by str(?label)
+                    </template>
+                    <param index="0" value="readytouse_value_type_mapping_array"/>
+                </data>             
+                
+                <data id="static-attributes-result" type="string" builder="lookup" loader="volatile">
+			<lookup>
+				<priority>1</priority>
+				<provider>virtuoso-provider</provider>
+				<query ref="static-attributes-query" />
+			</lookup>
+		</data>
+                
+                <data id="static-attributes-uris" type="uri" builder="jsonp" loader="volatile">
+			<source ref="static-attributes-result"/>
+			<query>uri</query>                        
+		</data>
+                
+                <data id="static-attributes-values" type="string" builder="jsonp" loader="volatile">
+			<source ref="request-body"/>
+			<query ref="static-attributes-uris" onMissing="clean"/>
+		</data>
+ 
+                <data id="graph-uri.service-uri.static-attributes-uris.static-attributes-values" type="quad" builder="bean" loader="virtuoso">
+			<member name="graph" ref="graph-uri"/> 
+			<member name="subject" ref="service-uri"/> 
+			<member name="property" ref="static-attributes-uris"/>
+			<member name="filler" ref="static-attributes-values"/> 
+		</data>
+
                               
 	</process>
 

@@ -1,7 +1,7 @@
 version: "3"
 services:
   dashboard:
-    image: disitlab/dashboard-builder:v3
+    image: disitlab/dashboard-builder:v4
     ports:
       - "80:80"
     volumes:
@@ -10,11 +10,11 @@ services:
        - ./iot-directory-conf:/var/www/html/iot-directory/conf
        - ./iot-directory-certificate:/var/www/certificate
        - ./iot-directory-log:/var/www/log
-       - ./apache-proxy.conf:/etc/apache2/conf-enabled/proxy.conf
+       - ./apache-proxy.conf:/etc/apache2/conf-virtualhost/proxy.conf
+       - ./processloader-conf/config.php:/var/www/html/processloader/config.php
+       - ./processloader-conf/external_service.php:/var/www/html/processloader/external_service.php
+       - ./ownership-conf/config.php:/var/www/html/ownership-api/config.php
        - dashboard-img:/var/www/html/dashboardSmartCity/img
-#      - /home/debian/dashboard-builder/dashboard_frontend:/var/www/html/dashboardSmartCity
-#      - /home/debian/snap4city/Ownership-API:/var/www/html/ownership-api
-#       - /home/debian/notificator/www:/var/www/html/notificator
     environment:
       OWN_DB_HOST: "dashboarddb"
       OWN_DB_USER: "user"
@@ -32,13 +32,13 @@ services:
     depends_on: 
       - dashboarddb
   dashboard-cron:
-    image: disitlab/dashboard-builder:v3
+    image: disitlab/dashboard-builder:v4
     volumes:
        - ./dashboard-builder-conf:/var/www/html/dashboardSmartCity/conf
        - ./dashboard-cron-conf/crontab:/crontab
     command: /bin/sh -c "crontab /crontab; cron -f"
   personaldata:
-    image: disitlab/personaldata:v1
+    image: disitlab/personaldata:v2
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     volumes:
       - ./datamanager-logs:/datamanager
@@ -53,6 +53,16 @@ services:
       "spring.ldap.basicdn": "dc=ldap,dc=organization,dc=com"
       "spring.ldap.managerdn": "cn=admin,dc=ldap,dc=organization,dc=com"
       "spring.ldap.password": "secret"
+      "config.kpi.organizationlist": "[\"Organization\"]"
+      "config.kpi.dictionary": "http://dashboard/processloader/api/dictionary/"
+      "config.kpi.authentication.clientid": "js-kpi-client"
+      "config.grp.authentication.clientid": "js-grp-client"
+      "grpsensors.datasource.url": "http://dashboard/dashboardSmartCity/api/sensors.php"
+      "grp.url": "http://dashboard/datamanager/grp/?id=%d"
+#     "spring.cache.jcache.config": "classpath:ehcache.xml"
+      "kafka.bootstrapAddress": "kafka:9092"
+      "kafka.prefixTopic": "kpi-"
+      "kafka.sendMessages": "true"
       logFileFolder: ""
     ports:
       - 8080:8080
@@ -62,7 +72,7 @@ services:
       - dashboarddb
       - keycloak 
   wsserver:
-    image: disitlab/websocketserver:v1
+    image: disitlab/websocketserver:v2
     ports:
       - 9000:9000
     volumes:
@@ -70,8 +80,17 @@ services:
     depends_on:
       - dashboarddb
       - keycloak 
+  synoptics:
+    image: disitlab/synoptics:v0
+    volumes:
+      - ./synoptics-conf/config.js:/usr/src/synoptics/new-config.js
+      - ./synoptics-conf/v2-config.js:/usr/src/synoptics/v2/new-config.js
+    ports:
+      - 3001:3001
+      - 3002:3002
+    restart: always
   iotapp-nr1:
-    image: disitlab/snap4city-nodered-adv:v54
+    image: disitlab/snap4city-nodered-adv:v76
     volumes:
       - ./iotapp-nr1:/data
     ports:
@@ -80,7 +99,7 @@ services:
       - dashboard
       - keycloak
   iotapp-nr2:
-    image: disitlab/snap4city-nodered-adv:v54
+    image: disitlab/snap4city-nodered-adv:v76
     volumes:
       - ./iotapp-nr2:/data
     ports:
@@ -88,6 +107,29 @@ services:
     depends_on:
       - dashboard
       - keycloak
+
+  zookeeper:
+    image: zookeeper
+    ports:
+      - "2181:2181"
+    volumes:
+      - zkdata:/data
+  kafka:
+    image: bitnami/kafka:latest
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+        - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+        - ALLOW_PLAINTEXT_LISTENER=yes
+        - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT
+        - KAFKA_CFG_LISTENERS=CLIENT://:9092
+        - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092
+        - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
+    volumes:
+      - kafka:/bitnami/kafka
+    depends_on: 
+      - zookeeper
 
 # IOTOBSF ######################################################
   orionbrokerfilter:
@@ -129,7 +171,7 @@ services:
 
 #KBSSM ################################################################      
   servicemap:
-    image: disitlab/servicemap:v0 
+    image: disitlab/servicemap:v1 
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     volumes:
       - ./servicemap-conf:/root/servicemap
@@ -155,7 +197,6 @@ services:
     ports:
       - "8890:8890"      
       - "1111:1111"
-
 #IOTDES ################################################################      
   nifi:
     image: apache/nifi:1.9.2
@@ -168,10 +209,13 @@ services:
       - ./nifi/conf:/opt/nifi/nifi-current/conf
   elasticsearch:
     image: elasticsearch:6.8.5
+    environment:
+      - 'path.repo=/elastic-bkup'
     ports:
       - "9200:9200"      
     volumes:
       - elastic-data:/usr/share/elasticsearch/data
+      - ./elastic-bkup:/elastic-bkup 
   kibana:
     image: kibana:6.8.5
     ports:
@@ -191,6 +235,7 @@ services:
       - ./database/iot-directory.sql:/docker-entrypoint-initdb.d/6_init.sql
       - ./database/servicemap.sql:/docker-entrypoint-initdb.d/7_init.sql
       - ./database/superservicemap.sql:/docker-entrypoint-initdb.d/8_init.sql
+      - ./database/processloader.sql:/docker-entrypoint-initdb.d/9_init.sql
     environment:
       TZ: "Europe/Rome"
       MYSQL_ALLOW_EMPTY_PASSWORD: "no"
@@ -200,8 +245,9 @@ services:
       MYSQL_DATABASE: 'Dashboard'      
     ports:
       - "3306:3306"
+
   ldap-server:
-    image: disitlab/preconf-openldap:v1 
+    image: disitlab/preconf-openldap:v2 
 #    image: osixia/openldap
     environment:
       LDAP_ORGANISATION: "organization"
@@ -219,7 +265,7 @@ services:
     depends_on:
       - "ldap-server"
   keycloak:
-      image: disitlab/preconf-keycloak:v2 
+      image: disitlab/preconf-keycloak:v3 
 #      image: jboss/keycloak:4.8.3.Final 
       command: ["-Djboss.socket.binding.port-offset=8"]
       ports:
@@ -231,7 +277,14 @@ services:
         - ldap-server
 volumes:
   dashboarddb:
+  dashboarddb2:
   dashboard-img:
   virtuoso:
   mongodb:
   elastic-data:
+  ckan_conf:
+  ckan_home:
+  ckan_storage:
+  pg_data:
+  zkdata:
+  kafka:

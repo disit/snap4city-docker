@@ -1,42 +1,58 @@
 CREATE SCHEMA `iotdb` DEFAULT CHARACTER SET utf8;
 GRANT ALL ON iotdb.* TO 'user'@'%';
+-- MySQL dump 10.16  Distrib 10.1.41-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 192.168.1.119    Database: iotdb
+-- ------------------------------------------------------
+-- Server version	10.4.12-MariaDB-1:10.4.12+maria~bionic
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `iotdb`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `iotdb` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `iotdb`;
 
-CREATE TABLE `protocols` (
-  `name` varchar(20) NOT NULL,
-  PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Table structure for table `access_log`
+--
 
-CREATE TABLE `formats` (
-  `name` varchar(20) NOT NULL,
-  PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `data_types` (
-  `data_type` varchar(30) NOT NULL,
-  PRIMARY KEY (`data_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `value_types` (
-  `value_type` varchar(30) NOT NULL,
-  `value_unit_default` varchar(30) NOT NULL,
-  PRIMARY KEY (`value_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+DROP TABLE IF EXISTS `access_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `access_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `time` timestamp NOT NULL DEFAULT current_timestamp(),
   `accessed_by` varchar(100) NOT NULL,
   `target_entity_type` varchar(50) NOT NULL,
   `access_type` varchar(50) NOT NULL,
   `entity_name` varchar(100) DEFAULT NULL,
-  `notes` text,
-  `result` set('success','faliure','') DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `result` set('success','faliure','failure','') DEFAULT NULL,
   `organization` varchar(50) DEFAULT 'DISIT',
   PRIMARY KEY (`id`,`time`,`accessed_by`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `association_rules`
+--
+
+DROP TABLE IF EXISTS `association_rules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `association_rules` (
   `input_data_type` varchar(30) DEFAULT NULL,
   `input_value_type` varchar(120) DEFAULT NULL,
@@ -60,8 +76,15 @@ CREATE TABLE `association_rules` (
   `lift` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `bulkload_status`
+--
 
+DROP TABLE IF EXISTS `bulkload_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bulkload_status` (
   `username` varchar(100) NOT NULL,
   `is_bulk_processing` tinyint(1) NOT NULL,
@@ -70,7 +93,15 @@ CREATE TABLE `bulkload_status` (
   `is_finished` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `contextbroker`
+--
+
+DROP TABLE IF EXISTS `contextbroker`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contextbroker` (
   `name` varchar(40) NOT NULL,
   `protocol` varchar(20) NOT NULL,
@@ -81,7 +112,7 @@ CREATE TABLE `contextbroker` (
   `password` varchar(20) DEFAULT NULL,
   `latitude` varchar(20) DEFAULT NULL,
   `longitude` varchar(20) DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `accesslink` varchar(100) NOT NULL,
   `accessport` varchar(5) NOT NULL,
   `sha` varchar(100) DEFAULT NULL,
@@ -91,18 +122,37 @@ CREATE TABLE `contextbroker` (
   `version` varchar(50) DEFAULT NULL,
   `path` varchar(100) DEFAULT NULL,
   `kind` set('external','internal') DEFAULT NULL,
-  `subscription_id` varchar(40) DEFAULT NULL,
+  `subscription_id` varchar(255) DEFAULT NULL,
   `urlnificallback` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`name`),
-  UNIQUE KEY `ip` (`ip`,`port`),
-  UNIQUE KEY `uri` (`uri`),
   KEY `protocol` (`protocol`),
   CONSTRAINT `contextbroker_ibfk_1` FOREIGN KEY (`protocol`) REFERENCES `protocols` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `data_types`
+--
+
+DROP TABLE IF EXISTS `data_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `data_types` (
+  `data_type` varchar(30) NOT NULL,
+  PRIMARY KEY (`data_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `defaultcontestbrokerpolicy`
+--
+
+DROP TABLE IF EXISTS `defaultcontestbrokerpolicy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `defaultcontestbrokerpolicy` (
   `policyname` varchar(30) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT 0,
   `contextbroker` varchar(40) NOT NULL,
   `protocol` varchar(20) NOT NULL,
   `format` varchar(20) NOT NULL,
@@ -111,10 +161,18 @@ CREATE TABLE `defaultcontestbrokerpolicy` (
   KEY `protocol` (`protocol`),
   KEY `format` (`format`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `defaultpolicy`
+--
+
+DROP TABLE IF EXISTS `defaultpolicy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `defaultpolicy` (
   `policyname` varchar(30) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT 0,
   `contextbroker` varchar(40) NOT NULL,
   `protocol` varchar(20) NOT NULL,
   `format` varchar(20) NOT NULL,
@@ -125,29 +183,41 @@ CREATE TABLE `defaultpolicy` (
   KEY `protocol` (`protocol`),
   KEY `format` (`format`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `deleted_devices`
+--
+
+DROP TABLE IF EXISTS `deleted_devices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `deleted_devices` (
   `contextBroker` varchar(40) NOT NULL,
-  `id` varchar(120) NOT NULL,
-  `uri` text,
+  `id` varchar(255) NOT NULL,
+  `uri` text DEFAULT NULL,
   `devicetype` varchar(80) NOT NULL,
   `kind` set('sensor','actuator') DEFAULT NULL,
   `mandatoryproperties` tinyint(1) NOT NULL,
   `mandatoryvalues` tinyint(1) NOT NULL,
   `macaddress` varchar(20) DEFAULT NULL,
   `model` varchar(50) DEFAULT NULL,
-  `producer` varchar(20) DEFAULT NULL,
+  `producer` varchar(125) DEFAULT NULL,
   `longitude` varchar(20) DEFAULT NULL,
   `latitude` varchar(20) DEFAULT NULL,
   `protocol` varchar(20) NOT NULL,
   `format` varchar(20) NOT NULL,
   `visibility` set('public','private') DEFAULT NULL,
   `frequency` varchar(20) DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted` date DEFAULT NULL,
   `privatekey` varchar(50) DEFAULT NULL,
   `certificate` varchar(50) DEFAULT NULL,
   `organization` varchar(50) DEFAULT 'DISIT',
+  `subnature` varchar(50) DEFAULT NULL,
+  `static_attributes` text DEFAULT NULL,
+  `service` varchar(25) DEFAULT NULL,
+  `servicePath` varchar(96) DEFAULT NULL,
   PRIMARY KEY (`id`,`contextBroker`),
   KEY `contextBroker` (`contextBroker`),
   KEY `protocol` (`protocol`),
@@ -156,10 +226,18 @@ CREATE TABLE `deleted_devices` (
   CONSTRAINT `deleted_devices_ibfk_2` FOREIGN KEY (`protocol`) REFERENCES `protocols` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `deleted_devices_ibfk_3` FOREIGN KEY (`format`) REFERENCES `formats` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `deleted_event_values`
+--
+
+DROP TABLE IF EXISTS `deleted_event_values`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `deleted_event_values` (
   `cb` varchar(40) NOT NULL,
-  `device` varchar(120) NOT NULL,
+  `device` varchar(255) NOT NULL,
   `value_name` varchar(120) NOT NULL,
   `data_type` varchar(30) NOT NULL,
   `value_type` varchar(120) DEFAULT NULL,
@@ -172,34 +250,44 @@ CREATE TABLE `deleted_event_values` (
   `order` int(11) NOT NULL,
   PRIMARY KEY (`cb`,`device`,`value_name`),
   KEY `data_type` (`data_type`),
-  KEY `value_type` (`value_type`),
   CONSTRAINT `deleted_event_values_ibfk_1` FOREIGN KEY (`data_type`) REFERENCES `data_types` (`data_type`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `deleted_event_values_ibfk_2` FOREIGN KEY (`value_type`) REFERENCES `value_types` (`value_type`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `deleted_event_values_ibfk_3` FOREIGN KEY (`cb`, `device`) REFERENCES `deleted_devices` (`contextBroker`, `id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `devices`
+--
+
+DROP TABLE IF EXISTS `devices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `devices` (
   `contextBroker` varchar(40) NOT NULL,
-  `id` varchar(120) NOT NULL,
-  `uri` text,
+  `id` varchar(255) NOT NULL,
+  `uri` text DEFAULT NULL,
   `devicetype` varchar(80) NOT NULL,
   `kind` set('sensor','actuator') NOT NULL DEFAULT 'sensor',
-  `mandatoryproperties` tinyint(1) NOT NULL DEFAULT '0',
-  `mandatoryvalues` tinyint(1) NOT NULL DEFAULT '0',
+  `mandatoryproperties` tinyint(1) NOT NULL DEFAULT 0,
+  `mandatoryvalues` tinyint(1) NOT NULL DEFAULT 0,
   `macaddress` varchar(20) DEFAULT NULL,
   `model` varchar(50) DEFAULT NULL,
-  `producer` varchar(20) DEFAULT NULL,
+  `producer` varchar(125) DEFAULT NULL,
   `longitude` varchar(20) DEFAULT NULL,
   `latitude` varchar(20) DEFAULT NULL,
   `protocol` varchar(20) NOT NULL,
   `format` varchar(20) NOT NULL,
   `visibility` set('public','private') NOT NULL DEFAULT 'public',
   `frequency` varchar(20) DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted` date DEFAULT NULL,
   `privatekey` varchar(100) DEFAULT NULL,
   `certificate` varchar(100) DEFAULT NULL,
   `organization` varchar(50) DEFAULT 'DISIT',
+  `subnature` varchar(50) DEFAULT NULL,
+  `static_attributes` text DEFAULT NULL,
+  `service` varchar(25) DEFAULT NULL,
+  `servicePath` varchar(96) DEFAULT NULL,
   PRIMARY KEY (`id`,`contextBroker`),
   KEY `contextBroker` (`contextBroker`),
   KEY `protocol` (`protocol`),
@@ -208,34 +296,56 @@ CREATE TABLE `devices` (
   CONSTRAINT `devices_ibfk_2` FOREIGN KEY (`protocol`) REFERENCES `protocols` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `devices_ibfk_3` FOREIGN KEY (`format`) REFERENCES `formats` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `edgegatewaytype`
+--
+
+DROP TABLE IF EXISTS `edgegatewaytype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `edgegatewaytype` (
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `event_values`
+--
+
+DROP TABLE IF EXISTS `event_values`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `event_values` (
   `cb` varchar(40) NOT NULL,
-  `device` varchar(120) NOT NULL,
+  `device` varchar(255) NOT NULL,
   `value_name` varchar(120) NOT NULL,
   `data_type` varchar(30) NOT NULL,
   `value_type` varchar(120) DEFAULT NULL,
-  `editable` tinyint(1) NOT NULL,
+  `editable` tinyint(1) NOT NULL DEFAULT 0,
   `value_unit` varchar(30) DEFAULT NULL,
   `healthiness_criteria` set('refresh_rate','different_values','within_bounds','') DEFAULT NULL,
-  `value_refresh_rate` int(11) DEFAULT NULL,
+  `value_refresh_rate` int(11) DEFAULT 0,
   `different_values` int(11) DEFAULT NULL,
   `value_bounds` varchar(10) DEFAULT NULL,
-  `order` int(11) NOT NULL,
-  `old_value_name` varchar(50) DEFAULT NULL,
+  `order` int(11) NOT NULL DEFAULT 0,
+  `old_value_name` varchar(120) DEFAULT NULL,
   PRIMARY KEY (`cb`,`device`,`value_name`),
   KEY `data_type` (`data_type`),
-  KEY `value_type` (`value_type`),
   CONSTRAINT `event_values_ibfk_1` FOREIGN KEY (`data_type`) REFERENCES `data_types` (`data_type`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `event_values_ibfk_2` FOREIGN KEY (`value_type`) REFERENCES `value_types` (`value_type`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `event_values_ibfk_3` FOREIGN KEY (`cb`, `device`) REFERENCES `devices` (`contextBroker`, `id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `extractionRules`
+--
+
+DROP TABLE IF EXISTS `extractionRules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `extractionRules` (
   `id` varchar(30) NOT NULL,
   `contextbroker` varchar(35) NOT NULL,
@@ -252,56 +362,101 @@ CREATE TABLE `extractionRules` (
   KEY `contextbroker_erfk_1` (`contextbroker`),
   CONSTRAINT `contextbroker_erfk_1` FOREIGN KEY (`contextbroker`) REFERENCES `contextbroker` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `fieldType`
+--
+
+DROP TABLE IF EXISTS `fieldType`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fieldType` (
   `fieldName` varchar(80) NOT NULL,
   `menuType` varchar(40) DEFAULT NULL,
-  `query` text,
-  `fieldsHtml` text,
-  `autocomplete` text,
+  `query` text DEFAULT NULL,
+  `fieldsHtml` text DEFAULT NULL,
+  `autocomplete` text DEFAULT NULL,
   PRIMARY KEY (`fieldName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `formats`
+--
+
+DROP TABLE IF EXISTS `formats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `formats` (
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `functionalities`
+--
+
+DROP TABLE IF EXISTS `functionalities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `functionalities` (
   `id` int(11) NOT NULL,
   `functionality` varchar(200) DEFAULT '0',
-  `ToolAdmin` tinyint(1) NOT NULL DEFAULT '0',
-  `AreaManager` tinyint(1) NOT NULL DEFAULT '0',
-  `Manager` tinyint(1) NOT NULL DEFAULT '0',
-  `Public` tinyint(1) NOT NULL DEFAULT '0',
+  `ToolAdmin` tinyint(1) NOT NULL DEFAULT 0,
+  `AreaManager` tinyint(1) NOT NULL DEFAULT 0,
+  `Manager` tinyint(1) NOT NULL DEFAULT 0,
+  `Public` tinyint(1) NOT NULL DEFAULT 0,
   `link` varchar(200) DEFAULT NULL,
   `view` varchar(40) DEFAULT NULL,
   `class` varchar(200) DEFAULT NULL,
-  `RootAdmin` tinyint(1) NOT NULL DEFAULT '0',
+  `RootAdmin` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `mainmenu`
+--
+
+DROP TABLE IF EXISTS `mainmenu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mainmenu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `linkUrl` varchar(200) NOT NULL,
   `linkId` varchar(200) DEFAULT NULL,
   `icon` varchar(200) DEFAULT NULL,
   `text` varchar(200) DEFAULT NULL,
-  `privileges` text,
+  `privileges` text DEFAULT NULL,
   `userType` varchar(45) DEFAULT 'any',
   `externalApp` varchar(3) DEFAULT 'no',
   `openMode` varchar(45) DEFAULT 'newTab',
   `iconColor` varchar(45) DEFAULT '#FFFFFF',
-  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `active` tinyint(1) NOT NULL DEFAULT 1,
   `pageTitle` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `model`
+--
+
+DROP TABLE IF EXISTS `model`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `model` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `description` varchar(100) DEFAULT NULL,
+  `description` varchar(125) DEFAULT NULL,
   `devicetype` varchar(80) NOT NULL,
   `kind` set('sensor','actuator','') DEFAULT NULL,
-  `producer` varchar(20) DEFAULT NULL,
+  `producer` varchar(125) DEFAULT NULL,
   `frequency` varchar(20) DEFAULT NULL,
   `policy` varchar(20) DEFAULT NULL,
-  `attributes` text,
+  `attributes` text DEFAULT NULL,
   `link` varchar(100) DEFAULT NULL,
   `contextbroker` varchar(40) NOT NULL,
   `protocol` varchar(20) NOT NULL,
@@ -314,19 +469,61 @@ CREATE TABLE `model` (
   `edgegateway_type` varchar(20) DEFAULT NULL,
   `organization` varchar(50) DEFAULT 'DISIT',
   `visibility` set('public','private') DEFAULT 'public',
+  `subnature` varchar(50) DEFAULT NULL,
+  `static_attributes` text DEFAULT NULL,
+  `service` varchar(25) DEFAULT NULL,
+  `servicePath` varchar(96) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `id` (`id`),
   KEY `policy` (`policy`),
   CONSTRAINT `model_ibfk_1` FOREIGN KEY (`policy`) REFERENCES `defaultpolicy` (`policyname`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `protocols`
+--
+
+DROP TABLE IF EXISTS `protocols`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `protocols` (
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `services`
+--
+
+DROP TABLE IF EXISTS `services`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `services` (
+  `id` int(32) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `broker_name` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `broker_name_ibfk_1` (`broker_name`),
+  CONSTRAINT `broker_name_ibfk_1` FOREIGN KEY (`broker_name`) REFERENCES `contextbroker` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `temporary_devices`
+--
+
+DROP TABLE IF EXISTS `temporary_devices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `temporary_devices` (
   `username` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `contextBroker` varchar(40) NOT NULL,
-  `id` varchar(120) NOT NULL,
-  `uri` text,
+  `id` varchar(255) NOT NULL,
+  `uri` text DEFAULT NULL,
   `devicetype` varchar(80) DEFAULT NULL,
   `kind` set('sensor','actuator','') DEFAULT NULL,
   `status` set('valid','invalid') DEFAULT 'invalid',
@@ -341,13 +538,17 @@ CREATE TABLE `temporary_devices` (
   `deleted` date DEFAULT NULL,
   `k1` varchar(40) DEFAULT NULL,
   `k2` varchar(40) DEFAULT NULL,
-  `producer` varchar(20) DEFAULT NULL,
-  `validity_msg` text,
+  `producer` varchar(125) DEFAULT NULL,
+  `validity_msg` text DEFAULT NULL,
   `edge_gateway_type` varchar(30) DEFAULT NULL,
-  `edge_gateway_uri` text,
+  `edge_gateway_uri` text DEFAULT NULL,
   `toDelete` varchar(10) DEFAULT NULL,
   `should_be_registered` set('yes','no') NOT NULL DEFAULT 'yes',
   `organization` varchar(50) DEFAULT 'DISIT',
+  `subnature` varchar(50) DEFAULT NULL,
+  `static_attributes` text DEFAULT NULL,
+  `service` varchar(25) DEFAULT NULL,
+  `servicePath` varchar(96) DEFAULT NULL,
   PRIMARY KEY (`id`,`contextBroker`),
   KEY `contextBroker` (`contextBroker`),
   KEY `protocol` (`protocol`),
@@ -355,10 +556,18 @@ CREATE TABLE `temporary_devices` (
   KEY `id` (`id`),
   CONSTRAINT `temporary_devices_ibfk_1` FOREIGN KEY (`contextBroker`) REFERENCES `contextbroker` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `temporary_event_values`
+--
+
+DROP TABLE IF EXISTS `temporary_event_values`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `temporary_event_values` (
   `cb` varchar(40) NOT NULL,
-  `device` varchar(120) NOT NULL,
+  `device` varchar(255) NOT NULL,
   `value_name` varchar(120) NOT NULL,
   `old_value_name` varchar(120) NOT NULL,
   `data_type` varchar(30) DEFAULT NULL,
@@ -375,7 +584,15 @@ CREATE TABLE `temporary_event_values` (
   KEY `temporary_event_values_ibfk_1` (`device`,`cb`),
   CONSTRAINT `temporary_event_values_ibfk_1` FOREIGN KEY (`device`, `cb`) REFERENCES `temporary_devices` (`id`, `contextBroker`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `IdUser` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
@@ -390,251 +607,124 @@ CREATE TABLE `users` (
   `activationHash` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`IdUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-/*
--- Query: SELECT * FROM iotdb.defaultpolicy
--- Date: 2019-10-28 18:45
-*/
-INSERT INTO `defaultpolicy` (`policyname`,`active`,`contextbroker`,`protocol`,`format`,`healthiness_criteria`,`healthiness_value`) VALUES ('advances',0,'mqttUNIFI','mqtt','csv','refresh_rate','300');
-INSERT INTO `defaultpolicy` (`policyname`,`active`,`contextbroker`,`protocol`,`format`,`healthiness_criteria`,`healthiness_value`) VALUES ('basic',1,'orionUNIFI','ngsi','json','refresh_rate','300');
+--
+-- Table structure for table `value_types`
+--
 
-/*
--- Query: SELECT * FROM iotdb.formats
--- Date: 2019-10-28 18:46
-*/
-INSERT INTO `formats` (`name`) VALUES ('csv');
-INSERT INTO `formats` (`name`) VALUES ('json');
-INSERT INTO `formats` (`name`) VALUES ('xml');
+DROP TABLE IF EXISTS `value_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `value_types` (
+  `value_type` varchar(30) NOT NULL,
+  `value_unit_default` varchar(30) NOT NULL,
+  PRIMARY KEY (`value_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*
--- Query: SELECT * FROM iotdb.functionalities
--- Date: 2019-10-28 18:46
-*/
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (1,'View Sensors and Actuators',1,1,1,0,'value.php','view','#mainContentCnt',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (2,'Search Sensors and Actuators on the Map',1,1,1,0,'value.php','popup','#addMap1SA',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (3,'New Sensor/Actuator',1,1,0,0,'value.php','popup','#addValueBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (4,'Modify Sensor/Actuator',1,1,0,0,'value.php','popup','.editDashBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (5,'Delete Sensor/Actuator',1,1,0,0,'value.php','popup','.delDashBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (6,'View Sensor/Actuator on Map',1,1,0,0,'value.php','popup','.addMapBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (7,'View Devices',1,1,1,0,'devices.php','view','#mainContentCnt',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (8,'Search Devices on the Map',1,1,1,0,'devices.php','popup','#displayDevicesMap',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (9,'New Device',1,1,0,0,'devices.php','popup','#addDeviceBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (10,'Modify Device',1,1,0,0,'devices.php','popup','.editDashBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (11,'Delete Device',1,1,0,0,'devices.php','popup','.delDashBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (12,'View Device on Map',1,1,1,0,'devices.php','popup','.addMapBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (13,'View Context Brokers',1,0,0,0,'contextbroker.php','view','.mainContentCnt',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (14,'Search Context Brokers On the Map',1,0,0,0,'contextbroker.php','popup','#displayDevicesMapCB',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (15,'New Context Broker',1,0,0,0,'contextbroker.php','popup','#addContextBrokerBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (16,'Modify Context Broker',1,0,0,0,'contextbroker.php','popup','.editDashBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (17,'Delete Context Broker',1,0,0,0,'contextbroker.php','popup','.delDashBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (18,'View Device Manager Board',0,0,1,0,'devices.php','view','#managerBoard',0);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (19,'Stub for gathering devices',1,0,0,0,'contextbroker.php','popup','.viewDashBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (20,'View Syntesis',1,0,0,0,'devices.php','view','#synthesis',0);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (21,'View Syntesis',1,0,0,0,'value.php','view','#synthesis',0);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (22,'View Syntesis',1,0,0,0,'contextbroker.php','view','#synthesis',0);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (23,'View Devices',1,1,1,0,'mydevices.php','view','#mainContentCnt',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (24,'Search Devices on the Map',0,0,1,0,'mydevices.php','popup','#displayDevicesMap',0);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (25,'New Device',0,0,0,0,'mydevices.php','popup','#addDeviceBtn',0);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (26,'Modify Device',1,1,0,0,'mydevices.php','popup','.editDashBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (27,'Delete Device',1,1,1,0,'mydevices.php','popup','.delDashBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (28,'View Device on Map',1,1,1,0,'mydevices.php','popup','.addMapBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (29,'View Device Manager Board',1,1,1,0,'mydevices.php','view','#managerBoard',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (30,'View Syntesis',0,0,0,0,'mydevices.php','view','#synthesis',0);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (31,'View Devices',1,0,0,0,'alldevices.php','view','#mainContentCnt',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (32,'Search Devices on the Map',1,0,0,0,'alldevices.php','popup','#displayDevicesMap',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (33,'New Device',1,0,0,0,'alldevices.php','popup','#addDeviceBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (34,'Modify Device',1,0,0,0,'alldevices.php','popup','.editDashBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (35,'View Device on Map',1,1,1,0,'alldevices.php','popup','.addMapBtn',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (36,'View Device Manager Board',0,0,1,0,'alldevices.php','view','#managerBoard',0);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (37,'View Syntesis',1,0,0,0,'alldevices.php','view','#synthesis',1);
-INSERT INTO `functionalities` (`id`,`functionality`,`ToolAdmin`,`AreaManager`,`Manager`,`Public`,`link`,`view`,`class`,`RootAdmin`) VALUES (38,'Delete Device',1,0,0,0,'alldevices.php','popup','.delDashBtn',1);
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-/*
--- Query: SELECT * FROM iotdb.mainmenu
--- Date: 2019-10-28 18:47
-*/
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (1,'value.php','valueLink','fa fa-podcast','Sensors&amp;Actuators','[\"AreaManager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#f3cf58',1,'IoT Directory: Sensors and Actuators');
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (2,'devices.php','devicesLink','fa fa-microchip','Devices','[\"AreaManager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#33cc33',1,'IoT Directory: Devices');
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (3,'contextbroker.php','contextbrokerLink','fa fa-object-group','Context Brokers','[\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#d84141',1,'IoT Directory: Context Brokers');
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (5,'users.php','userLink','fa fa-user','List of Users','[\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#FFFFFF',1,'IoT Directory: Users');
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (6,'account.php','accountManagementLink','fa fa-lock','Account','[\"AreaManager\",\"Manager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#ff9933',1,'IoT Directory: Account');
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (8,'bulkUpdate.php','bulkDUpdateLink','fa fa-microchip','Update Devices ','[]','any','no','samePage','#33cc33',0,'IoT Directory: Device Bulk Updates');
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (9,'bulkCBUpdate.php','bulkCBUpdateLink','fa fa-microchip','Update COntext Broker','[]','any','no','samePage','#33cc33',0,'IoT Directory: Device Bulk Updates');
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (10,'setup.php','setupLink','fa fa-cogs','Settings','[\"AreaManager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#00e6e6',1,'IoT Directory: Setup');
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (11,'mydevices.php','mydevicesLink','fa fa-microchip','Devices','[\"AreaManager\",\"Manager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#33cc33',1,'IoT Directory: Devices');
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (12,'alldevices.php','alldevicesLink','fa fa-microchip','Devices','[\"RootAdmin\"]','any','no','samePage','#33cc33',1,'IoT Directory: Devices');
-INSERT INTO `mainmenu` (`id`,`linkUrl`,`linkId`,`icon`,`text`,`privileges`,`userType`,`externalApp`,`openMode`,`iconColor`,`active`,`pageTitle`) VALUES (13,'model.php','modelLink','fa fa-microchip','Models','[\"AreaManager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#33cc33',1,'IoT Directory: Models');
+-- Dump completed on 2020-09-09 18:34:30
+-- MySQL dump 10.16  Distrib 10.1.41-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 192.168.1.119    Database: iotdb
+-- ------------------------------------------------------
+-- Server version	10.4.12-MariaDB-1:10.4.12+maria~bionic
 
-/*
--- Query: SELECT * FROM iotdb.protocols
--- Date: 2019-10-28 18:47
-*/
-INSERT INTO `protocols` (`name`) VALUES ('amqp');
-INSERT INTO `protocols` (`name`) VALUES ('coap');
-INSERT INTO `protocols` (`name`) VALUES ('mqtt');
-INSERT INTO `protocols` (`name`) VALUES ('ngsi');
-INSERT INTO `protocols` (`name`) VALUES ('sigfox');
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-/*
--- Query: SELECT * FROM iotdb.value_types
--- Date: 2019-10-28 18:48
-*/
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('actuator_canceller','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('actuator_deleted','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('actuator_deletion_date','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('annual_PM10_exceedance_count','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('audio','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('available_bikes','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('average_vehicle_distance','m');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('average_vehicle_speed','km/h');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('average_vehicle_time','s');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('battery_level','%');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('benzene_concentration','ppm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('blue_code_count','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('broken_bikes','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('button','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('car_park_exit_rate','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('car_park_fill_rate','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('car_park_free_places','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('car_park_occupancy','%');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('car_park_occupied_places','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('car_park_status','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('car_park_validity_status','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('charging_level','%');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('charging_state','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('charging_station_state','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('CO2_concentration','ppm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('CO_concentration','ppm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('creation_date','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('current','A');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('daily_O3_exceedance_count','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('date','-');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('datetime','-');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('dew_point','°C');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('duration','s');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('electro_conductivity','mS/cm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('electro_valve_action','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('energy','KW/h');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('entity_creator','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('entity_desc','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('fan','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('freeze','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('free_stalls','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('fuel_price','euro');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('fuel_type','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('glucose_percentage','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('green_code_count','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('H2S_concentration','ppm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('hour_O3_max','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('humidity','%');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('ir','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('lamp_level','%');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('lamp_temperature','°C');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('latitude','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('latitude_longitude','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('leaf_wetness','%');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('light','lux');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('longitude','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('max_temperature','°C');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('min_temperature','°C');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('monitor_status','-');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('moonrise_time','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('moonset_time','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('motion_detection','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('NO2_concentration','ppm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('NO_concentration','ppm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('O3_concentration','ppm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('orientation','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('people_count','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('perceived_temperature','°C');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('PM10_concentration','ppm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('PM2.5_concentration','ppm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('pollen_concentration_level','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('pollen_concentration_trend','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('pollen_concentration_value','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('power','W');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('power_meter_m','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('power_meter_s','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('precipitation_type','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('presence_detection_e','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('pressure','hPa');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('rain','mm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('red_code_count','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('road_condition','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('salt_concentration','%');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('sittings_count','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('snow','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('soil_humidity','%');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('soil_temperature','°C');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('soil_water_potential','cbar');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('sound_lv','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('SO_concentration','ppm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('speed','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('state_count','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('state_time','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('status','-');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('stop','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('sunrise_time','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('sunset_time','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('sun_max_height','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('sun_max_height_hour','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('temperature','°C');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('time','-');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('timestamp','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('transits_count','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('uv','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('vdc','V');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('vehicle_concentration','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('vehicle_flow','car/h');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('vehicle_occupancy','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('vehicle_speed_percentile','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('vehicle_threshold_perc','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('velocity','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('voltage','V');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('waste_filling_rate','%');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('water_consumption','l/h');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('water_film','µm');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('water_flowing','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('water_level','m');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('white_code_count','#');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('wind','');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('wind_direction','deg');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('wind_gust_speed','m/s');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('wind_speed','m/s');
-INSERT INTO `value_types` (`value_type`,`value_unit_default`) VALUES ('yellow_code_count','#');
+--
+-- Dumping data for table `functionalities`
+--
 
-/*
--- Query: SELECT * FROM iotdb.data_types
--- Date: 2019-10-28 18:44
-*/
-INSERT INTO `data_types` (`data_type`) VALUES ('binary');
-INSERT INTO `data_types` (`data_type`) VALUES ('boolean');
-INSERT INTO `data_types` (`data_type`) VALUES ('button');
-INSERT INTO `data_types` (`data_type`) VALUES ('collection');
-INSERT INTO `data_types` (`data_type`) VALUES ('date');
-INSERT INTO `data_types` (`data_type`) VALUES ('datetime');
-INSERT INTO `data_types` (`data_type`) VALUES ('float');
-INSERT INTO `data_types` (`data_type`) VALUES ('html');
-INSERT INTO `data_types` (`data_type`) VALUES ('identifier');
-INSERT INTO `data_types` (`data_type`) VALUES ('image');
-INSERT INTO `data_types` (`data_type`) VALUES ('integer');
-INSERT INTO `data_types` (`data_type`) VALUES ('json');
-INSERT INTO `data_types` (`data_type`) VALUES ('path');
-INSERT INTO `data_types` (`data_type`) VALUES ('set');
-INSERT INTO `data_types` (`data_type`) VALUES ('shape');
-INSERT INTO `data_types` (`data_type`) VALUES ('string');
-INSERT INTO `data_types` (`data_type`) VALUES ('switch');
-INSERT INTO `data_types` (`data_type`) VALUES ('time');
-INSERT INTO `data_types` (`data_type`) VALUES ('timestamp');
-INSERT INTO `data_types` (`data_type`) VALUES ('url');
-INSERT INTO `data_types` (`data_type`) VALUES ('vector');
-INSERT INTO `data_types` (`data_type`) VALUES ('webpage');
-INSERT INTO `data_types` (`data_type`) VALUES ('wkt');
-INSERT INTO `data_types` (`data_type`) VALUES ('xml');
+LOCK TABLES `functionalities` WRITE;
+/*!40000 ALTER TABLE `functionalities` DISABLE KEYS */;
+INSERT INTO `functionalities` VALUES (1,'View Sensors and Actuators',1,1,1,0,'value.php','view','#mainContentCnt',1),(2,'Search Sensors and Actuators on the Map',1,1,1,0,'value.php','popup','#addMap1SA',1),(3,'New Sensor/Actuator',1,1,0,0,'value.php','popup','#addValueBtn',1),(4,'Modify Sensor/Actuator',1,1,0,0,'value.php','popup','.editDashBtn',1),(5,'Delete Sensor/Actuator',1,1,0,0,'value.php','popup','.delDashBtn',1),(6,'View Sensor/Actuator on Map',1,1,0,0,'value.php','popup','.addMapBtn',1),(7,'View Devices',1,1,1,0,'devices.php','view','#mainContentCnt',1),(8,'Search Devices on the Map',1,1,1,0,'devices.php','popup','#displayDevicesMap',1),(9,'New Device',1,1,0,0,'devices.php','popup','#addDeviceBtn',1),(10,'Modify Device',1,1,0,0,'devices.php','popup','.editDashBtn',1),(11,'Delete Device',1,1,0,0,'devices.php','popup','.delDashBtn',1),(12,'View Device on Map',1,1,1,0,'devices.php','popup','.addMapBtn',1),(13,'View Context Brokers',1,0,0,0,'contextbroker.php','view','.mainContentCnt',1),(14,'Search Context Brokers On the Map',1,0,0,0,'contextbroker.php','popup','#displayDevicesMapCB',1),(15,'New Context Broker',1,0,0,0,'contextbroker.php','popup','#addContextBrokerBtn',1),(16,'Modify Context Broker',1,0,0,0,'contextbroker.php','popup','.editDashBtn',1),(17,'Delete Context Broker',1,0,0,0,'contextbroker.php','popup','.delDashBtn',1),(18,'View Device Manager Board',0,0,1,0,'devices.php','view','#managerBoard',0),(19,'Stub for gathering devices',1,0,0,0,'contextbroker.php','popup','.viewDashBtn',1),(20,'View Syntesis',1,0,0,0,'devices.php','view','#synthesis',0),(21,'View Syntesis',1,0,0,0,'value.php','view','#synthesis',0),(22,'View Syntesis',1,0,0,0,'contextbroker.php','view','#synthesis',0),(23,'View Devices',1,1,1,0,'mydevices.php','view','#mainContentCnt',1),(24,'Search Devices on the Map',0,0,1,0,'mydevices.php','popup','#displayDevicesMap',0),(25,'New Device',0,0,0,0,'mydevices.php','popup','#addDeviceBtn',0),(26,'Modify Device',1,1,0,0,'mydevices.php','popup','.editDashBtn',1),(27,'Delete Device',1,1,1,0,'mydevices.php','popup','.delDashBtn',1),(28,'View Device on Map',1,1,1,0,'mydevices.php','popup','.addMapBtn',1),(29,'View Device Manager Board',1,1,1,0,'mydevices.php','view','#managerBoard',1),(30,'View Syntesis',0,0,0,0,'mydevices.php','view','#synthesis',0),(31,'View Devices',1,0,0,0,'alldevices.php','view','#mainContentCnt',1),(32,'Search Devices on the Map',1,0,0,0,'alldevices.php','popup','#displayDevicesMap',1),(33,'New Device',1,0,0,0,'alldevices.php','popup','#addDeviceBtn',1),(34,'Modify Device',1,0,0,0,'alldevices.php','popup','.editDashBtn',1),(35,'View Device on Map',1,1,1,0,'alldevices.php','popup','.addMapBtn',1),(36,'View Device Manager Board',0,0,1,0,'alldevices.php','view','#managerBoard',0),(37,'View Syntesis',1,0,0,0,'alldevices.php','view','#synthesis',1),(38,'Delete Device',1,0,0,0,'alldevices.php','popup','.delDashBtn',1);
+/*!40000 ALTER TABLE `functionalities` ENABLE KEYS */;
+UNLOCK TABLES;
 
-/*
--- Query: SELECT * FROM iotdb.defaultcontestbrokerpolicy
--- Date: 2019-10-28 18:45
-*/
-INSERT INTO `defaultcontestbrokerpolicy` (`policyname`,`active`,`contextbroker`,`protocol`,`format`) VALUES ('advances',0,'mqttUNIFI','mqtt','csv');
-INSERT INTO `defaultcontestbrokerpolicy` (`policyname`,`active`,`contextbroker`,`protocol`,`format`) VALUES ('basic',1,'orionUNIFI','ngsi','json');
+--
+-- Dumping data for table `mainmenu`
+--
+
+LOCK TABLES `mainmenu` WRITE;
+/*!40000 ALTER TABLE `mainmenu` DISABLE KEYS */;
+INSERT INTO `mainmenu` VALUES (1,'value.php','valueLink','fa fa-podcast','Sensors&amp;Actuators','[\"AreaManager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#f3cf58',1,'IoT Directory: Sensors and Actuators'),(2,'devices.php','devicesLink','fa fa-microchip','Devices','[\"AreaManager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#33cc33',1,'IoT Directory: Devices'),(3,'contextbroker.php','contextbrokerLink','fa fa-object-group','Context Brokers','[\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#d84141',1,'IoT Directory: Context Brokers'),(5,'users.php','userLink','fa fa-user','List of Users','[\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#FFFFFF',1,'IoT Directory: Users'),(6,'account.php','accountManagementLink','fa fa-lock','Account','[\"AreaManager\",\"Manager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#ff9933',1,'IoT Directory: Account'),(8,'bulkUpdate.php','bulkDUpdateLink','fa fa-microchip','Update Devices ','[]','any','no','samePage','#33cc33',0,'IoT Directory: Device Bulk Updates'),(9,'bulkCBUpdate.php','bulkCBUpdateLink','fa fa-microchip','Update COntext Broker','[]','any','no','samePage','#33cc33',0,'IoT Directory: Device Bulk Updates'),(10,'setup.php','setupLink','fa fa-cogs','Settings','[\"AreaManager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#00e6e6',1,'IoT Directory: Setup'),(11,'mydevices.php','mydevicesLink','fa fa-microchip','Devices','[\"AreaManager\",\"Manager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#33cc33',1,'IoT Directory: Devices'),(12,'alldevices.php','alldevicesLink','fa fa-microchip','Devices','[\"RootAdmin\"]','any','no','samePage','#33cc33',1,'IoT Directory: Devices'),(13,'model.php','modelLink','fa fa-microchip','Models','[\"AreaManager\",\"ToolAdmin\", \"RootAdmin\"]','any','no','samePage','#33cc33',1,'IoT Directory: Models');
+/*!40000 ALTER TABLE `mainmenu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `defaultpolicy`
+--
+
+LOCK TABLES `defaultpolicy` WRITE;
+/*!40000 ALTER TABLE `defaultpolicy` DISABLE KEYS */;
+INSERT INTO `defaultpolicy` VALUES ('advances',0,'mqttUNIFI','mqtt','csv','refresh_rate','300'),('basic',1,'orionUNIFI','ngsi','json','refresh_rate','300');
+/*!40000 ALTER TABLE `defaultpolicy` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `formats`
+--
+
+LOCK TABLES `formats` WRITE;
+/*!40000 ALTER TABLE `formats` DISABLE KEYS */;
+INSERT INTO `formats` VALUES ('csv'),('json'),('xml');
+/*!40000 ALTER TABLE `formats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `protocols`
+--
+
+LOCK TABLES `protocols` WRITE;
+/*!40000 ALTER TABLE `protocols` DISABLE KEYS */;
+INSERT INTO `protocols` VALUES ('amqp'),('coap'),('mqtt'),('ngsi'),('sigfox');
+/*!40000 ALTER TABLE `protocols` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `data_types`
+--
+
+LOCK TABLES `data_types` WRITE;
+/*!40000 ALTER TABLE `data_types` DISABLE KEYS */;
+INSERT INTO `data_types` VALUES ('binary'),('boolean'),('button'),('collection'),('date'),('datetime'),('float'),('html'),('identifier'),('image'),('integer'),('json'),('path'),('set'),('shape'),('string'),('switch'),('time'),('timestamp'),('url'),('vector'),('webpage'),('wkt'),('xml');
+/*!40000 ALTER TABLE `data_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `defaultcontestbrokerpolicy`
+--
+
+LOCK TABLES `defaultcontestbrokerpolicy` WRITE;
+/*!40000 ALTER TABLE `defaultcontestbrokerpolicy` DISABLE KEYS */;
+INSERT INTO `defaultcontestbrokerpolicy` VALUES ('advances',0,'mqttUNIFI','mqtt','csv'),('basic',1,'orionUNIFI','ngsi','json');
+/*!40000 ALTER TABLE `defaultcontestbrokerpolicy` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-09-09 18:34:30

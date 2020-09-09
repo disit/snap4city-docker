@@ -1,18 +1,29 @@
 CREATE SCHEMA `ServiceMap` DEFAULT CHARACTER SET utf8;
 GRANT ALL ON ServiceMap.* TO 'user'@'%';
-
-USE ServiceMap;
+-- MySQL dump 10.16  Distrib 10.1.41-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 192.168.1.119    Database: ServiceMap
+-- ------------------------------------------------------
+-- Server version	10.4.12-MariaDB-1:10.4.12+maria~bionic
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `ServiceMap`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ServiceMap` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `ServiceMap`;
 
 --
 -- Table structure for table `AccessLog`
@@ -23,14 +34,14 @@ DROP TABLE IF EXISTS `AccessLog`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `AccessLog` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `mode` varchar(45) DEFAULT NULL,
   `ip` varchar(45) DEFAULT NULL,
   `userAgent` varchar(255) DEFAULT NULL,
   `uid` varchar(255) DEFAULT NULL,
   `serviceUri` varchar(255) DEFAULT NULL,
-  `selection` text,
-  `categories` text,
+  `selection` text DEFAULT NULL,
+  `categories` text DEFAULT NULL,
   `maxResults` varchar(255) DEFAULT NULL,
   `maxDistance` varchar(255) DEFAULT NULL,
   `reqfrom` varchar(45) DEFAULT NULL,
@@ -45,7 +56,7 @@ CREATE TABLE `AccessLog` (
   KEY `mode` (`mode`),
   KEY `ip` (`ip`),
   KEY `uid` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=145797576 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +91,7 @@ CREATE TABLE `Geometry` (
   `label` varchar(30) NOT NULL,
   `wkt` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4232 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,8 +119,8 @@ DROP TABLE IF EXISTS `Queries`;
 CREATE TABLE `Queries` (
   `id` varchar(45) NOT NULL DEFAULT '0',
   `email` varchar(128) DEFAULT NULL,
-  `description` text,
-  `categorie` longtext,
+  `description` text DEFAULT NULL,
+  `categorie` longtext DEFAULT NULL,
   `numeroRisultatiServizi` int(10) unsigned DEFAULT NULL,
   `numeroRisultatiSensori` int(11) DEFAULT NULL,
   `numeroRisultatiBus` int(11) DEFAULT NULL,
@@ -124,20 +135,34 @@ CREATE TABLE `Queries` (
   `line` varchar(45) DEFAULT NULL,
   `stop` varchar(45) DEFAULT NULL,
   `coordinateSelezione` varchar(128) DEFAULT NULL,
-  `title` text,
+  `title` text DEFAULT NULL,
   `idService` varchar(128) DEFAULT NULL,
   `typeService` varchar(45) DEFAULT NULL,
   `nameService` varchar(128) DEFAULT NULL,
   `zoom` int(11) DEFAULT NULL,
   `center` varchar(128) DEFAULT NULL,
   `weatherCity` varchar(45) DEFAULT NULL,
-  `popupOpen` text,
+  `popupOpen` text DEFAULT NULL,
   `confR` varchar(128) DEFAULT NULL,
   `typeSaving` varchar(45) DEFAULT NULL,
-  `text` longtext,
-  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `text` longtext DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ServiceAlias`
+--
+
+DROP TABLE IF EXISTS `ServiceAlias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ServiceAlias` (
+  `serviceUri` varchar(255) NOT NULL,
+  `serviceUriAlias` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`serviceUri`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,10 +179,10 @@ CREATE TABLE `ServiceCategory_menu_NEW` (
   `MacroClass` varchar(200) DEFAULT NULL,
   `ItaAdditional` varchar(200) DEFAULT NULL,
   `TypeOfService` varchar(45) DEFAULT 'Service',
-  `Visible` int(11) DEFAULT '1',
+  `Visible` int(11) DEFAULT 1,
   `icon` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1543 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,8 +197,8 @@ CREATE TABLE `ServiceComment` (
   `serviceUri` varchar(255) NOT NULL DEFAULT '',
   `serviceName` varchar(255) NOT NULL DEFAULT '',
   `uid` varchar(255) NOT NULL DEFAULT '',
-  `comment` text CHARACTER SET utf8,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `comment` text CHARACTER SET utf8 DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` enum('submitted','validated','rejected') NOT NULL DEFAULT 'submitted',
   `longitude` varchar(45) DEFAULT NULL,
   `latitude` varchar(45) DEFAULT NULL,
@@ -182,7 +207,7 @@ CREATE TABLE `ServiceComment` (
   `address` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `serviceUri` (`serviceUri`)
-) ENGINE=InnoDB AUTO_INCREMENT=176 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,9 +221,9 @@ CREATE TABLE `ServiceLimit` (
   `ipaddr` varchar(100) NOT NULL,
   `requestType` varchar(45) NOT NULL,
   `date` date NOT NULL DEFAULT '0000-00-00',
-  `doneCount` int(11) NOT NULL DEFAULT '0',
-  `limitedCount` int(11) NOT NULL DEFAULT '0',
-  `resultsCount` int(11) NOT NULL DEFAULT '0',
+  `doneCount` int(11) NOT NULL DEFAULT 0,
+  `limitedCount` int(11) NOT NULL DEFAULT 0,
+  `resultsCount` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`date`,`requestType`,`ipaddr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -213,15 +238,15 @@ DROP TABLE IF EXISTS `ServiceMapping`;
 CREATE TABLE `ServiceMapping` (
   `serviceType` varchar(50) NOT NULL,
   `apiVersion` varchar(45) NOT NULL DEFAULT '1',
-  `priority` int(11) NOT NULL DEFAULT '100',
+  `priority` int(11) NOT NULL DEFAULT 100,
   `section` varchar(45) DEFAULT 'Service',
-  `serviceDetailsSparqlQuery` text,
-  `serviceAttributesSparqlQuery` text,
-  `serviceRealTimeSparqlQuery` text,
-  `serviceRealTimeSqlQuery` text,
-  `serviceRealTimeSolrQuery` text,
-  `servicePredictionSqlQuery` text,
-  `serviceTrendSqlQuery` text,
+  `serviceDetailsSparqlQuery` text DEFAULT NULL,
+  `serviceAttributesSparqlQuery` text DEFAULT NULL,
+  `serviceRealTimeSparqlQuery` text DEFAULT NULL,
+  `serviceRealTimeSqlQuery` text DEFAULT NULL,
+  `serviceRealTimeSolrQuery` text DEFAULT NULL,
+  `servicePredictionSqlQuery` text DEFAULT NULL,
+  `serviceTrendSqlQuery` text DEFAULT NULL,
   PRIMARY KEY (`serviceType`,`apiVersion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -240,9 +265,9 @@ CREATE TABLE `ServicePhoto` (
   `uid` varchar(255) NOT NULL DEFAULT '',
   `file` varchar(255) NOT NULL DEFAULT '',
   `status` enum('submitted','validated','rejected') NOT NULL DEFAULT 'submitted',
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `ip` varchar(45) NOT NULL DEFAULT '',
-  `userAgent` text,
+  `userAgent` text DEFAULT NULL,
   `longitude` varchar(45) DEFAULT NULL,
   `latitude` varchar(45) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
@@ -250,7 +275,7 @@ CREATE TABLE `ServicePhoto` (
   `address` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `serviceUri` (`serviceUri`)
-) ENGINE=InnoDB AUTO_INCREMENT=368 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,8 +288,8 @@ DROP TABLE IF EXISTS `ServiceStars`;
 CREATE TABLE `ServiceStars` (
   `serviceUri` varchar(255) NOT NULL DEFAULT '',
   `uid` varchar(255) NOT NULL DEFAULT '',
-  `stars` int(10) unsigned NOT NULL DEFAULT '0',
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `stars` int(10) unsigned NOT NULL DEFAULT 0,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`serviceUri`,`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -298,15 +323,19 @@ CREATE TABLE `ServiceValues` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-19 16:55:19
+-- Dump completed on 2020-09-09 18:34:30
+-- MySQL dump 10.16  Distrib 10.1.41-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 192.168.1.119    Database: ServiceMap
+-- ------------------------------------------------------
+-- Server version	10.4.12-MariaDB-1:10.4.12+maria~bionic
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
@@ -321,23 +350,22 @@ INSERT INTO `ServiceCategory_menu_NEW` VALUES (1,'Produzione Vegetali','Crop_pro
 /*!40000 ALTER TABLE `ServiceCategory_menu_NEW` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
 --
 -- Dumping data for table `ServiceMapping`
 --
 
 LOCK TABLES `ServiceMapping` WRITE;
 /*!40000 ALTER TABLE `ServiceMapping` DISABLE KEYS */;
-INSERT INTO `ServiceMapping` VALUES ('http://www.w3.org/ns/sosa/Sensor','1',10,'Service','PREFIX km4c:<http://www.disit.org/km4city/schema#>\n PREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>\n PREFIX xsd:<http://www.w3.org/2001/XMLSchema#>\n PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n PREFIX schema:<http://schema.org/>\n PREFIX skos:<http://www.w3.org/2004/02/skos/core#>\n PREFIX dcterms:<http://purl.org/dc/terms/>\n PREFIX opengis:<http://www.opengis.net/ont/geosparql#>\n SELECT \n  ?name ?_elat ?_elong ?typeLabel ?_type ?_category ?protocol ?format ?model ?producer ?macaddress ?brokerName ?brokerEndpoint (IF(BOUND(?ownershp), ?ownershp, \"public\") as ?ownership) ?organization\n WHERE{\n    <%SERVICE_URI> geo:lat ?_elat; geo:long ?_elong.\n   optional{<%SERVICE_URI> schema:name ?name.}\n   <%SERVICE_URI> a ?_type . FILTER(?_type!=km4c:RegularService && ?_type!=km4c:Service && ?_type!=km4c:DigitalLocation)\n   ?_type rdfs:label ?typeLabel.\n   ?_type rdfs:subClassOf* ?_category.\n   ?_category rdfs:subClassOf km4c:Service.\n   FILTER(LANG(?typeLabel) = \"%LANG\")\n   optional{<%SERVICE_URI> km4c:protocol ?protocol}\n   optional{<%SERVICE_URI> km4c:format ?format}\n   optional{<%SERVICE_URI> km4c:macaddress ?macaddress}\n   optional{<%SERVICE_URI> km4c:model ?model}\n   optional{<%SERVICE_URI> km4c:producer ?producer}\n   <%SERVICE_URI> <http://purl.oclc.org/NET/UNIS/fiware/iot-lite#exposedBy> ?broker.\n   optional{?broker schema:name ?brokerName.}\n   optional{?broker <http://purl.oclc.org/NET/UNIS/fiware/iot-lite#endpoint> ?brokerEndpoint.}\n   optional{<%SERVICE_URI> km4c:ownership ?ownershp}\n   optional{<%SERVICE_URI> km4c:organization ?organization}\n } LIMIT 1',NULL,NULL,NULL,'elasticsearch',NULL,NULL),('IoTDevice','1',100,'Service','PREFIX km4c:<http://www.disit.org/km4city/schema#>\nPREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>\nPREFIX xsd:<http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX schema:<http://schema.org/>\nPREFIX skos:<http://www.w3.org/2004/02/skos/core#>\nPREFIX dcterms:<http://purl.org/dc/terms/>\nPREFIX opengis:<http://www.opengis.net/ont/geosparql#>\nSELECT \n ?name ?_elat ?_elong ?typeLabel ?_type ?_category ?protocol ?format ?model ?producer ?macaddress ?brokerName ?brokerEndpoint (coalesce(?org,\"DISIT\") as ?organization)\nWHERE{\n   <%SERVICE_URI> geo:lat ?_elat; geo:long ?_elong.\n  optional{<%SERVICE_URI> schema:name ?name.}\n  <%SERVICE_URI> a ?_type . FILTER(?_type!=km4c:RegularService && ?_type!=km4c:Service && ?_type!=km4c:DigitalLocation)\n  ?_type rdfs:label ?typeLabel.\n  ?_type rdfs:subClassOf* ?_category.\n  ?_category rdfs:subClassOf km4c:Service.\n  FILTER(LANG(?typeLabel) = \"%LANG\")\n  optional{<%SERVICE_URI> km4c:organization ?org}\n  optional{<%SERVICE_URI> km4c:protocol ?protocol}\n  optional{<%SERVICE_URI> km4c:format ?format}\n  optional{<%SERVICE_URI> km4c:macaddress ?macaddress}\n  optional{<%SERVICE_URI> km4c:model ?model}\n  optional{<%SERVICE_URI> km4c:producer ?producer}\n  <%SERVICE_URI> <http://purl.oclc.org/NET/UNIS/fiware/iot-lite#exposedBy> ?broker.\n  optional{?broker schema:name ?brokerName.}\n  optional{?broker <http://purl.oclc.org/NET/UNIS/fiware/iot-lite#endpoint> ?brokerEndpoint.}\n} LIMIT 1',NULL,NULL,NULL,'elasticsearch',NULL,NULL),('StreetNumber','1',100,'Service','PREFIX km4c:<http://www.disit.org/km4city/schema#>\n PREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>\n PREFIX xsd:<http://www.w3.org/2001/XMLSchema#>\n PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n PREFIX schema:<http://schema.org/>\n PREFIX skos:<http://www.w3.org/2004/02/skos/core#>\n PREFIX dcterms:<http://purl.org/dc/terms/>\n PREFIX opengis:<http://www.opengis.net/ont/geosparql#>\n SELECT \n (concat(?n,\", \",?nc) as ?name) (\"StreetNumber\" as ?_type) ?city ?_elat ?_elong\n WHERE{\n   <%SERVICE_URI> km4c:belongToRoad ?r; \n     km4c:extendNumber ?nc; \n     km4c:hasExternalAccess [ geo:lat ?_elat; geo:long ?_elong].\n   ?r km4c:extendName ?n; km4c:inMunicipalityOf/foaf:name ?city.\n } LIMIT 1',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `ServiceMapping` VALUES ('http://www.w3.org/ns/sosa/Sensor','1',10,'Service','PREFIX km4c:<http://www.disit.org/km4city/schema#>\nPREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>\nPREFIX xsd:<http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX schema:<http://schema.org/>\nPREFIX skos:<http://www.w3.org/2004/02/skos/core#>\nPREFIX dcterms:<http://purl.org/dc/terms/>\nPREFIX opengis:<http://www.opengis.net/ont/geosparql#>\nSELECT \n (IF(?name2,?name2,?name1) as ?name) ?_elat ?_elong ?typeLabel ?_type ?_category ?protocol ?format ?model ?producer ?macaddress ?brokerName (IF(BOUND(?ownershp), ?ownershp, \"public\") as ?ownership) ?organization ?description ?website ?maintenanceUrl ?maxCapacity ?minCapacity\nWHERE{\n   <%SERVICE_URI> geo:lat ?_elat; geo:long ?_elong.\n  optional{<%SERVICE_URI> schema:name ?name1.}\n  optional{<%SERVICE_URI> foaf:name ?name2.}\n  <%SERVICE_URI> a ?_type . FILTER(?_type!=km4c:RegularService && ?_type!=km4c:Service && ?_type!=km4c:DigitalLocation)\n  ?_type rdfs:label ?typeLabel.\n  ?_type rdfs:subClassOf* ?_category.\n  ?_category rdfs:subClassOf km4c:Service.\n  FILTER(LANG(?typeLabel) = \"%LANG\")\n  optional{<%SERVICE_URI> km4c:protocol ?protocol}\n  optional{<%SERVICE_URI> km4c:format ?format}\n  optional{<%SERVICE_URI> km4c:macaddress ?macaddress}\n  optional{<%SERVICE_URI> km4c:model ?model}\n  optional{<%SERVICE_URI> km4c:producer ?producer}\n  <%SERVICE_URI> <http://purl.oclc.org/NET/UNIS/fiware/iot-lite#exposedBy> ?broker.\n  optional{?broker schema:name ?brokerName.}\n  optional{<%SERVICE_URI> km4c:ownership ?ownershp}\n  optional{<%SERVICE_URI> km4c:organization ?organization}\n  optional{<%SERVICE_URI> schema:url ?website}\n  optional{<%SERVICE_URI> km4c:maintenanceUrl ?maintenanceUrl }\n  optional{<%SERVICE_URI> km4c:minCapacity ?minCapacity}\n  optional{<%SERVICE_URI> km4c:maxCapacity ?maxCapacity}\n  optional{<%SERVICE_URI> dcterms:description ?description}\n} LIMIT 1',NULL,NULL,NULL,'elasticsearch',NULL,NULL),('IoTDevice','1',100,'Service','PREFIX km4c:<http://www.disit.org/km4city/schema#>\nPREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>\nPREFIX xsd:<http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX schema:<http://schema.org/>\nPREFIX skos:<http://www.w3.org/2004/02/skos/core#>\nPREFIX dcterms:<http://purl.org/dc/terms/>\nPREFIX opengis:<http://www.opengis.net/ont/geosparql#>\nSELECT \n ?name ?_elat ?_elong ?typeLabel ?_type ?_category ?protocol ?format ?model ?producer ?macaddress ?brokerName ?brokerEndpoint (coalesce(?org,\"DISIT\") as ?organization)\nWHERE{\n   <%SERVICE_URI> geo:lat ?_elat; geo:long ?_elong.\n  optional{<%SERVICE_URI> schema:name ?name.}\n  <%SERVICE_URI> a ?_type . FILTER(?_type!=km4c:RegularService && ?_type!=km4c:Service && ?_type!=km4c:DigitalLocation)\n  ?_type rdfs:label ?typeLabel.\n  ?_type rdfs:subClassOf* ?_category.\n  ?_category rdfs:subClassOf km4c:Service.\n  FILTER(LANG(?typeLabel) = \"%LANG\")\n  optional{<%SERVICE_URI> km4c:organization ?org}\n  optional{<%SERVICE_URI> km4c:protocol ?protocol}\n  optional{<%SERVICE_URI> km4c:format ?format}\n  optional{<%SERVICE_URI> km4c:macaddress ?macaddress}\n  optional{<%SERVICE_URI> km4c:model ?model}\n  optional{<%SERVICE_URI> km4c:producer ?producer}\n  <%SERVICE_URI> <http://purl.oclc.org/NET/UNIS/fiware/iot-lite#exposedBy> ?broker.\n  optional{?broker schema:name ?brokerName.}\n  optional{?broker <http://purl.oclc.org/NET/UNIS/fiware/iot-lite#endpoint> ?brokerEndpoint.}\n} LIMIT 1',NULL,NULL,NULL,'elasticsearch',NULL,NULL),('StreetNumber','1',100,'Service','PREFIX km4c:<http://www.disit.org/km4city/schema#>\n PREFIX geo:<http://www.w3.org/2003/01/geo/wgs84_pos#>\n PREFIX xsd:<http://www.w3.org/2001/XMLSchema#>\n PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n PREFIX schema:<http://schema.org/>\n PREFIX skos:<http://www.w3.org/2004/02/skos/core#>\n PREFIX dcterms:<http://purl.org/dc/terms/>\n PREFIX opengis:<http://www.opengis.net/ont/geosparql#>\n SELECT \n (concat(?n,\", \",?nc) as ?name) (\"StreetNumber\" as ?_type) ?city ?_elat ?_elong\n WHERE{\n   <%SERVICE_URI> km4c:belongToRoad ?r; \n     km4c:extendNumber ?nc; \n     km4c:hasExternalAccess [ geo:lat ?_elat; geo:long ?_elong].\n   ?r km4c:extendName ?n; km4c:inMunicipalityOf/foaf:name ?city.\n } LIMIT 1',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `ServiceMapping` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+-- Dump completed on 2020-09-09 18:34:30
