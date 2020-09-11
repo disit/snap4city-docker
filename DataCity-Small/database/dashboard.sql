@@ -1470,7 +1470,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `Domains` WRITE;
 /*!40000 ALTER TABLE `Domains` DISABLE KEYS */;
-INSERT INTO `Domains` VALUES (2,'[\'dashboard\']','Snap4CityDocker','dashboards.php?linkId=dashboardsLink','Snap4City','snap4cityPortalLink','false');
+INSERT INTO `Domains` VALUES (2,'[\'dashboard\']','Snap4CityDocker','http://www.snap4city.org/drupal','Snap4City','snap4cityPortalLink','false');
 /*!40000 ALTER TABLE `Domains` ENABLE KEYS */;
 UNLOCK TABLES;
 
