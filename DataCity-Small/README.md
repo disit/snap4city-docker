@@ -131,7 +131,7 @@ In this configuration to add a new nodered app *nr3* you need to:
 4. edit the file apache-proxy.conf and copy the rows related with nr2 to nr3
 5. connect to the db on port 3306 user/passwordx and 
 6. add a new row in profiledb.ownership with the following SQL command `INSERT INTO profiledb.ownership(username,elementid,elementtype,elementname,elementurl,elementdetails,created) values('usermanager','nr3','AppID','nodered 3','http://dashboard/iotapp/nr3/','{"edgegateway_type":"linux_Linux_4.9.0-8-amd64"}',now()); ` 
-7. perform the following SQL command to add a menu option to easily access to the app: `INSERT INTO Dashboard.MainMenuSubmenus(menu,linkUrl,linkid,icon,text,privileges,userType,externalApp,openMode,iconColor,pageTitle,menuorder,organizations) VALUES (1030,'http://dashboard/iotapp/nr3/','iotappnr3','fa fa-file-code-o','IoT Application nodered3','[\'RootAdmin\', \'Manager\']','any','yes','iframe','#FFFFFF','IoT Application nodered3', 3, '[\'Organization\',\'DISIT\',\'Other\']');`
+7. perform the following SQL command to add a menu option to easily access to the app: `INSERT INTO Dashboard.MainMenuSubmenus(menu,linkUrl,linkid,icon,text,privileges,userType,externalApp,openMode,iconColor,pageTitle,menuorder,organizations) VALUES (1035,'http://dashboard/iotapp/nr3/','iotappnr3','fa fa-file-code-o','IoT Application nodered3','[\'RootAdmin\', \'Manager\']','any','yes','iframe','#FFFFFF','IoT Application nodered3', 3, '[\'Organization\',\'DISIT\',\'Other\']');`
 8. issue command docker-compose up -d to bring the new container up
 9. restart the dashboard container
 10. if all it is ok you should see from the menu of 'usermanager' the new application and you can connect to it.
