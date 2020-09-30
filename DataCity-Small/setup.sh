@@ -7,10 +7,12 @@ mkdir servicemap-conf/logs
 mkdir servicemap-iot-conf/logs
 mkdir servicemap-iot-conf/logs/insert
 mkdir servicemap-iot-conf/logs/delete
+mkdir servicemap-iot-conf/logs/list-static-attr
 chmod a+w servicemap-conf/logs
 chmod a+w servicemap-iot-conf/logs
 chmod a+w servicemap-iot-conf/logs/insert
 chmod a+w servicemap-iot-conf/logs/delete
+chmod a+w servicemap-iot-conf/logs/list-static-attr
 chmod a+w nifi/conf
 chmod a+w nifi/conf/flow.xml.gz
 chmod a+w nifi/extensions
