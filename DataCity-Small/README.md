@@ -63,9 +63,9 @@ to administrate the keycloak server use http://dashboard/auth/admin and login wi
 user: admin 
 password: admin
 ```
-It is suggested to change this password ASAP!
+It is suggested to change this password, moreover logout after using this user in the keycloak configuration, this user is not present on the ldap server and so you cannot use it to access to snap4city.
 
-**Note:** when connecting to the server you need to use `http://dashboard/...` and NOT `http://localhost/...` or `http://<ip of server>/...` because the hostname in the connection is used to select the proper menu to be shown to the user and otherwise you will get an empty menu.
+**Note:** when connecting to the server you need to use `http://dashboard/...` and NOT `http://localhost/...` or `thttp://<ip of server>/...` because the hostname in the connection is used to select the proper menu to be shown to the user and otherwise you will get an empty menu.
 
 ## Setting up the broker
 This configuration includes the "orion" container running the orion context broken accessible from port 1026. It is also included the "orionbrokerfilter" container that is filtering and performing authentication checks on api calls to orion. 
