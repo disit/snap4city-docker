@@ -58,6 +58,13 @@ user: cn=admin,dc=ldap,dc=organization,dc=com
 password: secret
 ```
 
+to administrate the keycloak server use http://dashboard/auth/admin and login with 
+```
+user: admin 
+password: admin
+```
+It is suggested to change this password ASAP!
+
 **Note:** when connecting to the server you need to use `http://dashboard/...` and NOT `http://localhost/...` or `http://<ip of server>/...` because the hostname in the connection is used to select the proper menu to be shown to the user and otherwise you will get an empty menu.
 
 ## Setting up the broker
@@ -73,10 +80,10 @@ The iot-directory-certificate directory it is already configured for the iot-dir
 4. **Info tab**
     - Kind: **Internal**
     - Name: **iotobsf** (if you change this name nifi has to be reconfigured)
-    - IP: **orion** (the name of the container running orion)
+    - IP: **orion** (the name of the container running orion or the IP address of the VM running the container)
     - Port: **1026**
     - Protocol: **ngsi**
-    - Access Link: **orionbrokerfilter** (the name of the orion filter)
+    - Access Link: **orionbrokerfilter** (the name of the orion filter container or the IP address of the VM running the container)
     - Access Port: **8443**
     - Ownership: **Private**
 5. **Geo-Position tab**
@@ -101,14 +108,14 @@ The iotapp nr1 (accessible to usermanager or userrootadmin) contains a simple de
 4. **Values tab**, press "Add Value"
     - Value Name: **wind**
     - Data Type: **float**
-    - Value type: **wind**
+    - Value type: **WindSpeed**
     - Editable: **false**
-    - Value unit: **km/h**
+    - Value unit: **m/s**
 5. Press Confirm to create the model.
 6. On the row of the newly added model click on "MYOWNPRIVATE" to change visibility
 7. Click on the "Visibility" tab and select "Make It Public" button and Close
 8. Logout and login as "usermanager"
-9. Select "IOT Directory adn Devices" menu on the left and select "My IOT Devices"
+9. Select "IOT Directory and Devices" menu on the left and then select "My IOT Devices"
 10. Press "Add New Device" button
 11. Write Name: **wind1**, select a point on the map, and press "Submit Device"
 12. Write Name: **wind2**, select a point on the map, select wind model, and press "Submit Device"
