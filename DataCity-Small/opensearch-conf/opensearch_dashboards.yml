@@ -1,0 +1,43 @@
+# Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License").
+# You may not use this file except in compliance with the License.
+# A copy of the License is located at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# or in the "license" file accompanying this file. This file is distributed
+# on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+# express or implied. See the License for the specific language governing
+# permissions and limitations under the License.
+
+# Description:
+# Default configuration for OpenSearch Dashboards
+
+server.host: "0"
+opensearch.hosts: ["https://localhost:9200"]
+opensearch.ssl.verificationMode: none
+opensearch.username: "kibanaserver"
+opensearch.password: "kibanaserver"
+opensearch.requestHeadersWhitelist: [ authorization,securitytenant ]
+
+opensearch_security.multitenancy.enabled: true
+opensearch_security.multitenancy.tenants.preferred: ["Global","Private"]
+opensearch_security.readonly_mode.roles: ["kibana_read_only"]
+# Use this setting if you are running opensearch-dashboards without https
+opensearch_security.cookie.secure: false
+
+# Enable OpenID authentication
+opensearch_security.auth.type: "openid"
+
+# The IdP metadata endpoint
+opensearch_security.openid.connect_url: "http://dashboard/auth/realms/master/.well-known/openid-configuration"
+
+# The ID of the OpenID Connect client in your IdP
+opensearch_security.openid.client_id: "opensearch-dashboards"
+
+# The client secret of the OpenID Connect client
+opensearch_security.openid.client_secret: "4844c688-0877-4b74-8e18-07cd9eb71ba9"
+
+#opensearch_security.openid.base_redirect_url: "http://dashboard:5601/"
+opensearch_security.openid.base_redirect_url: "http://dashboard/kibana/"
