@@ -47,7 +47,7 @@ module.exports = {
     dashboardSmartCityUrl: "http://dashboard/dashboardSmartCity/",
     socketIOUrl: "http://dashboard",
     socketIOPath: "/synoptics/socket.io",
-
+    iotDirectoryUrl: "http://dashboard/iot-directory/", //NEW
 //    eventLogUri: 'http://192.168.1.43/RsyslogAPI/rsyslog.php',
 
     keycloakBaseUri: keycloak_base_uri,

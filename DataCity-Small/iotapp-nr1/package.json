@@ -1,5 +1,9 @@
 {
     "name": "node-red-project",
     "description": "A Node-RED Project",
-    "version": "0.0.1"
+    "version": "0.0.1",
+    "dependencies": {
+        "node-red-contrib-snap4city-developer": "~0.4.5",
+        "node-red-contrib-snap4city-user": "~0.8.2"
+    }
 }

@@ -30,7 +30,7 @@ $sso_login_redirect = 'http://dashboard/ownership-api/login/';
 // SSO mandatory configuration
 $sso_userinfo_endpoint = 'http://keycloak:8088/auth/realms/master/protocol/openid-connect/userinfo';
 
-$log_path = '/tmp';
+$log_path = '/ownership-logs';
 
 // can be used to bypass authentication, use ONLY if needed
 $trustedIpAddrs = array();

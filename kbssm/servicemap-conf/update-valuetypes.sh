@@ -1,6 +1,6 @@
 cd "$(dirname "$0")"
 echo -n "$(date -Iseconds) get valuetypes from processloader... "
-curl -s https://processloader.snap4city.org/processloader/get_valuetypes.php > valuetypes.vt
+curl -s https://processloader_host/processloader/get_valuetypes.php > valuetypes.vt
 
 STATUS="$(cmp --silent  valuetypes.vt valuetypes-last.vt ; echo $?)"  # "$?" gives exit status for each comparison
 

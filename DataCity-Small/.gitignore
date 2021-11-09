@@ -1,3 +1,6 @@
 nifi/conf/archive/*
 iotapp-nr1/refresh_token*
-
+opensearch-conf/*.pem
+opensearch-conf/*.p12
+opensearch-conf/*.srl
+opensearch-conf/cacerts
