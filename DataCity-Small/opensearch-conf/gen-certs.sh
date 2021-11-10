@@ -46,9 +46,8 @@ keytool -import -file root-ca.pem -alias snap4ca -storepass snap4ca -storetype p
 # p12 made with openssl does not work with java
 #openssl pkcs12 -export -nokeys -in root-ca.pem -out root-ca.p12 -passout pass:snap4ca
 #chmod a+r root-ca.p12
-cp trust-store.p12 ../nifi/conf
-cp trust-store.p12 ../datamanager-conf
+cp trust-store.p12 ../nifi/conf/trust-store.p12
+cp trust-store.p12 ../datamanager-conf/trust-store.p12
 cd ../servicemap-conf
 cp cacerts.orig cacerts
 keytool -importcert -keystore cacerts -file ../opensearch-conf/root-ca.pem -alias snap4ca -storepass changeit -noprompt
-

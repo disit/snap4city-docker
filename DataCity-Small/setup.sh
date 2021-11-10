@@ -3,6 +3,7 @@ chmod -R a+w iotapp-nr2
 chmod a+w iot-directory-certificate
 mkdir -p iot-directory-log
 chmod a+w iot-directory-log
+mkdir -p datamanager-conf
 mkdir -p servicemap-conf/logs
 mkdir -p servicemap-iot-conf/logs
 mkdir -p servicemap-iot-conf/logs/insert

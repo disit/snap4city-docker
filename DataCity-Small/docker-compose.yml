@@ -111,7 +111,6 @@ services:
       "kafka.bootstrapAddress": "kafka:9092"
       "kafka.prefixTopic": "kpi-"
       "kafka.sendMessages": "true"
-#      "sys:logFileFolder": "/datamanager"
       "elasticsearch.truststorefile": "/datamanager-conf/trust-store.p12"
       "elasticsearch.truststorepass": "snap4ca"
       "elasticsearch.username": "admin"
@@ -126,7 +125,6 @@ services:
       #set the same as dashboard-builder and ownership
       "security.encryptor.aes.secretkey": "EncryptionIniKey" 
       "security.encryptor.aes.ivparameter": "IVKeyivKey123456"
-
       "JAVA_OPTS": "-DlogFileFolder=/usr/local/tomcat/logs"
     ports:
       - 8080:8080
@@ -312,7 +310,6 @@ services:
     volumes:
       - ./servicemap-conf:/root/servicemap
       - ./servicemap-iot-conf/logs:/root/iot-log2
-#      - ./servicemap-iot-conf-old/:/root/usr/share/tomcat7/iot-config/
       - ./servicemap-iot-conf/:/root/iot-api-config/
       - ./servicemap-conf/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
       - ./servicemap-superservicemap-conf/settings.xml:/usr/local/tomcat/settings.xml
