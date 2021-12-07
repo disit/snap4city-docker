@@ -40,9 +40,9 @@ $password_kpi= 'passwordx';
 $dbname_kpi= 'processloader_db';
 
 //heatmap server
-$host_heatmap ='localhost';
+$host_heatmap ='dashboarddb';
 $username_heatmap = 'user';
-$password_heatmap = 'password';
+$password_heatmap = 'passwordx';
 $dbname_heatmap = 'heatmap';
 
 //userlimits

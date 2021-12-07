@@ -29,6 +29,10 @@ $dbname_valueunit = $dbname;
 
 //SERVER LDAP
 $ldapServer = 'ldap-server';
+$ldapParamters = 'dc=ldap,dc=organization,dc=com';
+$ldapAdminDN = 'cn=admin,'.$ldapParamters;
+$ldapAdminPwd = 'secret';
+
 //nome repository files
 $repository_files = 'jobs/';
 $repository_destination = '/srv/share/jobs/';
@@ -42,7 +46,6 @@ $ssoClientId = 'php-dashboard-builder';
 $ssoClientSecret = 'fd4b64fc-eabd-41e8-aef4-34c9f6864b2c';
 $personalDataApiBaseUrl = 'http://localhost/ownership-api';
 $delegationDataApiUrl = 'http://personaldata:8080/datamanager/api';
-$ldapParamters = 'dc=ldap,dc=organization,dc=com';
 $access_token_userinfo = 'http://dashboard/auth/realms/master/protocol/openid-connect/userinfo';
 $appUrl= 'http://dashboard/processloader';
 
