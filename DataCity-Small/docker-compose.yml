@@ -84,7 +84,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   personaldata:
-    image: disitlab/personaldata:v3
+    image: disitlab/personaldata:v3.1
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     volumes:
       - ./datamanager-logs:/usr/local/tomcat/logs/datamanager
@@ -140,9 +140,9 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   wsserver:
-    image: disitlab/websocketserver:v2
+    image: disitlab/websocketserver:v3
     ports:
-      - 9000:9000
+      - 9000:8000
     volumes:
       - ./dashboard-builder-conf:/websocketserver/conf
     depends_on:
@@ -247,7 +247,7 @@ services:
 
 # IOTOBSF ######################################################
   orionbrokerfilter:
-    image: disitlab/orionbrokerfilter:v3
+    image: disitlab/orionbrokerfilter:v3.1
     depends_on:
       - orion
     ports:
@@ -401,7 +401,7 @@ services:
 #      - "5601:5601"      
 
   opensearch-n1:
-    image: opensearchproject/opensearch:1.1.0
+    image: opensearchproject/opensearch:1.2.3
     environment:
       - discovery.type=single-node
       - DISABLE_INSTALL_DEMO_CONFIG=true
@@ -433,7 +433,7 @@ services:
         max-file: "${S4C_LOG_MAX_FILE:-10}"
 
   opensearch-dashboards:
-    image: opensearchproject/opensearch-dashboards:1.1.0
+    image: opensearchproject/opensearch-dashboards:1.2.0
     container_name: opensearch-dashboards
     ports:
       - 5601:5601
@@ -451,7 +451,7 @@ services:
       options:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
-  
+
 ######################################################################      
   dashboarddb:
     image: mariadb:10.3
