@@ -26,6 +26,24 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `iotdb` /*!40100 DEFAULT CHARACTER SET 
 USE `iotdb`;
 
 --
+-- Table structure for table `EXT_values_rules`
+--
+
+DROP TABLE IF EXISTS `EXT_values_rules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `EXT_values_rules` (
+  `Name` varchar(45) NOT NULL,
+  `If_statement` text DEFAULT NULL,
+  `Then_statement` text DEFAULT NULL,
+  `Organization` varchar(45) DEFAULT NULL,
+  `Timestamp` timestamp NULL DEFAULT NULL,
+  `mode` varchar(8) DEFAULT NULL,
+  PRIMARY KEY (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Rules to ingestion of external broker';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `access_log`
 --
 
@@ -124,6 +142,8 @@ CREATE TABLE `contextbroker` (
   `kind` set('external','internal') DEFAULT NULL,
   `subscription_id` varchar(255) DEFAULT NULL,
   `urlnificallback` varchar(100) DEFAULT NULL,
+  `req_frequency` int(11) DEFAULT NULL,
+  `timestampstatus` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`name`),
   KEY `protocol` (`protocol`),
   CONSTRAINT `contextbroker_ibfk_1` FOREIGN KEY (`protocol`) REFERENCES `protocols` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -458,7 +478,7 @@ CREATE TABLE `model` (
   `producer` varchar(125) DEFAULT NULL,
   `frequency` varchar(20) DEFAULT NULL,
   `policy` varchar(20) DEFAULT NULL,
-  `attributes` text DEFAULT NULL,
+  `attributes` longtext DEFAULT NULL,
   `link` varchar(100) DEFAULT NULL,
   `contextbroker` varchar(40) NOT NULL,
   `protocol` varchar(20) NOT NULL,
@@ -480,6 +500,31 @@ CREATE TABLE `model` (
   UNIQUE KEY `name` (`name`),
   KEY `policy` (`policy`),
   CONSTRAINT `model_ibfk_1` FOREIGN KEY (`policy`) REFERENCES `defaultpolicy` (`policyname`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `orionbrokers`
+--
+
+DROP TABLE IF EXISTS `orionbrokers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orionbrokers` (
+  `id_orionbroker` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `organization` varchar(45) DEFAULT NULL,
+  `ipaddr` varchar(45) DEFAULT NULL,
+  `external_port` varchar(45) DEFAULT NULL,
+  `access_port` varchar(45) DEFAULT NULL,
+  `multitenacy` varchar(45) DEFAULT NULL,
+  `urlnificallback` varchar(255) DEFAULT NULL,
+  `orion_image` varchar(45) DEFAULT NULL,
+  `enable_direct_access` tinyint(4) DEFAULT 0,
+  `status` varchar(45) DEFAULT NULL,
+  `status_timestamp` datetime DEFAULT NULL,
+  `status_history` mediumtext DEFAULT NULL,
+  PRIMARY KEY (`id_orionbroker`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -650,7 +695,7 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-08 17:28:19
+-- Dump completed on 2022-04-27 14:22:55
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: iotdb
@@ -745,4 +790,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-08 17:28:19
+-- Dump completed on 2022-04-27 14:22:55

@@ -54,4 +54,10 @@ $dbname_limits = 'profiledb';
 $org_limits_api = 'http://dashboard/dashboardSmartCity/api/organizations.php';
 $types_limits = ["IOTID","DashboardID","ModelID","AppID","DAAppID","DeviceGroupID","HeatmapID","PortiaID","SynopticID","SynopticTmplID","BrokerID"];
 
+// posgres od server
+$host_od = 'od-postgis';
+$username_od = 'postgres';
+$password_od = 'pgpassword';
+$dbname_od = 'postgres';
+
 ?>

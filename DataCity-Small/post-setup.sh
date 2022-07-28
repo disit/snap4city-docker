@@ -1,5 +1,5 @@
 cd servicemap-conf
-source update-ontology.sh localhost
+./update-ontology.sh localhost
 docker-compose exec virtuoso-kb isql-v localhost dba dba /root/servicemap/servicemap.vt
 docker-compose exec virtuoso-kb isql-v localhost dba dba /root/servicemap/servicemap-dbpedia.vt
 
@@ -7,6 +7,10 @@ docker-compose exec virtuoso-kb isql-v localhost dba dba /root/servicemap/servic
 
 echo create opensearch iot index
 curl --insecure -u admin:admin -H 'Content-Type: application/json' -X PUT 'https://localhost:9200/snap4-iot-organization' -d @mapping_Sensors-ETL-IOT-ES7-v4.json
+echo
+
+echo create opensearch iot-device index
+curl --insecure -u admin:admin -H 'Content-Type: application/json' -X PUT 'https://localhost:9200/device-iot-organization' -d @mapping_DeviceState-ES7-v1.json
 echo
 
 echo create opensearch kpi index
@@ -99,4 +103,7 @@ echo
 echo add dashboard
 curl -u admin:admin -XPOST "http://localhost/kibana/api/saved_objects/_import?overwrite=true" -H "osd-xsrf: true" -H "securitytenant: global" --form file=@osd-dashboard.ndjson
 echo
+
+echo restart some services
+docker-compose restart wsserver personaldata orionbrokerfilter opensearch-dashboards
 

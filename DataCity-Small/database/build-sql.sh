@@ -66,4 +66,17 @@ END
 mysqldump --no-data -h $HOST -u $USER --databases Notificator | sed 's/ AUTO_INCREMENT=[0-9]*//g' >> notificator.sql
 mysqldump --no-create-info -h $HOST -u $USER Notificator clientApplications emailBook eventGenerators >>  notificator.sql
 
+echo DataTable and POI Loader
+cat > datatable.sql <<-END
+CREATE SCHEMA \`datatable\` DEFAULT CHARACTER SET utf8;
+GRANT ALL ON datatable.* TO 'user'@'%';
+END
+mysqldump --no-data -h $HOST -u $USER --databases datatable | sed 's/ AUTO_INCREMENT=[0-9]*//g' >> datatable.sql
 
+echo heatmap 
+cat > heatmap.sql <<-END
+CREATE SCHEMA \`heatmap\` DEFAULT CHARACTER SET utf8;
+GRANT ALL ON heatmap.* TO 'user'@'%';
+END
+mysqldump --no-data -h $HOST -u $USER --databases heatmap | sed 's/ AUTO_INCREMENT=[0-9]*//g' >> heatmap.sql
+mysqldump --no-create-info -h $HOST -u $USER hetamap colors >>  heatmap.sql

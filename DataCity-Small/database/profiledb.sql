@@ -369,7 +369,7 @@ CREATE TABLE `ownership` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-08 17:28:19
+-- Dump completed on 2022-04-27 14:22:55
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: profiledb
@@ -392,7 +392,7 @@ CREATE TABLE `ownership` (
 
 LOCK TABLES `limits` WRITE;
 /*!40000 ALTER TABLE `limits` DISABLE KEYS */;
-INSERT INTO `limits` VALUES ('any','any','any','AppID',0),('any','any','any','BrokerID',1),('any','any','any','DashboardID',10),('any','any','any','IOTID',5),('any','any','any','ModelID',1),('any','any','any','SynopticID',10),('any','any','any','SynopticTmplID',0),('any','any','AreaManager','AppID',3),('any','any','AreaManager','DAAppID',3),('any','any','AreaManager','DataTableID',30),('any','any','AreaManager','PoiTableID',30),('any','any','AreaManager','PortiaID',1),('any','any','AreaManager','SynopticID',10),('any','any','AreaManager','SynopticTmplID',10),('any','any','Manager','DataTableID',2),('any','any','Manager','PoiTableID',2),('any','any','Manager','SynopticID',5),('any','any','Manager','SynopticTmplID',5),('any','any','RootAdmin','BrokerID',999),('any','any','RootAdmin','DAAppID',10),('any','any','RootAdmin','DashboardID',100),('any','any','RootAdmin','DataTableID',100),('any','any','RootAdmin','IOTID',999),('any','any','RootAdmin','ModelID',999),('any','any','RootAdmin','PoiTableID',100),('any','any','RootAdmin','PortiaID',1),('any','any','RootAdmin','SynopticID',999),('any','any','RootAdmin','SynopticTmplID',999),('any','any','ToolAdmin','AppID',10),('any','any','ToolAdmin','BrokerID',20),('any','any','ToolAdmin','DAAppID',3),('any','any','ToolAdmin','DashboardID',50),('any','any','ToolAdmin','DataTableID',50),('any','any','ToolAdmin','IOTID',20),('any','any','ToolAdmin','ModelID',20),('any','any','ToolAdmin','PoiTableID',50),('any','any','ToolAdmin','PortiaID',1),('any','any','ToolAdmin','SynopticID',50),('any','any','ToolAdmin','SynopticTmplID',50);
+INSERT INTO `limits` VALUES ('any','any','any','AppID',0),('any','any','any','BrokerID',1),('any','any','any','DashboardID',10),('any','any','any','IOTID',5),('any','any','any','ModelID',1),('any','any','any','SynopticID',10),('any','any','any','SynopticTmplID',0),('any','any','AreaManager','AppID',3),('any','any','AreaManager','DAAppID',3),('any','any','AreaManager','DataTableID',30),('any','any','AreaManager','IOTID',50),('any','any','AreaManager','ModelID',50),('any','any','AreaManager','PoiTableID',30),('any','any','AreaManager','PortiaID',1),('any','any','AreaManager','SynopticID',10),('any','any','AreaManager','SynopticTmplID',10),('any','any','Manager','DataTableID',2),('any','any','Manager','PoiTableID',2),('any','any','Manager','SynopticID',5),('any','any','Manager','SynopticTmplID',5),('any','any','RootAdmin','BrokerID',999),('any','any','RootAdmin','DAAppID',10),('any','any','RootAdmin','DashboardID',100),('any','any','RootAdmin','DataTableID',100),('any','any','RootAdmin','IOTID',999),('any','any','RootAdmin','ModelID',999),('any','any','RootAdmin','PoiTableID',100),('any','any','RootAdmin','PortiaID',1),('any','any','RootAdmin','SynopticID',999),('any','any','RootAdmin','SynopticTmplID',999),('any','any','ToolAdmin','AppID',10),('any','any','ToolAdmin','BrokerID',20),('any','any','ToolAdmin','DAAppID',3),('any','any','ToolAdmin','DashboardID',50),('any','any','ToolAdmin','DataTableID',50),('any','any','ToolAdmin','IOTID',20),('any','any','ToolAdmin','ModelID',20),('any','any','ToolAdmin','PoiTableID',50),('any','any','ToolAdmin','PortiaID',1),('any','any','ToolAdmin','SynopticID',50),('any','any','ToolAdmin','SynopticTmplID',50);
 /*!40000 ALTER TABLE `limits` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -404,7 +404,7 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-08 17:28:19
+-- Dump completed on 2022-04-27 14:22:55
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: profiledb
@@ -440,4 +440,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-08 17:28:19
+-- Dump completed on 2022-04-27 14:22:55

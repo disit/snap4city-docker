@@ -1,5 +1,5 @@
 export MYSQL_PWD=rootpwd
-for db in Dashboard ServiceMap SuperServiceMap iotdb profiledb processloader_db
+for db in Dashboard ServiceMap SuperServiceMap iotdb profiledb processloader_db datatable
 do
 echo backup $db...
   mysqldump -h 192.168.1.119 -u root $db > bkup/$db.sql
