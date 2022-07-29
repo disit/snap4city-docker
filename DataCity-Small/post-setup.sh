@@ -104,6 +104,9 @@ echo add dashboard
 curl -u admin:admin -XPOST "http://localhost/kibana/api/saved_objects/_import?overwrite=true" -H "osd-xsrf: true" -H "securitytenant: global" --form file=@osd-dashboard.ndjson
 echo
 
+echo add geoserver workspace Snap4City
+curl -u admin:snap4geo -XPOST -H "Content-type: text/xml" -d "<workspace><name>acme</name></workspace>"  http://localhost/geoserver/rest/workspaces
+
 echo restart some services
 docker-compose restart wsserver personaldata orionbrokerfilter opensearch-dashboards
 
