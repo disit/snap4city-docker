@@ -529,7 +529,7 @@ services:
 
 ###############HEATMAP
   heatmap2geosrv:
-    image: disitlab/heatmap2geoserver:v00
+    image: disitlab/heatmap2geoserver:v0
     volumes:
       - ./heatmap-tmp:/go/src/heatmap2geoserver/data/
     environment:
