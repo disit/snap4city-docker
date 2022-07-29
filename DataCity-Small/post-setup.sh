@@ -105,7 +105,7 @@ curl -u admin:admin -XPOST "http://localhost/kibana/api/saved_objects/_import?ov
 echo
 
 echo add geoserver workspace Snap4City
-curl -u admin:snap4geo -XPOST -H "Content-type: text/xml" -d "<workspace><name>acme</name></workspace>"  http://localhost/geoserver/rest/workspaces
+curl -u admin:snap4geo -XPOST -H "Content-type: text/xml" -d "<workspace><name>Snap4City</name></workspace>"  http://localhost/geoserver/rest/workspaces
 
 echo restart some services
 docker-compose restart wsserver personaldata orionbrokerfilter opensearch-dashboards
