@@ -14,7 +14,7 @@ mysqldump --no-create-info -h $HOST -u $USER Dashboard MainMenu MainMenuSubmenus
 
 
 echo "USE Dashboard;" > dashboard-wizard-min.sql
-mysqldump --no-create-info -h $HOST -u $USER --databases Dashboard --tables DashboardWizard --where="high_level_type IN ('POI','MicroApplication','Special Widget','External Service','HeatMap','Complex Event')" >> dashboard-wizard-min.sql
+mysqldump --no-create-info -h $HOST -u $USER --databases Dashboard --tables DashboardWizard --where="high_level_type IN ('POI','MicroApplication','Special Widget','External Service','HeatMap','Complex Event') AND low_level_type!='15minsubindex'" >> dashboard-wizard-min.sql
 
 echo ServiceMap
 cat > servicemap.sql <<-END
