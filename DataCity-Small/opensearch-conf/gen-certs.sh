@@ -22,14 +22,14 @@ echo generate node cert
 openssl genrsa -out node1-key-temp.pem 2048
 openssl pkcs8 -inform PEM -outform PEM -in node1-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out node1-key.pem
 openssl req -new -key node1-key.pem -subj "/C=$C/ST=$ST/L=$L/O=$O/OU=$OU/CN=opensearch-n1" -out node1.csr
-openssl x509 -req -in node1.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out node1.pem -days 3650
+openssl x509 -req -in node1.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -extfile <(printf "subjectAltName=DNS:opensearch-n1") -out node1.pem -days 3650
 # Client cert
 echo
 echo generate client cert
 openssl genrsa -out client-key-temp.pem 2048
 openssl pkcs8 -inform PEM -outform PEM -in client-key-temp.pem -topk8 -nocrypt -v1 PBE-SHA1-3DES -out client-key.pem
 openssl req -new -key client-key.pem -subj "/C=$C/ST=$ST/L=$L/O=$O/OU=$OU/CN=CLIENT" -out client.csr
-openssl x509 -req -in client.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -extfile <(printf "subjectAltName=DNS:opensearch-n1") -out client.pem -days 3650
+openssl x509 -req -in client.csr -CA root-ca.pem -CAkey root-ca-key.pem -CAcreateserial -sha256 -out client.pem -days 3650
 chmod a+r *-key.pem
 
 # Cleanup
