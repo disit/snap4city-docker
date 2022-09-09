@@ -193,7 +193,7 @@ services:
         max-file: "${S4C_LOG_MAX_FILE:-10}"
 
   iotapp-nr1:
-    image: disitlab/snap4city-nodered-v1.1.3-adv:v29
+    image: disitlab/snap4city-nodered-v2.2.2-adv:v4
     volumes:
       - ./iotapp-nr1:/data
     ports:
@@ -210,7 +210,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   iotapp-nr2:
-    image: disitlab/snap4city-nodered-v1.1.3-adv:v29
+    image: disitlab/snap4city-nodered-v2.2.2-adv:v4
     volumes:
       - ./iotapp-nr2:/data
     ports:
@@ -476,7 +476,7 @@ services:
 ########## OD ########################################################
 
   od-insert-api:
-    image: disitlab/od-matrix-api:v0
+    image: disitlab/od-matrix-api:v1
     ports:
       - 3100:3100
     command: python -u ./od-insert.py
@@ -489,7 +489,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   od-get-api:
-    image: disitlab/od-matrix-api:v0
+    image: disitlab/od-matrix-api:v1
     ports:
       - 3200:3200
     command: python -u ./od-get.py
@@ -502,7 +502,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   od-build-api:
-    image: disitlab/od-matrix-api:v0
+    image: disitlab/od-matrix-api:v1
     ports:
       - 3000:3000
     command: python -u ./od-build.py
@@ -524,6 +524,7 @@ services:
     volumes:
       - od-postgis-data:/var/lib/postgresql/data
       - ./od-postgis/od-matrix-db-schema.sql:/docker-entrypoint-initdb.d/20-od-matrix-db-schema.sql
+      - ./od-postgis/italy_rx.sql:/docker-entrypoint-initdb.d/30-italy_rx.sql
       - ./od-postgis:/od-postgis
     restart: unless-stopped
     logging:

@@ -413,14 +413,15 @@ ALTER SEQUENCE public.mgrs_1km_32t_unprojected_gid_seq OWNED BY public.mgrs_1km_
 -- Name: od_data; Type: TABLE; Schema: public; Owner: debian
 --
 
-CREATE TABLE public.od_data (
-    od_id character varying,
+CREATE TABLE IF NOT EXISTS public.od_data
+(
+    od_id character varying COLLATE pg_catalog."default",
     x_orig numeric,
     y_orig numeric,
     x_dest numeric,
     y_dest numeric,
     "precision" bigint,
-    value numeric,
+    value text COLLATE pg_catalog."default",
     orig_geom public.geometry(Polygon,4326),
     dest_geom public.geometry(Polygon,4326),
     from_date timestamp(0) without time zone,
@@ -428,7 +429,6 @@ CREATE TABLE public.od_data (
     orig_commune integer,
     dest_commune integer
 );
-
 
 --
 -- TOC entry 230 (class 1259 OID 110262)
@@ -479,18 +479,23 @@ CREATE TABLE public.od_data_mgrs_old (
 -- Name: od_metadata; Type: TABLE; Schema: public; Owner: debian
 --
 
-CREATE TABLE public.od_metadata (
-    od_id character varying,
-    value_type character varying,
-    value_unit character varying,
-    description character varying,
-    organization character varying,
-    kind character varying,
-    mode character varying,
-    transport character varying,
-    purpose character varying
-);
+-- Table: public.od_metadata
 
+-- DROP TABLE IF EXISTS public.od_metadata;
+
+CREATE TABLE IF NOT EXISTS public.od_metadata
+(
+    od_id character varying COLLATE pg_catalog."default",
+    value_type character varying COLLATE pg_catalog."default",
+    value_unit character varying COLLATE pg_catalog."default",
+    description character varying COLLATE pg_catalog."default",
+    organization character varying COLLATE pg_catalog."default",
+    kind character varying COLLATE pg_catalog."default",
+    mode character varying COLLATE pg_catalog."default",
+    transport character varying COLLATE pg_catalog."default",
+    purpose character varying COLLATE pg_catalog."default",
+    source text COLLATE pg_catalog."default"
+);
 
 --
 -- TOC entry 213 (class 1259 OID 19356)
@@ -714,8 +719,10 @@ CREATE INDEX mgrs_1km_32t_unprojected_geom_idx ON public.mgrs_1km_32t_unprojecte
 -- Name: od_metadata_od_id_idx; Type: INDEX; Schema: public; Owner: debian
 --
 
-CREATE UNIQUE INDEX od_metadata_od_id_idx ON public.od_metadata USING btree (od_id);
-
+CREATE UNIQUE INDEX IF NOT EXISTS od_metadata_od_id_idx
+    ON public.od_metadata USING btree
+    (od_id COLLATE pg_catalog."default" ASC NULLS LAST)
+    TABLESPACE pg_default;
 
 --
 -- TOC entry 4308 (class 1259 OID 19362)
