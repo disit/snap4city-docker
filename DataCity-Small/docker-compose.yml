@@ -30,7 +30,7 @@ services:
         max-file: "${S4C_LOG_MAX_FILE:-10}"
 
   dashboard-builder:
-    image: disitlab/dashboard-builder:v6
+    image: disitlab/dashboard-builder:v6.1
     ports:
       - "70:80"
     volumes:
@@ -83,7 +83,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   dashboard-cron:
-    image: disitlab/dashboard-builder:v6
+    image: disitlab/dashboard-builder:v6.1
     volumes:
        - ./dashboard-builder-conf:/var/www/html/dashboardSmartCity/conf
        - ./dashboard-cron-conf/crontab:/crontab
@@ -96,7 +96,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   personaldata:
-    image: disitlab/personaldata:v4
+    image: disitlab/personaldata:v5
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     volumes:
       - ./datamanager-logs:/usr/local/tomcat/logs/datamanager
@@ -153,7 +153,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   wsserver:
-    image: disitlab/websocketserver:v4.1
+    image: disitlab/websocketserver:v5
     ports:
       - 9100:8000
     volumes:
@@ -182,7 +182,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   iot-discovery:
-    image: disitlab/iot-directory-discover-api:v1
+    image: disitlab/iot-directory-discover-api:v2
     volumes:
       - ./iot-discovery-conf/:/usr/src/snap4IotServer/snap4cityBroker/conf
     restart: unless-stopped
@@ -191,9 +191,38 @@ services:
       options:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
+  iot-fiware-harvester:
+    image: disitlab/iot-directory-fiware-harvester:v0
+    environment:
+      "WAIT_TIME": "60m"
+    volumes:
+      - ./iot-fiware-harvester-conf/config.json:/app/config.json
+      - ./iot-fiware-harvester-conf/dbconfig.json:/app/dbconfig.json
+      - ./iot-fiware-harvester-conf/Download:/Download
+      - ./iot-fiware-harvester-conf/Results:/Results
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "${S4C_LOG_MAX_SIZE:-100m}"
+        max-file: "${S4C_LOG_MAX_FILE:-10}"
+  iot-fiware-api:
+    image: disitlab/iot-directory-fiware-harvester:v0
+    command: python3 API_ruleBuilder.py
+    volumes:
+      - ./iot-fiware-harvester-conf/config.json:/app/config.json
+      - ./iot-fiware-harvester-conf/dbconfig.json:/app/dbconfig.json
+      - ./iot-fiware-harvester-conf/Download:/Download
+      - ./iot-fiware-harvester-conf/Results:/Results
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "${S4C_LOG_MAX_SIZE:-100m}"
+        max-file: "${S4C_LOG_MAX_FILE:-10}"
 
   iotapp-nr1:
-    image: disitlab/snap4city-nodered-v2.2.2-adv:v4
+    image: disitlab/snap4city-nodered-v2.2.2-adv:v5
     volumes:
       - ./iotapp-nr1:/data
     ports:
@@ -210,7 +239,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   iotapp-nr2:
-    image: disitlab/snap4city-nodered-v2.2.2-adv:v4
+    image: disitlab/snap4city-nodered-v2.2.2-adv:v5
     volumes:
       - ./iotapp-nr2:/data
     ports:
@@ -267,7 +296,7 @@ services:
 
 # IOTOBSF ######################################################
   orionbrokerfilter:
-    image: disitlab/orionbrokerfilter:v3.1
+    image: disitlab/orionbrokerfilter:v6
     depends_on:
       - orion
     ports:
@@ -325,7 +354,7 @@ services:
 
 #KBSSM ################################################################      
   servicemap:
-    image: disitlab/servicemap:v4 
+    image: disitlab/servicemap:v5 
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     volumes:
       - ./servicemap-conf:/root/servicemap

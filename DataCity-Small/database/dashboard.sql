@@ -2,7 +2,7 @@
 --
 -- Host: 192.168.1.119    Database: Dashboard
 -- ------------------------------------------------------
--- Server version	10.3.31-MariaDB-1:10.3.31+maria~focal
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -130,6 +130,7 @@ CREATE TABLE `Config_dashboard` (
   `orgMenuVisible` varchar(3) DEFAULT 'no',
   `infoMsgPopup` varchar(8) DEFAULT NULL,
   `infoMsgText` varchar(300) DEFAULT NULL,
+  `theme` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `idx_Config_dashboard_name_dashboard` (`name_dashboard`(255)),
   KEY `idx_Config_dashboard_name_dashboard_Id` (`name_dashboard`(255),`Id`)
@@ -225,9 +226,11 @@ CREATE TABLE `Config_widget_dashboard` (
   `TTTDate` varchar(40) DEFAULT NULL,
   `computationType` varchar(40) DEFAULT NULL,
   `dayhourview` varchar(40) DEFAULT NULL,
+  `code` mediumtext DEFAULT NULL,
   PRIMARY KEY (`Id`),
   KEY `Config_widget_dashboard_ibfk_1` (`id_dashboard`),
   KEY `idx_Config_widget_dashboard_name_w` (`name_w`),
+  KEY `idx_Config_widget_dashboard_appid` (`appId`(255)),
   CONSTRAINT `Config_widget_dashboard_ibfk_1` FOREIGN KEY (`id_dashboard`) REFERENCES `Config_dashboard` (`Id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -977,6 +980,7 @@ CREATE TABLE `Organizations` (
   `orgUrl` text DEFAULT NULL,
   `welcomeUrl` text DEFAULT NULL,
   `users` text DEFAULT NULL,
+  `ghRouting` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1128,6 +1132,20 @@ CREATE TABLE `ToursSteps` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `TrustedUsers`
+--
+
+DROP TABLE IF EXISTS `TrustedUsers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `TrustedUsers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `Users`
 --
 
@@ -1243,6 +1261,22 @@ CREATE TABLE `WidgetsIconsMap` (
   `widgetCategory` varchar(45) DEFAULT 'dataViewer',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `camdata`
+--
+
+DROP TABLE IF EXISTS `camdata`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `camdata` (
+  `name` varchar(128) NOT NULL,
+  `username` varchar(128) DEFAULT 'admin',
+  `password` varchar(128) DEFAULT '123456',
+  `serviceuri` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1398,7 +1432,7 @@ USE `Dashboard`;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`user`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
 /*!50001 VIEW `monthly_usage` AS select `IdDashDailyAccess`.`IdDashboard` AS `id`,sum(`IdDashDailyAccess`.`nAccessPerDay`) AS `monthly_clicks`,sum(`IdDashDailyAccess`.`nMinutesPerDay`) AS `monthly_minutes`,current_timestamp() - interval 1 month AS `date_from`,current_timestamp() AS `date_to` from `IdDashDailyAccess` where `IdDashDailyAccess`.`date` >= current_timestamp() - interval 1 month group by `IdDashDailyAccess`.`IdDashboard` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -1417,7 +1451,7 @@ USE `Dashboard`;
 /*!50001 SET character_set_results     = utf8 */;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`user`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
 /*!50001 VIEW `synoptics` AS select `d`.`id` AS `id`,`d`.`unique_name_id` AS `name`,`t`.`id` AS `template_id`,`d`.`user` AS `owner`,`d`.`lastCheck` AS `created` from (`DashboardWizard` `d` join `templates` `t`) where `d`.`high_level_type` = 'Synoptic' and `d`.`low_level_type` = `t`.`name` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -1451,12 +1485,12 @@ USE `Dashboard`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 19:14:25
+-- Dump completed on 2022-09-21 17:04:54
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: Dashboard
 -- ------------------------------------------------------
--- Server version	10.3.31-MariaDB-1:10.3.31+maria~focal
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -1514,7 +1548,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `Organizations` WRITE;
 /*!40000 ALTER TABLE `Organizations` DISABLE KEYS */;
-INSERT INTO `Organizations` VALUES (7,'Organization','http://dashboard/ServiceMap/api/v1/','43.77251027974299,11.260920094643383',13,'eng','','','','http://virtuoso-kb:8890','','',' ','userareamanager');
+INSERT INTO `Organizations` VALUES (7,'Organization','http://dashboard/ServiceMap/api/v1/','43.77251027974299,11.260920094643383',13,'eng','','','','http://virtuoso-kb:8890','','',' ','userareamanager',NULL);
 /*!40000 ALTER TABLE `Organizations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1526,7 +1560,7 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 19:14:25
+-- Dump completed on 2022-09-21 17:04:54
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.0.37    Database: Dashboard
@@ -1601,4 +1635,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 19:14:28
+-- Dump completed on 2022-09-21 17:04:57

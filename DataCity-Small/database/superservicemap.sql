@@ -4,7 +4,7 @@ GRANT ALL ON SuperServiceMap.* TO 'user'@'%';
 --
 -- Host: 192.168.1.119    Database: SuperServiceMap
 -- ------------------------------------------------------
--- Server version	10.3.31-MariaDB-1:10.3.31+maria~focal
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -122,12 +122,12 @@ CREATE TABLE `servicemaps_priority` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 19:14:28
+-- Dump completed on 2022-09-21 17:04:57
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: SuperServiceMap
 -- ------------------------------------------------------
--- Server version	10.3.31-MariaDB-1:10.3.31+maria~focal
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -157,4 +157,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 19:14:28
+-- Dump completed on 2022-09-21 17:04:57

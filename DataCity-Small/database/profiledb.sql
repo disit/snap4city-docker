@@ -4,7 +4,7 @@ GRANT ALL ON profiledb.* TO 'user'@'%';
 --
 -- Host: 192.168.1.119    Database: profiledb
 -- ------------------------------------------------------
--- Server version	10.3.31-MariaDB-1:10.3.31+maria~focal
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -97,6 +97,7 @@ CREATE TABLE `data` (
   `variable_name` varchar(255) DEFAULT NULL,
   `variable_value` text CHARACTER SET utf8 DEFAULT NULL,
   `variable_unit` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `data_time_end` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `un_ai_mo_vn_index` (`username`,`app_id`,`motivation`,`variable_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -121,6 +122,7 @@ CREATE TABLE `delegation` (
   `delete_time` datetime DEFAULT NULL,
   `delegation_details` text DEFAULT NULL,
   `groupname_delegated` varchar(255) DEFAULT NULL,
+  `kind` varchar(25) DEFAULT 'READ_ACCESS',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -164,6 +166,24 @@ CREATE TABLE `devicegroupelement` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Temporary table structure for view `iot_data_relation`
+--
+
+DROP TABLE IF EXISTS `iot_data_relation`;
+/*!50001 DROP VIEW IF EXISTS `iot_data_relation`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `iot_data_relation` (
+  `id` tinyint NOT NULL,
+  `type` tinyint NOT NULL,
+  `name` tinyint NOT NULL,
+  `sourceId` tinyint NOT NULL,
+  `sourceType` tinyint NOT NULL,
+  `sourceName` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `kpiactivity`
@@ -296,7 +316,8 @@ CREATE TABLE `kpivalues` (
   `latitude` varchar(45) DEFAULT NULL,
   `longitude` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `kpi_id` (`kpi_id`,`id`)
+  KEY `kpi_id` (`kpi_id`,`id`),
+  KEY `kpi_id_delete_time_data_time` (`kpi_id`,`delete_time`,`data_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -359,6 +380,31 @@ CREATE TABLE `ownership` (
   KEY `idx_user_type_name` (`username`,`elementType`,`elementName`(100))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Current Database: `profiledb`
+--
+
+USE `profiledb`;
+
+--
+-- Final view structure for view `iot_data_relation`
+--
+
+/*!50001 DROP TABLE IF EXISTS `iot_data_relation`*/;
+/*!50001 DROP VIEW IF EXISTS `iot_data_relation`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `iot_data_relation` AS select `l`.`element_id` AS `id`,`l`.`element_type` AS `type`,`o1`.`elementName` AS `name`,`o`.`elementId` AS `sourceId`,`o`.`elementType` AS `sourceType`,`o`.`elementName` AS `sourceName` from ((`lightactivity` `l` left join `ownership` `o` on(`o`.`elementId` = convert(`l`.`source_id` using utf8mb4))) left join `ownership` `o1` on(convert(`l`.`element_id` using utf8mb4) = `o1`.`elementId` and `o`.`deleted` is null)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -369,12 +415,12 @@ CREATE TABLE `ownership` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 19:14:29
+-- Dump completed on 2022-09-21 17:04:57
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: profiledb
 -- ------------------------------------------------------
--- Server version	10.3.31-MariaDB-1:10.3.31+maria~focal
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -404,12 +450,12 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 19:14:29
+-- Dump completed on 2022-09-21 17:04:57
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: profiledb
 -- ------------------------------------------------------
--- Server version	10.3.31-MariaDB-1:10.3.31+maria~focal
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -440,4 +486,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 19:14:29
+-- Dump completed on 2022-09-21 17:04:57

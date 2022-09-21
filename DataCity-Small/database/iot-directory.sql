@@ -4,7 +4,7 @@ GRANT ALL ON iotdb.* TO 'user'@'%';
 --
 -- Host: 192.168.1.119    Database: iotdb
 -- ------------------------------------------------------
--- Server version	10.3.31-MariaDB-1:10.3.31+maria~focal
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,6 +26,26 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `iotdb` /*!40100 DEFAULT CHARACTER SET 
 USE `iotdb`;
 
 --
+-- Table structure for table `EXT_brokers`
+--
+
+DROP TABLE IF EXISTS `EXT_brokers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `EXT_brokers` (
+  `organization` varchar(50) NOT NULL,
+  `contextBrokerID` varchar(50) NOT NULL,
+  `accessLink` varchar(256) NOT NULL,
+  `multitenancy` tinyint(1) NOT NULL,
+  `NGSIvers` varchar(50) DEFAULT NULL,
+  `service` varchar(50) NOT NULL,
+  `servicePath` varchar(50) DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`accessLink`,`service`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `EXT_values_rules`
 --
 
@@ -33,12 +53,15 @@ DROP TABLE IF EXISTS `EXT_values_rules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `EXT_values_rules` (
-  `Name` varchar(45) NOT NULL,
+  `Name` varchar(255) NOT NULL,
   `If_statement` text DEFAULT NULL,
   `Then_statement` text DEFAULT NULL,
   `Organization` varchar(45) DEFAULT NULL,
   `Timestamp` timestamp NULL DEFAULT NULL,
   `mode` varchar(8) DEFAULT NULL,
+  `contextbroker` varchar(45) DEFAULT NULL,
+  `service` varchar(25) DEFAULT NULL,
+  `servicePath` varchar(96) DEFAULT NULL,
   PRIMARY KEY (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Rules to ingestion of external broker';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -161,6 +184,23 @@ CREATE TABLE `data_types` (
   `data_type` varchar(30) NOT NULL,
   PRIMARY KEY (`data_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `default_versions`
+--
+
+DROP TABLE IF EXISTS `default_versions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `default_versions` (
+  `domain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `subdomain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `model` varchar(50) NOT NULL DEFAULT 'Unset',
+  `defaultVersion` varchar(10) NOT NULL DEFAULT '0.0.0',
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`domain`,`subdomain`,`model`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,6 +503,23 @@ CREATE TABLE `mainmenu` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `map_id`
+--
+
+DROP TABLE IF EXISTS `map_id`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `map_id` (
+  `model_id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `subdomain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `model` varchar(50) NOT NULL DEFAULT 'Unset',
+  `version` varchar(10) NOT NULL DEFAULT '0.0.0',
+  PRIMARY KEY (`model_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `model`
 --
 
@@ -538,6 +595,29 @@ DROP TABLE IF EXISTS `protocols`;
 CREATE TABLE `protocols` (
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `raw_schema_model`
+--
+
+DROP TABLE IF EXISTS `raw_schema_model`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `raw_schema_model` (
+  `domain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `subdomain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `model` varchar(50) NOT NULL DEFAULT 'Unset',
+  `version` varchar(10) NOT NULL DEFAULT '0.0.0',
+  `attributes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `warnings` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `attributesLog` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `json_schema` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `unvalidAttributes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `subnature` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`domain`,`subdomain`,`model`,`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -630,6 +710,7 @@ CREATE TABLE `temporary_event_values` (
   KEY `data_type` (`data_type`),
   KEY `value_type` (`value_type`),
   KEY `temporary_event_values_ibfk_1` (`device`,`cb`),
+  KEY `value_name` (`value_name`),
   CONSTRAINT `temporary_event_values_ibfk_1` FOREIGN KEY (`device`, `cb`) REFERENCES `temporary_devices` (`id`, `contextBroker`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -695,12 +776,12 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 19:14:29
+-- Dump completed on 2022-09-21 17:04:57
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: iotdb
 -- ------------------------------------------------------
--- Server version	10.3.31-MariaDB-1:10.3.31+maria~focal
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -790,4 +871,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 19:14:29
+-- Dump completed on 2022-09-21 17:04:57
