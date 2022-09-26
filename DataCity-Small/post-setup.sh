@@ -1,6 +1,7 @@
 cd servicemap-conf
 ./update-ontology.sh localhost
 docker-compose exec virtuoso-kb isql-v localhost dba dba /root/servicemap/servicemap.vt
+docker-compose exec virtuoso-kb isql-v localhost dba dba /root/servicemap/valuetypes.vt
 docker-compose exec virtuoso-kb isql-v localhost dba dba /root/servicemap/servicemap-dbpedia.vt
 
 ##curl -H 'Content-Type: application/json' -X PUT 'https://localhost:9200/iotdata-organization' -d @mapping_Sensors-ETL-IOT-v3.json
@@ -108,5 +109,5 @@ echo add geoserver workspace Snap4City
 curl -u admin:snap4geo -XPOST -H "Content-type: text/xml" -d "<workspace><name>Snap4City</name></workspace>"  http://localhost/geoserver/rest/workspaces
 
 echo restart some services
-docker-compose restart wsserver personaldata orionbrokerfilter opensearch-dashboards
+docker-compose restart wsserver personaldata orionbrokerfilter opensearch-dashboards iot-fiware-harvester
 
