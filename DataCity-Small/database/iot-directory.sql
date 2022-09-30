@@ -872,3 +872,38 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-09-21 17:04:57
+-- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 192.168.1.7    Database: iotdb
+-- ------------------------------------------------------
+-- Server version	5.7.24
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Dumping data for table `fieldType`
+--
+
+LOCK TABLES `fieldType` WRITE;
+/*!40000 ALTER TABLE `fieldType` DISABLE KEYS */;
+INSERT INTO `fieldType` VALUES ('contextbroker','select','select distinct contextBroker FROM temporary_devices','',''),('data_type','select','select data_type as name from data_types','',''),('data_types','select','select data_type as name from data_types','',''),('device','text','','<input type=\"text\" class = \"autocomplete\" value=\"Empty\"><datalist id=\"huge_list\"></datalist>','SELECT DISTINCT id FROM temporary_devices'),('deviceType','text','','<input type=\"text\" value=\"Empty\">',''),('edge_gateway_type','select','SELECT name FROM edgegatewaytype','',''),('edge_gateway_uri','text','','<input type=\"text\" value=\"Empty\">',''),('editable','select','','<select><option value=\"1\">true</option><option value=\"0\">false</option></select>',''),('empty','text','','<input type=\"text\" value=\"Empty\">',''),('format','select','','<select><option value=\"csv\">csv</option><option value=\"json\">json</option><option value=\"xml\">xml</option></select>',''),('frequency','text','','<input type=\"text\" value=\"Empty\">',''),('healthiness_criteria','select','','<select><option value=\"refresh_rate\">Refresh rate</option><option value=\"different_values\">Different values</option><option value=\"within_bounds\">Within bounds</option></select>',''),('healthiness_value','text','','<input type=\"text\"  value=\"Empty\">',''),('id','text','','<input type=\"text\" value=\"Empty\">','SELECT DISTINCT id FROM temporary_devices'),('k1','text','','<input type=\"text\" value=\"Empty\">',''),('k2','text','','<input type=\"text\" value=\"Empty\">',''),('kind','select','','<select><option value=\"sensor\" selected>Sensor</option><option value=\"actuator\">Actuator</option></select>',''),('latitude','text','','<input type=\"text\" value=\"Empty\">',''),('longitude','text','','<input type=\"text\" value=\"Empty\">',''),('macaddress','text','','<input type=\"text\" value=\"Empty\">',''),('model','select','SELECT name FROM model','',''),('name','text','','<input type=\"text\"  value=\"Empty\">',''),('producer','text','','<input type=\"text\" value=\"Empty\">',''),('protocol','select','','<select><option value=\"amqp\">amqp</option><option value=\"coap\">coap</option><option value=\"mqtt\">mqtt</option><option value=\"ngsi\">ngsi</option></select>',''),('service_uri','text','','<input type=\"text\" value=\"Empty\">',''),('value_name','text','','<input type=\"text\" value=\"Empty\">',''),('value_type','select','SELECT value_type as name FROM value_types','',''),('value_unit','select','select distinct value_unit_default as name from value_types','','');
+/*!40000 ALTER TABLE `fieldType` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-09-29 11:26:00
