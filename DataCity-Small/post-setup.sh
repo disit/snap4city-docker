@@ -1,3 +1,5 @@
+set -e #stop on error
+
 cd servicemap-conf
 ./update-ontology.sh localhost
 docker-compose exec virtuoso-kb isql-v localhost dba dba /root/servicemap/servicemap.vt
@@ -102,7 +104,7 @@ EOF
 echo
 
 echo add dashboard
-curl -u admin:admin -XPOST "http://localhost/kibana/api/saved_objects/_import?overwrite=true" -H "osd-xsrf: true" -H "securitytenant: global" --form file=@osd-dashboard.ndjson
+curl -u admin:admin -XPOST "http://localhost:5601/api/saved_objects/_import?overwrite=true" -H "osd-xsrf: true" -H "securitytenant: global" --form file=@osd-dashboard.ndjson
 echo
 
 echo add geoserver workspace Snap4City
