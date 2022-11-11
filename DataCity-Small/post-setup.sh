@@ -12,8 +12,8 @@ echo create opensearch iot index
 curl --insecure -u admin:admin -H 'Content-Type: application/json' -X PUT 'https://localhost:9200/snap4-iot-organization' -d @mapping_Sensors-ETL-IOT-ES7-v4.json
 echo
 
-echo create opensearch iot-device index
-curl --insecure -u admin:admin -H 'Content-Type: application/json' -X PUT 'https://localhost:9200/device-iot-organization' -d @mapping_DeviceState-ES7-v1.json
+echo create opensearch iot-device-state index
+curl --insecure -u admin:admin -H 'Content-Type: application/json' -X PUT 'https://localhost:9200/iot-device-state' -d @mapping_DeviceState-ES7-v1.json
 echo
 
 echo create opensearch kpi index
