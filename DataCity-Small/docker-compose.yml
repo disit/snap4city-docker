@@ -479,7 +479,8 @@ services:
 
 #IOTDES ################################################################      
   nifi:
-    image: apache/nifi:1.9.2
+    image: apache/nifi:1.16.2
+    #image: apache/nifi:1.9.2
     #image: apache/nifi:latest
     environment:
       NIFI_WEB_HTTP_PORT: 9090
