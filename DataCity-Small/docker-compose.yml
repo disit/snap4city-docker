@@ -43,7 +43,7 @@ services:
     - ./certbot/www:/var/www/certbot
 
   dashboard-builder:
-    image: disitlab/dashboard-builder:v6.1
+    image: disitlab/dashboard-builder:v6.3
     ports:
       - "70:80"
     volumes:
@@ -59,6 +59,7 @@ services:
        - ./processloader-conf/poimanager_config.ini.php:/var/www/html/processloader/poimanager_config.ini.php
        - ./ownership-conf/config.php:/var/www/html/ownership-api/config.php
        - ./ownership-conf/logs:/ownership-logs
+       - ./multiservicemap-conf:/var/www/html/MultiServiceMap/conf
        - dashboard-img:/var/www/html/dashboardSmartCity/img
        - datatable-uploads:/var/www/html/processloader/DataTableManager/files
        - poitable-uploads:/var/www/html/processloader/POIManager/files
@@ -96,7 +97,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   dashboard-cron:
-    image: disitlab/dashboard-builder:v6.1
+    image: disitlab/dashboard-builder:v6.2
     volumes:
        - ./dashboard-builder-conf:/var/www/html/dashboardSmartCity/conf
        - ./dashboard-cron-conf/crontab:/crontab
@@ -270,11 +271,14 @@ services:
         max-file: "${S4C_LOG_MAX_FILE:-10}"
 
   zookeeper:
-    image: zookeeper
+    image: bitnami/zookeeper
     ports:
       - "2181:2181"
     volumes:
-      - zkdata:/data
+    #  - zkdata:/data
+      - zkdata:/bitnami/zookeeper 
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
     restart: unless-stopped
     logging:
       driver: "json-file"
@@ -484,17 +488,38 @@ services:
     #image: apache/nifi:latest
     environment:
       NIFI_WEB_HTTP_PORT: 9090
+      NIFI_JVM_HEAP_MAX: 2g
     ports:
       - "9090:9090"
     volumes:
       - ./nifi/extensions:/opt/nifi/nifi-current/extensions
       - ./nifi/conf:/opt/nifi/nifi-current/conf
+      - ./nifi/logs:/opt/nifi/nifi-current/logs
     restart: unless-stopped
     logging:
       driver: "json-file"
       options:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
+  varnish:
+    image: varnish:stable
+    hostname: cache
+    environment:
+      - VARNISH_SIZE=100MB
+      - VARNISHNCSA=true
+      - VARNISH_HTTP_PORTS=6081
+    ports:
+      - "6081:6081"
+    volumes:
+      - ./varnish/varnish-conf/default.vcl:/etc/varnish/default.vcl:ro
+      - ./varnish/docker-entrypoint:/root/custom-varnish-entrypoint
+      - ./varnish/varnishncsa-conf/format:/root/varnishncsa_format:ro
+      - ./varnish/logs:/root/logs:rw
+    tmpfs:
+      - /var/lib/varnish:exec
+    restart: unless-stopped
+    entrypoint: "/root/custom-varnish-entrypoint"
+
 #  elasticsearch:
 #    image: elasticsearch:6.8.5
 #    #image: elasticsearch:7.9.3

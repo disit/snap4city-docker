@@ -15,6 +15,11 @@ mkdir -p servicemap-iot-conf/logs/insert
 mkdir -p servicemap-iot-conf/logs/delete
 mkdir -p servicemap-iot-conf/logs/move
 mkdir -p servicemap-iot-conf/logs/list-static-attr
+mkdir -p varnish/logs
+mkdir -p nifi/logs
+mkdir -p ownership-conf/logs
+mkdir -p datamanager-logs
+
 chmod a+w servicemap-conf/logs
 chmod a+w servicemap-iot-conf/logs
 chmod a+w servicemap-iot-conf/logs/insert
@@ -24,13 +29,16 @@ chmod a+w servicemap-iot-conf/logs/list-static-attr
 chmod a+w nifi/conf
 chmod a+w nifi/conf/flow.xml.gz
 chmod a+w nifi/extensions
+chmod a+w nifi/logs
+chmod a+w ownership-conf/logs
+chmod a+w datamanager-logs
+
 mkdir -p certbot/logs
 mkdir -p certbot/conf
 mkdir -p certbot/work
 mkdir -p certbot/www
 chown -R 1000:1000 certbot
 
-#chmod a+w ckan-conf
 sysctl -w vm.max_map_count=262144
 
 cd opensearch-conf
