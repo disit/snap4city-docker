@@ -815,7 +815,7 @@ services:
         max-file: "${S4C_LOG_MAX_FILE:-10}"
 
   keycloak:
-    image: disitlab/preconf-keycloak:v4 
+    image: disitlab/preconf-keycloak:v5 
 #    image: jboss/keycloak:4.8.3.Final 
     command: ["-Djboss.socket.binding.port-offset=8"]
     ports:
