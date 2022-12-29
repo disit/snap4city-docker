@@ -495,6 +495,8 @@ services:
       - ./nifi/extensions:/opt/nifi/nifi-current/extensions
       - ./nifi/conf:/opt/nifi/nifi-current/conf
       - ./nifi/logs:/opt/nifi/nifi-current/logs
+    depends_on:
+      - varnish
     restart: unless-stopped
     logging:
       driver: "json-file"
@@ -517,6 +519,8 @@ services:
       - ./varnish/logs:/root/logs:rw
     tmpfs:
       - /var/lib/varnish:exec
+    depends_on:
+      - proxy
     restart: unless-stopped
     entrypoint: "/root/custom-varnish-entrypoint"
 
