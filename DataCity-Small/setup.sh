@@ -36,7 +36,7 @@ chmod a+w datamanager-logs
 mkdir -p certbot/logs
 mkdir -p certbot/conf
 mkdir -p certbot/work
-mkdir -p certbot/www
+mkdir -p certbot/www/.well-known/acme-challenge
 chown -R 1000:1000 certbot
 
 sysctl -w vm.max_map_count=262144

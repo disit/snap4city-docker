@@ -1,4 +1,4 @@
-<!ENTITY virtUrl "virtuoso-kb:1111">
+<!ENTITY virtUrl "jdbc:virtuoso://virtuoso-kb:1111">
 <!ENTITY virtUsr "dba">
 <!ENTITY virtPwd "dba">
 <!ENTITY ownership "http://dashboard/ownership-api/v1/list/">
