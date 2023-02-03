@@ -14,6 +14,29 @@ server {
     }
 }
 
+#used by varnish cache
+server {
+        listen 90;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_http_version 1.1;
+        proxy_read_timeout 1m;
+        location  /superservicemap/ {
+                proxy_pass "http://servicemap:8080/superservicemap/rest/";
+        }
+        location  /ServiceMap/api/v1/iot/ {
+                proxy_pass "http://servicemap:8080/iot/";
+        }
+        location  /ServiceMap/ {
+                proxy_pass "http://servicemap:8080/ServiceMap/";
+        }
+        location  / {
+                proxy_pass "http://dashboard-builder/";
+        }
+}
+
 server {
         listen 443 ssl;
         server_name <fqdn of server>;
@@ -32,6 +55,10 @@ server {
 #        log_format vhost_combined '$remote_addr - $remote_user [$time_local] '
 #                          '"$request" $status $body_bytes_sent '
 #                          '"$http_referer" "$http_user_agent" "$server_name" $request_time $upstream_response_time $upstream_connect_time $upstream_header_time';
+
+        proxy_busy_buffers_size   512k;
+        proxy_buffers   4 512k;
+        proxy_buffer_size   256k;
 
         proxy_set_header Host $http_host;
         proxy_set_header X-Real-IP $remote_addr;
