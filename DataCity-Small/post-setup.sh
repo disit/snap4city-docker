@@ -6,14 +6,16 @@ docker-compose exec virtuoso-kb isql-v localhost dba dba /root/servicemap/servic
 docker-compose exec virtuoso-kb isql-v localhost dba dba /root/servicemap/valuetypes.vt
 docker-compose exec virtuoso-kb isql-v localhost dba dba /root/servicemap/servicemap-dbpedia.vt
 
-##curl -H 'Content-Type: application/json' -X PUT 'https://localhost:9200/iotdata-organization' -d @mapping_Sensors-ETL-IOT-v3.json
-
 echo create opensearch iot index
 curl --insecure -u admin:admin -H 'Content-Type: application/json' -X PUT 'https://localhost:9200/snap4-iot-organization' -d @mapping_Sensors-ETL-IOT-ES7-v4.json
 echo
 
 echo create opensearch iot-device-state index
 curl --insecure -u admin:admin -H 'Content-Type: application/json' -X PUT 'https://localhost:9200/iot-device-state' -d @mapping_DeviceState-ES7-v1.json
+echo
+
+echo create opensearch ot-device-state index
+curl --insecure -u admin:admin -H 'Content-Type: application/json' -X PUT 'https://localhost:9200/ot-device-state' -d @mapping_DeviceState-ES7-v1.json
 echo
 
 echo create opensearch kpi index
@@ -111,5 +113,6 @@ echo add geoserver workspace Snap4City
 curl -u admin:snap4geo -XPOST -H "Content-type: text/xml" -d "<workspace><name>Snap4City</name></workspace>"  http://localhost/geoserver/rest/workspaces
 
 echo restart some services
-docker-compose restart wsserver personaldata orionbrokerfilter opensearch-dashboards iot-fiware-harvester
+docker-compose restart wsserver personaldata orionbrokerfilter opensearch-dashboards iot-fiware-harvester proxy varnish
+
 
