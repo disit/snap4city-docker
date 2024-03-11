@@ -1,0 +1,1 @@
+%{Varnish:side}x %{Varnish:hitmiss}x %h:%{VSL:BackendOpen[4]}x %l %u %t "%r" %s %b

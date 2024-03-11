@@ -1,10 +1,10 @@
 CREATE SCHEMA `iotdb` DEFAULT CHARACTER SET utf8;
 GRANT ALL ON iotdb.* TO 'user'@'%';
--- MySQL dump 10.16  Distrib 10.1.41-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: iotdb
 -- ------------------------------------------------------
--- Server version	10.4.12-MariaDB-1:10.4.12+maria~bionic
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,6 +26,47 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `iotdb` /*!40100 DEFAULT CHARACTER SET 
 USE `iotdb`;
 
 --
+-- Table structure for table `EXT_brokers`
+--
+
+DROP TABLE IF EXISTS `EXT_brokers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `EXT_brokers` (
+  `organization` varchar(50) NOT NULL,
+  `contextBrokerID` varchar(50) NOT NULL,
+  `accessLink` varchar(256) NOT NULL,
+  `multitenancy` tinyint(1) NOT NULL,
+  `NGSIvers` varchar(50) DEFAULT NULL,
+  `service` varchar(50) NOT NULL,
+  `servicePath` varchar(50) DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`accessLink`,`service`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `EXT_values_rules`
+--
+
+DROP TABLE IF EXISTS `EXT_values_rules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `EXT_values_rules` (
+  `Name` varchar(255) NOT NULL,
+  `If_statement` text DEFAULT NULL,
+  `Then_statement` text DEFAULT NULL,
+  `Organization` varchar(45) DEFAULT NULL,
+  `Timestamp` timestamp NULL DEFAULT NULL,
+  `mode` varchar(8) DEFAULT NULL,
+  `contextbroker` varchar(45) DEFAULT NULL,
+  `service` varchar(25) DEFAULT NULL,
+  `servicePath` varchar(96) DEFAULT NULL,
+  PRIMARY KEY (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Rules to ingestion of external broker';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `access_log`
 --
 
@@ -38,9 +79,9 @@ CREATE TABLE `access_log` (
   `accessed_by` varchar(100) NOT NULL,
   `target_entity_type` varchar(50) NOT NULL,
   `access_type` varchar(50) NOT NULL,
-  `entity_name` varchar(100) DEFAULT NULL,
+  `entity_name` varchar(255) DEFAULT NULL,
   `notes` text DEFAULT NULL,
-  `result` set('success','faliure','failure','') DEFAULT NULL,
+  `result` set('success','faliure','') DEFAULT NULL,
   `organization` varchar(50) DEFAULT 'DISIT',
   PRIMARY KEY (`id`,`time`,`accessed_by`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -124,6 +165,8 @@ CREATE TABLE `contextbroker` (
   `kind` set('external','internal') DEFAULT NULL,
   `subscription_id` varchar(255) DEFAULT NULL,
   `urlnificallback` varchar(100) DEFAULT NULL,
+  `req_frequency` int(11) DEFAULT NULL,
+  `timestampstatus` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`name`),
   KEY `protocol` (`protocol`),
   CONSTRAINT `contextbroker_ibfk_1` FOREIGN KEY (`protocol`) REFERENCES `protocols` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -141,6 +184,23 @@ CREATE TABLE `data_types` (
   `data_type` varchar(30) NOT NULL,
   PRIMARY KEY (`data_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `default_versions`
+--
+
+DROP TABLE IF EXISTS `default_versions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `default_versions` (
+  `domain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `subdomain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `model` varchar(50) NOT NULL DEFAULT 'Unset',
+  `defaultVersion` varchar(10) NOT NULL DEFAULT '0.0.0',
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`domain`,`subdomain`,`model`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,7 +331,7 @@ CREATE TABLE `devices` (
   `mandatoryproperties` tinyint(1) NOT NULL DEFAULT 0,
   `mandatoryvalues` tinyint(1) NOT NULL DEFAULT 0,
   `macaddress` varchar(20) DEFAULT NULL,
-  `model` varchar(50) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
   `producer` varchar(125) DEFAULT NULL,
   `longitude` varchar(20) DEFAULT NULL,
   `latitude` varchar(20) DEFAULT NULL,
@@ -347,8 +407,8 @@ DROP TABLE IF EXISTS `extractionRules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `extractionRules` (
-  `id` varchar(30) NOT NULL,
-  `contextbroker` varchar(35) NOT NULL,
+  `id` varchar(40) NOT NULL,
+  `contextbroker` varchar(40) NOT NULL,
   `format` set('csv','json','xml','') NOT NULL DEFAULT 'json',
   `selector` text NOT NULL,
   `kind` set('value','property') DEFAULT NULL,
@@ -358,6 +418,8 @@ CREATE TABLE `extractionRules` (
   `structure_flag` set('yes','no') DEFAULT 'no',
   `organization` varchar(30) DEFAULT NULL,
   `username` varchar(40) DEFAULT NULL,
+  `service` varchar(25) DEFAULT NULL,
+  `servicePath` varchar(96) DEFAULT NULL,
   PRIMARY KEY (`id`,`contextbroker`),
   KEY `contextbroker_erfk_1` (`contextbroker`),
   CONSTRAINT `contextbroker_erfk_1` FOREIGN KEY (`contextbroker`) REFERENCES `contextbroker` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -441,6 +503,23 @@ CREATE TABLE `mainmenu` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `map_id`
+--
+
+DROP TABLE IF EXISTS `map_id`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `map_id` (
+  `model_id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `subdomain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `model` varchar(50) NOT NULL DEFAULT 'Unset',
+  `version` varchar(10) NOT NULL DEFAULT '0.0.0',
+  PRIMARY KEY (`model_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `model`
 --
 
@@ -449,14 +528,14 @@ DROP TABLE IF EXISTS `model`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `model` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `description` varchar(125) DEFAULT NULL,
   `devicetype` varchar(80) NOT NULL,
   `kind` set('sensor','actuator','') DEFAULT NULL,
   `producer` varchar(125) DEFAULT NULL,
   `frequency` varchar(20) DEFAULT NULL,
   `policy` varchar(20) DEFAULT NULL,
-  `attributes` text DEFAULT NULL,
+  `attributes` longtext DEFAULT NULL,
   `link` varchar(100) DEFAULT NULL,
   `contextbroker` varchar(40) NOT NULL,
   `protocol` varchar(20) NOT NULL,
@@ -474,10 +553,35 @@ CREATE TABLE `model` (
   `service` varchar(25) DEFAULT NULL,
   `servicePath` varchar(96) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
   UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `name` (`name`),
   KEY `policy` (`policy`),
   CONSTRAINT `model_ibfk_1` FOREIGN KEY (`policy`) REFERENCES `defaultpolicy` (`policyname`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `orionbrokers`
+--
+
+DROP TABLE IF EXISTS `orionbrokers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orionbrokers` (
+  `id_orionbroker` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `organization` varchar(45) DEFAULT NULL,
+  `ipaddr` varchar(45) DEFAULT NULL,
+  `external_port` varchar(45) DEFAULT NULL,
+  `access_port` varchar(45) DEFAULT NULL,
+  `multitenacy` varchar(45) DEFAULT NULL,
+  `urlnificallback` varchar(255) DEFAULT NULL,
+  `orion_image` varchar(45) DEFAULT NULL,
+  `enable_direct_access` tinyint(4) DEFAULT 0,
+  `status` varchar(45) DEFAULT NULL,
+  `status_timestamp` datetime DEFAULT NULL,
+  `status_history` mediumtext DEFAULT NULL,
+  PRIMARY KEY (`id_orionbroker`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -491,6 +595,29 @@ DROP TABLE IF EXISTS `protocols`;
 CREATE TABLE `protocols` (
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `raw_schema_model`
+--
+
+DROP TABLE IF EXISTS `raw_schema_model`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `raw_schema_model` (
+  `domain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `subdomain` varchar(50) NOT NULL DEFAULT 'Unset',
+  `model` varchar(50) NOT NULL DEFAULT 'Unset',
+  `version` varchar(10) NOT NULL DEFAULT '0.0.0',
+  `attributes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `warnings` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `attributesLog` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `json_schema` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `unvalidAttributes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `subnature` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`domain`,`subdomain`,`model`,`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -578,11 +705,42 @@ CREATE TABLE `temporary_event_values` (
   `value_refresh_rate` int(11) DEFAULT NULL,
   `different_values` int(11) DEFAULT NULL,
   `value_bounds` varchar(10) DEFAULT NULL,
+  `toDelete` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`cb`,`device`,`value_name`),
   KEY `data_type` (`data_type`),
   KEY `value_type` (`value_type`),
   KEY `temporary_event_values_ibfk_1` (`device`,`cb`),
+  KEY `value_name` (`value_name`),
   CONSTRAINT `temporary_event_values_ibfk_1` FOREIGN KEY (`device`, `cb`) REFERENCES `temporary_devices` (`id`, `contextBroker`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `temporary_event_values_for_registered_devices`
+--
+
+DROP TABLE IF EXISTS `temporary_event_values_for_registered_devices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `temporary_event_values_for_registered_devices` (
+  `cb` varchar(40) NOT NULL,
+  `device` varchar(255) NOT NULL,
+  `value_name` varchar(120) NOT NULL,
+  `old_value_name` varchar(120) NOT NULL,
+  `data_type` varchar(30) DEFAULT NULL,
+  `value_type` varchar(120) DEFAULT NULL,
+  `editable` varchar(5) DEFAULT NULL,
+  `value_unit` varchar(30) DEFAULT NULL,
+  `healthiness_criteria` set('refresh_rate','different_values','within_bounds','') DEFAULT NULL,
+  `value_refresh_rate` int(11) DEFAULT NULL,
+  `different_values` int(11) DEFAULT NULL,
+  `value_bounds` varchar(10) DEFAULT NULL,
+  `toDelete` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`cb`,`device`,`value_name`),
+  KEY `data_type` (`data_type`),
+  KEY `value_type` (`value_type`),
+  KEY `temporary_event_values_for_registered_devices_ibfk_1` (`device`,`cb`),
+  CONSTRAINT `temporary_event_values_for_registered_devices_ibfk_1` FOREIGN KEY (`device`, `cb`) REFERENCES `devices` (`id`, `contextBroker`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -608,20 +766,6 @@ CREATE TABLE `users` (
   PRIMARY KEY (`IdUser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `value_types`
---
-
-DROP TABLE IF EXISTS `value_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `value_types` (
-  `value_type` varchar(30) NOT NULL,
-  `value_unit_default` varchar(30) NOT NULL,
-  PRIMARY KEY (`value_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -632,12 +776,12 @@ CREATE TABLE `value_types` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-09 18:34:30
--- MySQL dump 10.16  Distrib 10.1.41-MariaDB, for debian-linux-gnu (x86_64)
+-- Dump completed on 2022-09-21 17:04:57
+-- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: iotdb
 -- ------------------------------------------------------
--- Server version	10.4.12-MariaDB-1:10.4.12+maria~bionic
+-- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -695,7 +839,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `protocols` WRITE;
 /*!40000 ALTER TABLE `protocols` DISABLE KEYS */;
-INSERT INTO `protocols` VALUES ('amqp'),('coap'),('mqtt'),('ngsi'),('sigfox');
+INSERT INTO `protocols` VALUES ('amqp'),('coap'),('mqtt'),('ngsi'),('ngsi w/MultiService'),('sigfox');
 /*!40000 ALTER TABLE `protocols` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -727,4 +871,39 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-09 18:34:30
+-- Dump completed on 2022-09-21 17:04:57
+-- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: 192.168.1.7    Database: iotdb
+-- ------------------------------------------------------
+-- Server version	5.7.24
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Dumping data for table `fieldType`
+--
+
+LOCK TABLES `fieldType` WRITE;
+/*!40000 ALTER TABLE `fieldType` DISABLE KEYS */;
+INSERT INTO `fieldType` VALUES ('contextbroker','select','select distinct contextBroker FROM temporary_devices','',''),('data_type','select','select data_type as name from data_types','',''),('data_types','select','select data_type as name from data_types','',''),('device','text','','<input type=\"text\" class = \"autocomplete\" value=\"Empty\"><datalist id=\"huge_list\"></datalist>','SELECT DISTINCT id FROM temporary_devices'),('deviceType','text','','<input type=\"text\" value=\"Empty\">',''),('edge_gateway_type','select','SELECT name FROM edgegatewaytype','',''),('edge_gateway_uri','text','','<input type=\"text\" value=\"Empty\">',''),('editable','select','','<select><option value=\"1\">true</option><option value=\"0\">false</option></select>',''),('empty','text','','<input type=\"text\" value=\"Empty\">',''),('format','select','','<select><option value=\"csv\">csv</option><option value=\"json\">json</option><option value=\"xml\">xml</option></select>',''),('frequency','text','','<input type=\"text\" value=\"Empty\">',''),('healthiness_criteria','select','','<select><option value=\"refresh_rate\">Refresh rate</option><option value=\"different_values\">Different values</option><option value=\"within_bounds\">Within bounds</option></select>',''),('healthiness_value','text','','<input type=\"text\"  value=\"Empty\">',''),('id','text','','<input type=\"text\" value=\"Empty\">','SELECT DISTINCT id FROM temporary_devices'),('k1','text','','<input type=\"text\" value=\"Empty\">',''),('k2','text','','<input type=\"text\" value=\"Empty\">',''),('kind','select','','<select><option value=\"sensor\" selected>Sensor</option><option value=\"actuator\">Actuator</option></select>',''),('latitude','text','','<input type=\"text\" value=\"Empty\">',''),('longitude','text','','<input type=\"text\" value=\"Empty\">',''),('macaddress','text','','<input type=\"text\" value=\"Empty\">',''),('model','select','SELECT name FROM model','',''),('name','text','','<input type=\"text\"  value=\"Empty\">',''),('producer','text','','<input type=\"text\" value=\"Empty\">',''),('protocol','select','','<select><option value=\"amqp\">amqp</option><option value=\"coap\">coap</option><option value=\"mqtt\">mqtt</option><option value=\"ngsi\">ngsi</option></select>',''),('service_uri','text','','<input type=\"text\" value=\"Empty\">',''),('value_name','text','','<input type=\"text\" value=\"Empty\">',''),('value_type','select','SELECT value_type as name FROM value_types','',''),('value_unit','select','select distinct value_unit_default as name from value_types','','');
+/*!40000 ALTER TABLE `fieldType` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-09-29 11:26:00

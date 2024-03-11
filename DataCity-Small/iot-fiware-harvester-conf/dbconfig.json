@@ -1,0 +1,8 @@
+{
+    "host": "dashboarddb",
+    "user": "user",
+    "password": "passwordx",
+    "database": "iotdb",
+    "ssl_disabled" :0
+}
+

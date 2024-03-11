@@ -16,11 +16,12 @@ service <https://dbpedia.org/sparql> {
 ?s <http://dbpedia.org/ontology/abstract> ?a_it. filter(lang(?a_it)="it")
 ?s geo:lat ?lat.
 ?s geo:long ?long.
-?s geo:geometry ?p.
+#?s geo:geometry ?p.
 #filter(bif:st_distance(?p,bif:st_point(12.4969,41.9030))<10)
 }
 bind(uri(concat("http://www.disit.org/km4city/resource/dbpedia_historicbuilding_",md5(str(?s)))) as ?ss)
 bind(replace(?a_it,"Il template {{Coord}} ha riscontrato degli errori \\(istruzioni\\):.?Modulo:Wikidata:398: attempt to index field 'wikibase' \\(a nil value\\) ?","") as ?a_ita)
+bind(STRDT(concat("POINT(",?long," ",?lat,")"),virtrdf:Geometry) as ?p)
 };
 SPARQL
 clear graph <urn:dbpedia:museum>;
@@ -40,10 +41,11 @@ service <https://dbpedia.org/sparql> {
 optional{?s <http://dbpedia.org/ontology/abstract> ?a_it. filter(lang(?a_it)="it")}
 ?s geo:lat ?lat.
 ?s geo:long ?long.
-?s geo:geometry ?p.
+#?s geo:geometry ?p.
 #filter(bif:st_distance(?p,bif:st_point(12.4969,41.9030))<10)
 }
 bind(uri(concat("http://www.disit.org/km4city/resource/dbpedia_museum_",md5(str(?s)))) as ?ss)
 bind(replace(?a_it,"Il template {{Coord}} ha riscontrato degli errori \\(istruzioni\\):.?Modulo:Wikidata:398: attempt to index field 'wikibase' \\(a nil value\\) ?","") as ?a_ita)
+bind(STRDT(concat("POINT(",?long," ",?lat,")"),virtrdf:Geometry) as ?p)
 };
 

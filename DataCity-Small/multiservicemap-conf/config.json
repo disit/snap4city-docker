@@ -1,0 +1,11 @@
+[{
+	"natureApiUrl": "http://dashboard/processloader/api/dictionary/?type=nature",
+    "subnatureApiUrl": "http://dashboard/processloader/api/dictionary/?type=subnature",
+	"orgApiUrl" : "http://dashboard/dashboardSmartCity/api/organizations.php",
+	"superServiceMapApiUrl" : "http://dashboard/superservicemap/api/v1/",
+	"multiServiceMapUrl":"http://dashboard/MultiServiceMap/",
+	"realm": "master",
+    "authUrl": "http://dashboard/auth/",
+    "clientId": "js-multiservicemap",
+	"ldapApiUrl":"http://dashboard/dashboardSmartCity/api/ldap.php?action=get_logged_ou&username="
+}]

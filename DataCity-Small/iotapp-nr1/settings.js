@@ -40,14 +40,14 @@ module.exports = {
     //Aggiunto da me: URL cui risponde il WebSocket server
     wsServerUrl: 'ws://dashboard/wsserver',
     wsServerRetryActive: 'yes',
-    wsServerRetryTime: 120,
+    wsServerRetryTime: 10,
     wsReconnectTimeout: 1200,
     myPersonalDataUrl: "http://dashboard/datamanager/api/v1/",
     ascapiUrl: "http://dashboard/ServiceMap/api/v1",
     dashboardSmartCityUrl: "http://dashboard/dashboardSmartCity/",
     socketIOUrl: "http://dashboard",
     socketIOPath: "/synoptics/socket.io",
-
+    iotDirectoryUrl: "http://dashboard/iot-directory/", //NEW
 //    eventLogUri: 'http://192.168.1.43/RsyslogAPI/rsyslog.php',
 
     keycloakBaseUri: keycloak_base_uri,

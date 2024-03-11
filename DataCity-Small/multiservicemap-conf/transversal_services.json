@@ -1,0 +1,358 @@
+{
+    "result": "OK",
+    "code": 200,
+    "content": [
+        {
+            "nature": "Area",
+            "nature_img": "Area",
+            "children": [
+                {
+                    "sub_nature": "Controlled_parking_zone",
+                    "sub_nature_img": "TransferServiceAndRenting_Controlled_parking_zone"
+                },
+                {
+                    "sub_nature": "Gardens",
+                    "sub_nature_img": "Entertainment_Gardens"
+                },
+                {
+                    "sub_nature": "Green_areas",
+                    "sub_nature_img": "Entertainment_Green_areas"
+                },
+                {
+                    "sub_nature": "Sports_facility",
+                    "sub_nature_img": "Entertainment_Sports_facility"
+                }
+            ]
+        },
+        {
+            "nature": "DigitalLocation",
+            "nature_img": "DigitalLocation",
+            "children": [
+                {
+                    "sub_nature": "Artisan_shop",
+                    "sub_nature_img": "ShoppingAndService_Artisan_shop"
+                },
+                {
+                    "sub_nature": "Bank",
+                    "sub_nature_img": "FinancialService_Bank"
+                },
+                {
+                    "sub_nature": "Bookshop",
+                    "sub_nature_img": "ShoppingAndService_Bookshop"
+                },
+                {
+                    "sub_nature": "Boxoffice",
+                    "sub_nature_img": "Entertainment_Boxoffice"
+                },
+                {
+                    "sub_nature": "Churches",
+                    "sub_nature_img": "CulturalActivity_Churches"
+                },
+                {
+                    "sub_nature": "Cinema",
+                    "sub_nature_img": "Entertainment_Cinema"
+                },
+                {
+                    "sub_nature": "Consulate",
+                    "sub_nature_img": "GovernmentOffice_Consulate"
+                },
+                {
+                    "sub_nature": "Controlled_parking_zone",
+                    "sub_nature_img": "TransferServiceAndRenting_Controlled_parking_zone"
+                },
+                {
+                    "sub_nature": "Gardens",
+                    "sub_nature_img": "Entertainment_Gardens"
+                },
+                {
+                    "sub_nature": "Green_areas",
+                    "sub_nature_img": "Entertainment_Green_areas"
+                },
+                {
+                    "sub_nature": "Gym_fitness",
+                    "sub_nature_img": "Entertainment_Gym_fitness"
+                },
+                {
+                    "sub_nature": "Healthcare_centre",
+                    "sub_nature_img": "HealthCare_Healthcare_centre"
+                },
+                {
+                    "sub_nature": "Historical_buildings",
+                    "sub_nature_img": "CulturalActivity_Historical_buildings"
+                },
+                {
+                    "sub_nature": "Library",
+                    "sub_nature_img": "CulturalActivity_Library"
+                },
+                {
+                    "sub_nature": "Literary_cafe",
+                    "sub_nature_img": "WineAndFood_Literary_cafe"
+                },
+                {
+                    "sub_nature": "Local_health_authority",
+                    "sub_nature_img": "WineAndFood_Literary_cafe"
+                },
+                {
+                    "sub_nature": "Monument_location",
+                    "sub_nature_img": "CulturalActivity_Monument_location"
+                },
+                {
+                    "sub_nature": "Museum",
+                    "sub_nature_img": "CulturalActivity_Museum"
+                },
+                {
+                    "sub_nature": "Pastry_shop",
+                    "sub_nature_img": "WineAndFood_Pastry_shop"
+                },
+                {
+                    "sub_nature": "Pharmacy",
+                    "sub_nature_img": "ShoppingAndService_Pharmacy"
+                },
+                {
+                    "sub_nature": "Public_hospital",
+                    "sub_nature_img": "HealthCare_Public_hospital"
+                },
+                {
+                    "sub_nature": "Public_infant_school",
+                    "sub_nature_img": "EducationAndResearch_Public_infant_school"
+                },
+                {
+                    "sub_nature": "Restaurant",
+                    "sub_nature_img": "WineAndFood_Restaurant"
+                },
+                {
+                    "sub_nature": "RTZgate",
+                    "sub_nature_img": "TransferServiceAndRenting_RTZgate"
+                },
+                {
+                    "sub_nature": "Small_shop",
+                    "sub_nature_img": "WineAndFood_Small_shop"
+                },
+                {
+                    "sub_nature": "Sports_facility",
+                    "sub_nature_img": "Entertainment_Sports_facility"
+                },
+                {
+                    "sub_nature": "Squares",
+                    "sub_nature_img": "CulturalActivity_Squares"
+                },
+                {
+                    "sub_nature": "Theatre",
+                    "sub_nature_img": "CulturalActivity_Theatre"
+                },
+                {
+                    "sub_nature": "Toilet",
+                    "sub_nature_img": "TourismService_Toilet"
+                },
+                {
+                    "sub_nature": "Tourist_complaints_office",
+                    "sub_nature_img": "TourismService_Tourist_complaints_office"
+                },
+                {
+                    "sub_nature": "Tourist_information_office",
+                    "sub_nature_img": "TourismService_Tourist_information_office"
+                },
+                {
+                    "sub_nature": "Tourist_trail",
+                    "sub_nature_img": "TourismService_Tourist_trail"
+                },
+                {
+                    "sub_nature": "Training_school",
+                    "sub_nature_img": "EducationAndResearch_Training_school"
+                },
+                {
+                    "sub_nature": "Train_station",
+                    "sub_nature_img": "TransferServiceAndRenting_Train_station"
+                },
+                {
+                    "sub_nature": "Tramline",
+                    "sub_nature_img": "TransferServiceAndRenting_Tramline"
+                },
+                {
+                    "sub_nature": "Tram_stops",
+                    "sub_nature_img": "TransferServiceAndRenting_Tram_stops"
+                },
+                {
+                    "sub_nature": "Trattoria",
+                    "sub_nature_img": "WineAndFood_Trattoria"
+                },
+                {
+                    "sub_nature": "Wifi",
+                    "sub_nature_img": "TourismService_Wifi"
+                }
+            ]
+        },
+        {
+            "nature": "Path",
+            "nature_img": "Path",
+            "children": [
+                {
+                    "sub_nature": "Cycle_paths",
+                    "sub_nature_img": "TransferServiceAndRenting_Cycle_paths"
+                },
+                {
+                    "sub_nature": "Tourist_trail",
+                    "sub_nature_img": "TourismService_Tourist_trail"
+                },
+                {
+                    "sub_nature": "Tramline",
+                    "sub_nature_img": "TransferServiceAndRenting_Tramline"
+                }
+            ]
+        },
+        {
+            "nature": "HappeningNow",
+            "nature_img": "HappeningNow",
+            "children": [
+                {
+                    "sub_nature": "Event",
+                    "sub_nature_img": "HappeningNow_Event"
+                }
+            ]
+        },
+        {
+            "nature": "IoTDevice",
+            "nature_img": "IoTDevice",
+            "children": [
+                {
+                    "sub_nature": "IoTActuator",
+                    "sub_nature_img": "IoTDevice_IoTActuator"
+                },
+                {
+                    "sub_nature": "IoTSensor",
+                    "sub_nature_img": "IoTDevice_IoTSensor"
+                }
+            ]
+        },
+        {
+            "nature": "Fresh Place",
+            "nature_img": "TourismService_Fresh_place",
+            "children": []
+        },
+        {
+            "nature": "Public Transport Line",
+            "nature_img": "TransferServiceAndRenting_Urban_bus",
+            "children": []
+        },
+                {
+            "nature": "Traffic_sensor",
+            "nature_img": "TransferServiceAndRenting_Traffic_sensor",
+            "children": []
+        },
+        {
+            "nature": "Road Sensors",
+            "nature_img": "TransferServiceAndRenting_SensorSite",
+            "children": []
+        },
+        {
+            "nature": "Bus Stops",
+            "nature_img": "TransferServiceAndRenting_BusStop",
+            "children": []
+        },
+        {
+            "nature": "Tram_stops",
+            "nature_img": "TransferServiceAndRenting_Tram_stops",
+            "children": []
+        },
+        {
+            "nature": "Subway_station",
+            "nature_img": "TransferServiceAndRenting_Subway_station",
+            "children": []
+        },
+        {
+            "nature": "Train_station",
+            "nature_img": "TransferServiceAndRenting_Train_station",
+            "children": []
+        },
+        {
+            "nature": "Ferry_stop",
+            "nature_img": "TransferServiceAndRenting_Ferry_stop",
+            "children": []
+        },
+        {
+            "nature": "Car_park",
+            "nature_img": "TransferServiceAndRenting_Car_park",
+            "children": []
+        },
+        {
+            "nature": "Bike_sharing_rack",
+            "nature_img": "TransferServiceAndRenting_Bike_sharing_rack",
+            "children": []
+        },
+        {
+            "nature": "RTZgate",
+            "nature_img": "TransferServiceAndRenting_RTZgate",
+            "children": []
+        },
+        {
+            "nature": "Fuel_station",
+            "nature_img": "TransferServiceAndRenting_Fuel_station",
+            "children": []
+        },
+        {
+			"nature": "Charging_stations",
+            "nature_img": "TransferServiceAndRenting_Charging_stations",
+            "children": []
+        },
+        {
+            "nature": "Underpass",
+            "nature_img": "TransferServiceAndRenting_Underpass",
+            "children": []
+        },
+        {
+            "nature": "Air_quality_monitoring_station",
+            "nature_img": "Environment_Air_quality_monitoring_station",
+            "children": []
+        },
+        {
+            "nature": "Pollen_monitoring_station",
+            "nature_img": "Environment_Pollen_monitoring_station",
+            "children": []
+        },
+                {
+            "nature": "Street_light",
+            "nature_img": "Environment_Street_light",
+            "children": []
+        },
+        {
+            "nature": "Smart_waste_container",
+            "nature_img": "Environment_Smart_waste_container",
+            "children": []
+        },
+        {
+            "nature": "Smart_irrigator",
+            "nature_img": "Environment_Smart_irrigator",
+            "children": []
+        },
+        {
+            "nature": "Weather_sensor",
+            "nature_img": "Environment_Weather_sensor",
+            "children": []
+        },
+        {
+            "nature": "Noise_level_sensor",
+            "nature_img": "Environment_Noise_level_sensor",
+            "children": []
+        },
+        {
+            "nature": "People_counter",
+            "nature_img": "Environment_People_counter",
+            "children": []
+        },
+        {
+            "nature": "Smart_bench",
+            "nature_img": "Entertainment_Smart_Bench",
+            "children": []
+        },
+        {
+            "nature": "First_aid",
+            "nature_img": "Emergency_First_aid",
+            "children": []
+        },
+        {
+            "nature": "Police_headquarters",
+            "nature_img": "GovernmentOffice_Police_headquarters",
+            "children": []
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+<!ENTITY virtUrl "virtuoso-kb:1111">
+<!ENTITY virtUsr "dba">
+<!ENTITY virtPwd "dba">
+<!ENTITY ownership "https://www.snap4city.org/ownership-api/v1/list/">
+<!ENTITY servicemap "http://localhost:8080/ServiceMap/api/v1/">
+<!ENTITY keycloak "https://www.snap4city.org/auth/realms/master/protocol/openid-connect/userinfo">
+

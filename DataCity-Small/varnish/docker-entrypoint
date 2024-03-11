@@ -1,0 +1,51 @@
+#!/bin/bash
+set -e
+set -m
+
+VARNISHD="$(command -v varnishd) 
+          -f /etc/varnish/default.vcl 
+          -a proxy=:8443,PROXY 
+          -p feature=+http2 
+          -s malloc,${VARNISH_SIZE} 
+          -F"
+
+HTTP_PORTS_ARG=""
+if [ ! -z "${VARNISH_HTTP_PORTS}" ]; then
+    while IFS="," read -ra PORTS; do
+        for p in "${PORTS[@]}"; do
+            HTTP_PORTS_ARG="${HTTP_PORTS_ARG} -a http=:${p},HTTP"
+        done
+    done <<< "$VARNISH_HTTP_PORTS"
+else
+    HTTP_PORTS_ARG="-a http=:6081,HTTP"
+fi
+VARNISHD="${VARNISHD} ${HTTP_PORTS_ARG}"
+
+VARNISH_NCSA="$(command -v varnishncsa) 
+              -b -c 
+              -f /root/varnishncsa_format 
+              -w /root/logs/varnish_ncsa.log 
+              -P /var/run/varnishncsa.pid 
+              -D"
+
+if [ ! -z "${VARNISHNCSA}" ]; then
+    if [ "${VARNISHNCSA}" == "true" ]; then
+        # Start varnish in background
+        echo starting $VARNISHD
+        ${VARNISHD} & 
+        # Start varnishncsa
+	sleep 5
+        echo "Starting varnishncsa:"
+        echo starting $VARNISH_NCSA
+        ${VARNISH_NCSA}
+        fg %1
+    else
+        echo $VARNISHD
+        ${VARNISHD}
+    fi
+else
+    echo $VARNISHD
+    ${VARNISHD}
+fi
+
+

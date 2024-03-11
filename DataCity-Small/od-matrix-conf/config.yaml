@@ -1,0 +1,12 @@
+# PostgreSQL DB Host and Credentials
+user_psg: postgres 
+password_psg: pgpassword
+host_psg: od-postgis
+port_psg: 5432
+database_psg: postgres
+
+# SQL DB Host and Credentials
+user_sql: user
+password_sql: passwordx
+host_sql: dashboarddb 
+database_sql: heatmap

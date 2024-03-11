@@ -16,9 +16,9 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 //EXTERNAL SERVICES//
-$host= 'loclahost';
+$host= 'dashboarddb';
 $username= 'user';
-$password= 'password';
+$password= 'passwordx';
 $dbname= 'profiledb';
 $snap4city_API='localhost';
 
@@ -40,9 +40,24 @@ $password_kpi= 'passwordx';
 $dbname_kpi= 'processloader_db';
 
 //heatmap server
-$host_heatmap ='localhost';
+$host_heatmap ='dashboarddb';
 $username_heatmap = 'user';
-$password_heatmap = 'password';
+$password_heatmap = 'passwordx';
 $dbname_heatmap = 'heatmap';
+
+//userlimits
+$host_limits = 'dashboarddb';
+$username_limits = 'user';
+$password_limits = 'passwordx';
+$dbname_limits = 'profiledb';
+
+$org_limits_api = 'http://dashboard/dashboardSmartCity/api/organizations.php';
+$types_limits = ["IOTID","DashboardID","ModelID","AppID","DAAppID","DeviceGroupID","HeatmapID","PortiaID","SynopticID","SynopticTmplID","BrokerID"];
+
+// posgres od server
+$host_od = 'od-postgis';
+$username_od = 'postgres';
+$password_od = 'pgpassword';
+$dbname_od = 'postgres';
 
 ?>
