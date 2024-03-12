@@ -34,5 +34,5 @@ docker-compose run --user=1000 --rm --entrypoint "certbot renew" certbot
 echo
 
 echo "### Reloading nginx ..."
-docker-compose exec proxy nginx -s reload
+docker-compose exec -T proxy nginx -s reload
 
