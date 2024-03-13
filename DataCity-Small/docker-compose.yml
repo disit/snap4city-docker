@@ -43,7 +43,8 @@ services:
     - ./certbot/www:/var/www/certbot
 
   dashboard-builder:
-    image: disitlab/dashboard-builder:v6.3
+    image: disitlab/dashboard-builder:v7.7.2
+    build: ./build/dashboard-builder
     ports:
       - "70:80"
     volumes:
@@ -112,6 +113,7 @@ services:
   personaldata:
     image: disitlab/personaldata:v5
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
+    build: ./build/personaldata
     volumes:
       - ./datamanager-logs:/usr/local/tomcat/logs/datamanager
       - ./datamanager-conf:/datamanager-conf
@@ -168,6 +170,7 @@ services:
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   wsserver:
     image: disitlab/websocketserver:v5
+    build: ./build/wsserver
     ports:
       - 9100:8000
     volumes:
@@ -314,6 +317,7 @@ services:
 # IOTOBSF ######################################################
   orionbrokerfilter:
     image: disitlab/orionbrokerfilter:v6
+    build: ./build/orionbrokerfilter
     depends_on:
       - orion
     ports:
@@ -426,8 +430,9 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
 #KBSSM ################################################################      
   servicemap:
-    image: disitlab/servicemap:v5.1
+    image: disitlab/servicemap:v5.8.1
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
+    build: ./build/servicemap
     volumes:
       - ./servicemap-conf:/root/servicemap
       - ./servicemap-iot-conf/logs:/root/iot-log2
@@ -435,7 +440,12 @@ services:
       - ./servicemap-conf/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
       - ./servicemap-superservicemap-conf/settings.xml:/usr/local/tomcat/settings.xml
       - ./servicemap-conf/cacerts:/usr/local/openjdk-8/jre/lib/security/cacerts
-#    environment:
+      - ./servicemap-whatif-router/gh-data:/usr/local/tomcat/gh-data
+      - ./servicemap-trafficflowmanager:/home/debian/TrafficFlowManager
+    environment:
+      GH_MAP_PBF: "gh-data/map.osm.pbf"
+      GH_LOCATION_PFX: "gh-data/map"
+      GH_TYPICAL_TTT_PATH: "gh-data/typical_ttt"
     ports:
       - 8090:8080
     depends_on:
