@@ -15,5 +15,8 @@
   <label id="tmpcachexp">
     <value>36000</value>
   </label>
+  <label id="validationQuery">
+    <value>SELECT 1</value>
+  </label>
 </setting>
 
