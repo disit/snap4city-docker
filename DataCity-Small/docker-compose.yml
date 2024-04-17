@@ -493,16 +493,21 @@ services:
 
 #IOTDES ################################################################      
   nifi:
-    image: apache/nifi:1.16.2
+    #image: apache/nifi:1.16.2
     #image: apache/nifi:1.9.2
     #image: apache/nifi:latest
+    image: disitlab/snap4nifi:v0-1.16.2
+    build: 
+      context: ./build/nifi
+      args:
+        NIFI_TAG: 1.16.2
     environment:
       NIFI_WEB_HTTP_PORT: 9090
       NIFI_JVM_HEAP_MAX: 2g
     ports:
       - "9090:9090"
     volumes:
-      - ./nifi/extensions:/opt/nifi/nifi-current/extensions
+      #- ./nifi/extensions:/opt/nifi/nifi-current/extensions
       - ./nifi/conf:/opt/nifi/nifi-current/conf
       - ./nifi/logs:/opt/nifi/nifi-current/logs
     depends_on:
