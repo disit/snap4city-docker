@@ -43,7 +43,7 @@ services:
     - ./certbot/www:/var/www/certbot
 
   dashboard-builder:
-    image: disitlab/dashboard-builder:v7.7.2
+    image: disitlab/dashboard-builder:v8.2
     #build: ./build/dashboard-builder
     ports:
       - "70:80"
@@ -64,6 +64,10 @@ services:
        - dashboard-img:/var/www/html/dashboardSmartCity/img
        - datatable-uploads:/var/www/html/processloader/DataTableManager/files
        - poitable-uploads:/var/www/html/processloader/POIManager/files
+       - ./iotapp-api-conf/config.php:/var/www/html/snap4city-application-api/config.php
+       #- ./iotapp-api-conf:/iotapp-api
+       #- ./iotapp-data:/mnt/data
+
     sysctls:
        - net.ipv4.ip_unprivileged_port_start=0
     environment:
@@ -272,41 +276,29 @@ services:
       options:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
-
-  zookeeper:
-    image: bitnami/zookeeper
-    ports:
-      - "2181:2181"
-    volumes:
-    #  - zkdata:/data
-      - zkdata:/bitnami/zookeeper 
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
-    restart: unless-stopped
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "${S4C_LOG_MAX_SIZE:-100m}"
-        max-file: "${S4C_LOG_MAX_FILE:-10}"
   kafka:
-    image: bitnami/kafka:latest
+    image: bitnami/kafka:3.3.2
     ports:
       - "9000:9000"
       - "9092:9092"
       - "9093:9093"
     environment:
-        - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+        - KAFKA_ENABLE_KRAFT=yes
+        - KAFKA_KRAFT_CLUSTER_ID=iaDH4PL9QMqf7qLnXXOogQ
+        - KAFKA_CFG_NODE_ID=1001
+        - KAFKA_CFG_BROKER_ID=1001
+        - KAFKA_CFG_PROCESS_ROLES=broker,controller
+        - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+        - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1001@127.0.0.1:9093
         - ALLOW_PLAINTEXT_LISTENER=yes
-        - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT
-        - KAFKA_CFG_LISTENERS=CLIENT://:9092
+        - KAFKA_CFG_LISTENERS=CLIENT://:9092,CONTROLLER://:9093
+        - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,CONTROLLER:PLAINTEXT
         - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092
         - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
         - JMX_PORT=9000
         - KAFKA_JMX_OPTS=-Djava.rmi.server.hostname=192.168.1.119 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.rmi.port=9000 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
     volumes:
       - kafka:/bitnami/kafka
-    depends_on: 
-      - zookeeper
     restart: unless-stopped
     logging:
       driver: "json-file"
@@ -335,10 +327,10 @@ services:
       "spring.delegation_endpoint": "http://dashboard/datamanager/api"
       "spring.orionbroker_endpoint": "http://orion:1026"
       "spring.elapsingcache.minutes": "3"
-      "spring.prefixelementID": "Organization:iotobsf"
+      "spring.prefixelementID": "Organization:orion-1"
       "spring.prefix_serviceuri": "http://www.disit.org/km4city/resource/iot"
       "spring.organization": "Organization"
-      "spring.context_broker_name": "iotobsf"
+      "spring.context_broker_name": "orion-1"
       "connection.max": "100"
       "multitenancy": "false"
       "connection.timeout": "10000"
@@ -430,7 +422,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
 #KBSSM ################################################################      
   servicemap:
-    image: disitlab/servicemap:v5.8.3
+    image: disitlab/servicemap:v5.8.5
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     build: ./build/servicemap
     volumes:

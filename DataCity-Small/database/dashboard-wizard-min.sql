@@ -3,7 +3,7 @@ USE Dashboard;
 --
 -- Host: 192.168.1.119    Database: Dashboard
 -- ------------------------------------------------------
--- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
+-- Server version	10.3.39-MariaDB-1:10.3.39+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -34,4 +34,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-21 17:04:57
+-- Dump completed on 2024-05-24 18:05:48

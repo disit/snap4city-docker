@@ -4,7 +4,7 @@ GRANT ALL ON profiledb.* TO 'user'@'%';
 --
 -- Host: 192.168.1.119    Database: profiledb
 -- ------------------------------------------------------
--- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
+-- Server version	10.3.39-MariaDB-1:10.3.39+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -21,7 +21,7 @@ GRANT ALL ON profiledb.* TO 'user'@'%';
 -- Current Database: `profiledb`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `profiledb` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `profiledb` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
 USE `profiledb`;
 
@@ -48,7 +48,7 @@ CREATE TABLE `activity` (
   `domain` varchar(255) DEFAULT NULL,
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `activity_violation` (
   `ip_address` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `time_idx` (`time`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,12 +95,12 @@ CREATE TABLE `data` (
   `app_name` varchar(255) DEFAULT NULL,
   `motivation` varchar(255) DEFAULT NULL,
   `variable_name` varchar(255) DEFAULT NULL,
-  `variable_value` text CHARACTER SET utf8 DEFAULT NULL,
-  `variable_unit` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `variable_value` text CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `variable_unit` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `data_time_end` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `un_ai_mo_vn_index` (`username`,`app_id`,`motivation`,`variable_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +124,7 @@ CREATE TABLE `delegation` (
   `groupname_delegated` varchar(255) DEFAULT NULL,
   `kind` varchar(25) DEFAULT 'READ_ACCESS',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +146,7 @@ CREATE TABLE `devicegroup` (
   `high_level_type` varchar(128) DEFAULT NULL,
   `organizations` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +164,7 @@ CREATE TABLE `devicegroupelement` (
   `insert_time` datetime DEFAULT NULL,
   `delete_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,7 +204,7 @@ CREATE TABLE `kpiactivity` (
   `elapse_time` datetime DEFAULT NULL,
   `source_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +229,7 @@ CREATE TABLE `kpiactivity_violation` (
   `stacktrace` blob DEFAULT NULL,
   `ip_address` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +277,7 @@ CREATE TABLE `kpidata` (
   `db_values_link` varchar(255) DEFAULT NULL,
   `value_unit` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,7 +295,7 @@ CREATE TABLE `kpimetadata` (
   `delete_time` timestamp NULL DEFAULT NULL,
   `elapse_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,7 +318,7 @@ CREATE TABLE `kpivalues` (
   PRIMARY KEY (`id`),
   KEY `kpi_id` (`kpi_id`,`id`),
   KEY `kpi_id_delete_time_data_time` (`kpi_id`,`delete_time`,`data_time`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -337,7 +337,7 @@ CREATE TABLE `lightactivity` (
   `delete_time` datetime DEFAULT NULL,
   `source_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -354,7 +354,7 @@ CREATE TABLE `limits` (
   `elementType` varchar(45) NOT NULL,
   `maxCount` int(11) DEFAULT NULL,
   PRIMARY KEY (`organization`,`username`,`role`,`elementType`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,7 +378,7 @@ CREATE TABLE `ownership` (
   `deletedBy` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_user_type_name` (`username`,`elementType`,`elementName`(100))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -415,12 +415,12 @@ USE `profiledb`;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-21 17:04:57
+-- Dump completed on 2024-05-24 18:05:49
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: profiledb
 -- ------------------------------------------------------
--- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
+-- Server version	10.3.39-MariaDB-1:10.3.39+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -450,12 +450,12 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-21 17:04:57
+-- Dump completed on 2024-05-24 18:05:49
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: profiledb
 -- ------------------------------------------------------
--- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
+-- Server version	10.3.39-MariaDB-1:10.3.39+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -474,7 +474,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `ownership` WRITE;
 /*!40000 ALTER TABLE `ownership` DISABLE KEYS */;
-INSERT INTO `ownership` VALUES (16464,'userareamanager','nr1','AppID','nodered','http://dashboard/iotapp/nr1/','{\"edgegateway_type\":\"linux_Linux_4.9.0-8-amd64\"}',NULL,'2019-02-19 09:15:00',NULL,NULL),(16477,'userareamanager','nr2','AppID','nodered 2','http://dashboard/iotapp/nr2/','{\"edgegateway_type\":\"linux_Linux_4.9.0-8-amd64\"}',NULL,'2019-02-19 09:15:00',NULL,NULL);
+INSERT INTO `ownership` VALUES (16464,'userareamanager','nr1','AppID','nodered','http://dashboard/iotapp/nr1/','{\"type\":\"advanced\",\"image\":\"snap4city-nodered-adv\",\"iotappids\":[]}',NULL,'2019-02-19 09:15:00',NULL,NULL),(16477,'userareamanager','nr2','AppID','nodered 2','http://dashboard/iotapp/nr2/','{\"type\":\"advanced\",\"image\":\"snap4city-nodered-adv\",\"iotappids\":[]}',NULL,'2019-02-19 09:15:00',NULL,NULL);
 /*!40000 ALTER TABLE `ownership` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -486,4 +486,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-21 17:04:57
+-- Dump completed on 2024-05-24 18:05:49

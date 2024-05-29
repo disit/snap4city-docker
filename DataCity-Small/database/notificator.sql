@@ -4,7 +4,7 @@ GRANT ALL ON Notificator.* TO 'user'@'%';
 --
 -- Host: 192.168.1.119    Database: Notificator
 -- ------------------------------------------------------
--- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
+-- Server version	10.3.39-MariaDB-1:10.3.39+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -21,7 +21,7 @@ GRANT ALL ON Notificator.* TO 'user'@'%';
 -- Current Database: `Notificator`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `Notificator` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `Notificator` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
 
 USE `Notificator`;
 
@@ -45,7 +45,7 @@ CREATE TABLE `clientApplications` (
   `sessionLifetime` int(9) DEFAULT 30,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `clientLoggedUsers` (
   `userIp` varchar(45) NOT NULL,
   `ttl` int(15) NOT NULL,
   PRIMARY KEY (`usr`,`clientApplication`,`userIp`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,13 +73,13 @@ DROP TABLE IF EXISTS `emailAddrBook`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `emailAddrBook` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `adr` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `fName` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `lName` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `org` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `adr` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `fName` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `lName` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `org` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`id`,`adr`),
   UNIQUE KEY `adr_UNIQUE` (`adr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,10 +91,10 @@ DROP TABLE IF EXISTS `emailBook`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `emailBook` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sub` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
-  `txt` longtext CHARACTER SET latin1 DEFAULT NULL,
+  `sub` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `txt` longtext CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +109,7 @@ CREATE TABLE `emailNotificationRecipientsRelation` (
   `recId` int(11) NOT NULL,
   KEY `notificationsRecipientsForeignKey_idx` (`notId`),
   CONSTRAINT `notificationsRecipientsForeignKey` FOREIGN KEY (`notId`) REFERENCES `emailNotifications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Relations between notification and receipts';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='Relations between notification and receipts';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +121,7 @@ DROP TABLE IF EXISTS `emailNotifications`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `emailNotifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `genId` int(11) NOT NULL,
   `eventId` int(11) NOT NULL,
   `msgId` int(11) NOT NULL DEFAULT -1,
@@ -129,7 +129,7 @@ CREATE TABLE `emailNotifications` (
   `valStart` datetime DEFAULT NULL,
   `valEnd` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='This table holds notifications data';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='This table holds notifications data';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,16 +141,16 @@ DROP TABLE IF EXISTS `eventGenerators`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `eventGenerators` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `appName` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `generatorOriginalName` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `generatorOriginalType` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `appName` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `generatorOriginalName` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `generatorOriginalType` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `containerName` varchar(100) DEFAULT NULL,
   `appUsr` varchar(100) NOT NULL,
   `url` varchar(200) DEFAULT NULL,
   `regTime` timestamp NULL DEFAULT current_timestamp(),
   `val` varchar(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `events` (
   `val` int(1) DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `eventsUnique` (`genId`,`eventType`,`thrCnt`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `eventsLog` (
   `value` varchar(20) DEFAULT NULL,
   `genId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +198,7 @@ DROP TABLE IF EXISTS `restNotifications`;
 CREATE TABLE `restNotifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -210,12 +210,12 @@ CREATE TABLE `restNotifications` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-21 17:05:00
+-- Dump completed on 2024-05-24 18:05:49
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: Notificator
 -- ------------------------------------------------------
--- Server version	10.3.36-MariaDB-1:10.3.36+maria~ubu2004
+-- Server version	10.3.39-MariaDB-1:10.3.39+maria~ubu2004
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -265,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-21 17:05:00
+-- Dump completed on 2024-05-24 18:05:49
