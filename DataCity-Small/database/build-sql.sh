@@ -7,7 +7,7 @@ export USER=root
 echo Dashboard
 mysqldump --no-data -h $HOST -u $USER --databases Dashboard | sed 's/ AUTO_INCREMENT=[0-9]*//g' > dashboard.sql
 mysqldump --no-create-info -h $HOST -u $USER Dashboard DashboardTemplates DataInspector Descriptions Domains Organizations | sed 's/ AUTO_INCREMENT=[0-9]*//g' >> dashboard.sql
-mysqldump --no-create-info -h 192.168.0.37 -u root -p Dashboard Widgets WidgetsIconsMap multilanguage HeatmapRanges HeatmapColorLevels | sed 's/ AUTO_INCREMENT=[0-9]*//g' >> dashboard.sql
+mysqldump --no-create-info -h 192.168.0.37 -u root -p Dashboard Widgets WidgetsIconsMap multilanguage HeatmapRanges HeatmapColorLevels fileextensions | sed 's/ AUTO_INCREMENT=[0-9]*//g' >> dashboard.sql
 
 echo "USE Dashboard;" > dashboard-menu.sql
 mysqldump --no-create-info -h $HOST -u $USER Dashboard MainMenu MainMenuSubmenus | sed 's/ AUTO_INCREMENT=[0-9]*//g' >> dashboard-menu.sql
