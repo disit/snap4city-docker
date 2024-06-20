@@ -102,7 +102,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   dashboard-cron:
-    image: disitlab/dashboard-builder:v6.2
+    image: disitlab/dashboard-builder:v8.2
     volumes:
        - ./dashboard-builder-conf:/var/www/html/dashboardSmartCity/conf
        - ./dashboard-cron-conf/crontab:/crontab

@@ -1,7 +1,12 @@
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-* * * * * /bin/bash /var/www/html/dashboardSmartCity/ScheduledTasks/run-iotapp.sh > /proc/1/fd/1 2>/proc/1/fd/2
+#use opensearch
+* * * * *  /var/www/html/dashboardSmartCity/ScheduledTasks/run-micro-os.sh > /proc/1/fd/1 2>/proc/1/fd/2
+#every 10 min run the healthcheck script, makes a request for all sensors to update health status, make more frequent or less frequent
+*/10 * * * * /var/www/html/dashboardSmartCity/ScheduledTasks/run-health-os.sh > /proc/1/fd/1 2>/proc/1/fd/2
 
+#use mysql db
+* * * * * /bin/bash /var/www/html/dashboardSmartCity/ScheduledTasks/run-iotapp.sh > /proc/1/fd/1 2>/proc/1/fd/2
 #every 5 min run the healthcheck script, makes a request for all sensors to update health status, make more frequent or less frequent
 */5 * * * * /bin/bash /var/www/html/dashboardSmartCity/ScheduledTasks/run-health.sh > /proc/1/fd/1 2>/proc/1/fd/2
 
