@@ -721,7 +721,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   geoserver:
-    image: kartoza/geoserver:2.20.0
+    image: kartoza/geoserver:2.25.2
     volumes:
       - geoserver-data:/opt/geoserver/data_dir
     ports:

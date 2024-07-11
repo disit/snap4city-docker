@@ -1,0 +1,765 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+    xmlns:cpsv="http://purl.org/vocab/cpsv#"
+    xmlns:s4city="https://saref.etsi.org/saref4city/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:saref="https://saref.etsi.org/core/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:time="http://www.w3.org/2006/time#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:prov="http://www.w3.org/ns/prov#"
+    xmlns:geosp="http://www.opengis.net/ont/geosparql#"
+    xmlns:vann="http://purl.org/vocab/vann/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <owl:Ontology rdf:about="https://saref.etsi.org/saref4city/">
+    <rdfs:seeAlso rdf:resource="https://www.etsi.org/deliver/etsi_ts/103400_103499/10341004/01.01.02_60/ts_10341004v010102p.pdf"/>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2020-06-05</dcterms:modified>
+    <vann:preferredNamespaceUri>https://saref.etsi.org/saref4city/</vann:preferredNamespaceUri>
+    <dcterms:publisher rdf:resource="https://www.etsi.org/"/>
+    <vann:preferredNamespacePrefix>s4city</vann:preferredNamespacePrefix>
+    <owl:versionIRI rdf:resource="https://saref.etsi.org/saref4city/v1.1.2/"/>
+    <dcterms:description xml:lang="en">This ontology extends the SAREF ontology for the Smart City domain. This work has been developed in the context of the STF 534 (https://portal.etsi.org/STF/STFs/STFHomePages/STF534.aspx), which was established with the goal to create three SAREF extensions, one of them for the Smart City domain.</dcterms:description>
+    <owl:versionInfo>v1.1.2</owl:versionInfo>
+    <dcterms:creator rdf:resource="https://www.linkedin.com/in/paolaespinoza-arias/"/>
+    <dcterms:creator rdf:resource="http://www.garcia-castro.com/foaf.rdf#me"/>
+    <dcterms:source rdf:resource="https://saref.etsi.org/sources/saref4city/"/>
+    <dcterms:creator rdf:resource="http://w3id.org/people/mpoveda"/>
+    <dcterms:license rdf:resource="https://forge.etsi.org/etsi-software-license"/>
+    <rdfs:comment xml:lang="en">Information about changes compared to version 1.1.1: 
+ - Updated namespaces for compatibility with SAREF v3.</rdfs:comment>
+    <dcterms:title xml:lang="en">SAREF extension for Smart City</dcterms:title>
+    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2020-06-05</dcterms:issued>
+    <owl:imports rdf:resource="https://saref.etsi.org/core/v3.1.1/"/>
+  </owl:Ontology>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/Event">
+    <rdfs:seeAlso rdf:resource="https://www.wikidata.org/wiki/Q1656682"/>
+    <rdfs:label xml:lang="en">Event</rdfs:label>
+    <rdfs:comment xml:lang="en">Temporary and scheduled event, like a festival or competition. (Definition taken from Wikidata)</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.w3.org/2006/time#TemporalEntity"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/takesPlaceAtTime"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/saref4city/Facility"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/takesPlaceAtFacility"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/saref4city/Event"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isSubEventOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/saref4city/Agent"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isOrganizedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#Concept"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/hasAccesibility"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/District">
+    <rdfs:label xml:lang="en">District</rdfs:label>
+    <rdfs:comment xml:lang="en">A district is a type of administrative division that, in some countries, is managed by local government. Across the world, areas known as "districts" vary greatly in size, spanning regions or counties, several municipalities, subdivisions of municipalities, school district, or political district. (https://en.wikipedia.org/wiki/District)</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="https://saref.etsi.org/saref4city/AdministrativeArea"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://purl.org/vocab/cpsv#PublicService">
+    <rdfs:label xml:lang="en">Public Service</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/vocab/cpsv#"/>
+    <rdfs:comment xml:lang="en">This class represents the service itself. A public service is the capacity to carry out a procedure and exists whether it is used or not. It is a set of deeds and acts performed by or on behalf of a public agency for the benefit of a citizen, a business or another public agency.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/core/FeatureOfInterest">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/core/Measurement"/>
+        </owl:allValuesFrom>
+        <owl:onProperty rdf:resource="https://saref.etsi.org/core/hasMeasurement"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/core/Property"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/hasProperty"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/saref4city/KeyPerformanceIndicator"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/hasKPI"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/core/Sensor">
+    <rdfs:label xml:lang="en">Sensor</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+    <rdfs:comment xml:lang="en">A device that detects and responds to events or changes in the physical environment such as light, motion, or temperature changes.
+A device that has category saref:Sensor and performs a saref:SensingFunction.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="https://saref.etsi.org/core/Device"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/core/Property">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/core/Measurement"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/relatesToMeasurement"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment>Anything that can be sensed, measured or controlled in households, common public buildings or offices. We propose here a list of properties that are relevant for the purpose of SAREF, but this list can be extended.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/core/FeatureOfInterest"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isPropertyOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:disjointWith>
+      <owl:Class rdf:about="https://saref.etsi.org/core/UnitOfMeasure"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/core/Device"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isControlledByDevice"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/core/Device"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isMeasuredByDevice"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">An aspect of an entity that can be observable by a sensor.</rdfs:comment>
+    <rdfs:label xml:lang="en">Property</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/PublicService">
+    <rdfs:seeAlso rdf:resource="https://en.wikipedia.org/wiki/Public_service"/>
+    <rdfs:label xml:lang="en">Public service</rdfs:label>
+    <rdfs:comment xml:lang="en">Public service is a service which is provided by government either directly (through the public sector) or by financing provision of services. (Definition taken from Wikipedia)</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="http://purl.org/dc/terms/LinguisticSystem"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isAvailableInLanguage"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/saref4city/Facility"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/involvesFacility"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/saref4city/AdministrativeArea"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://purl.org/vocab/cpsv#physicallyAvailableAt"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://purl.org/vocab/cpsv#PublicService"/>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/Country">
+    <rdfs:label xml:lang="en">Country</rdfs:label>
+    <rdfs:comment xml:lang="en">A country is a region that is identified as a distinct national entity in political geography. (https://en.wikipedia.org/wiki/Country)</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="https://saref.etsi.org/saref4city/AdministrativeArea"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/PublicAdministration">
+    <rdfs:seeAlso rdf:resource="https://www.wikidata.org/wiki/Q31728"/>
+    <rdfs:label xml:lang="en">Public administration</rdfs:label>
+    <rdfs:comment xml:lang="en">Public leadership of public affairs directly responsible for executive action. (Definition taken from wikidata)</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://www.w3.org/ns/org#Organization"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.w3.org/2006/time#TemporalEntity">
+    <rdfs:label xml:lang="en">Temporal entity</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/2006/time#"/>
+    <rdfs:comment xml:lang="en">A temporal interval or instant.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.opengis.net/ont/geosparql#SpatialObject">
+    <rdfs:label xml:lang="en">SpatialObject</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql"/>
+    <rdfs:comment xml:lang="en">The class spatial-object represents everything that can have a spatial representation. It is superclass of feature and geometry.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#Concept">
+    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/2004/02/skos/core#"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.w3.org/2006/time#Interval">
+    <rdfs:label xml:lang="en">Time interval</rdfs:label>
+    <rdfs:label xml:lang="en">A temporal entity with an extent or duration</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/2006/time#"/>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/time#TemporalEntity"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.w3.org/2006/time#TemporalDuration"/>
+  <owl:Class rdf:about="http://www.w3.org/ns/org#Organization">
+    <rdfs:label xml:lang="en">Organization</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/ns/org#"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Agent"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/core/UnitOfMeasure">
+    <rdfs:label xml:lang="en">Unit of measure</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+    <rdfs:comment xml:lang="en">The unit of measure is a standard for measurement of a quantity, such as a Property. For example,  Power is a property and Watt is a unit of power that represents a definite predetermined power: when we say 10 Watt, we actually mean 10 times the definite predetermined power called "watt". Our definition is based on the definition of unit of measure in the Ontology of units of Measure (OM). We propose here a list of some units of measure that are relevant for the purpose of the Smart Appliances ontology, but this list can be extended.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.opengis.net/ont/geosparql#Feature">
+    <rdfs:label xml:lang="en">Feature</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql"/>
+    <rdfs:comment xml:lang="en">This class represents the top-level feature type. This class is equivalent to GFI_Feature defined in ISO 19156:2011, and it is superclass of all feature types.</rdfs:comment>
+    <owl:disjointWith>
+      <owl:Class rdf:about="http://www.opengis.net/ont/geosparql#Geometry"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf rdf:resource="http://www.opengis.net/ont/geosparql#SpatialObject"/>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/core/Actuator">
+    <rdfs:label xml:lang="en">Actuator</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+    <rdfs:comment xml:lang="en">A device responsible for moving or controlling a mechanism or system</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="https://saref.etsi.org/core/Device"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person">
+    <rdfs:label xml:lang="en">Person</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://xmlns.com/foaf/0.1/"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Agent"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.opengis.net/ont/geosparql#Geometry">
+    <rdfs:label xml:lang="en">Geometry</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql"/>
+    <rdfs:comment xml:lang="en">The class represents the top-level geometry type. This class is equivalent to the UML class GM_Object defined in ISO 19107, and it is superclass of all geometry types.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.opengis.net/ont/geosparql#SpatialObject"/>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/CityObject">
+    <rdfs:label xml:lang="en">City object</rdfs:label>
+    <rdfs:comment xml:lang="en">Generic class for describing city objects.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.opengis.net/ont/geosparql#Feature"/>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/Agent">
+    <rdfs:label xml:lang="en">Agent</rdfs:label>
+    <rdfs:comment xml:lang="en">An agent making an action in the context of a city. An agent could be a person, software, etc.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/saref4city/PublicService"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://purl.org/vocab/cpsv#uses"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/saref4city/PublicService"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://purl.org/vocab/cpsv#provides"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Agent"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.w3.org/2006/time#Instant">
+    <rdfs:label xml:lang="en">Instant</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/2006/time#"/>
+    <rdfs:comment xml:lang="en">A temporal entity with zero extent or duration</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2006/time#TemporalEntity"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"/>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/KeyPerformanceIndicatorAssessment">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/core/UnitOfMeasure"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isMeasuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/core/FeatureOfInterest"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/assesses"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/core/Measurement"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isDerivedFrom"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/saref4city/Agent"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isAssessedBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/saref4city/KeyPerformanceIndicator"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/quantifiesKPI"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A Key Performance Indicator assessment represents the assessment of a KPI calculated by a given agent in a given time.</rdfs:comment>
+    <rdfs:label xml:lang="en">Key performance indicator assessment</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="https://saref.etsi.org/saref4city/hasCreationDate"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty rdf:resource="https://saref.etsi.org/core/hasValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2006/time#TemporalEntity"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/refersToTime"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="https://saref.etsi.org/saref4city/hasExpirationDate"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="https://saref.etsi.org/saref4city/hasLastUpdateDate"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/AdministrativeArea">
+    <rdfs:label xml:lang="en">Administrative area</rdfs:label>
+    <rdfs:comment xml:lang="en">An administrative division, unit, entity, area or region, also referred to as a subnational entity, constituent unit, or country subdivision, is a portion of a country or other region delineated for the purpose of administration. (https://en.wikipedia.org/wiki/Administrative_division)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.opengis.net/ont/geosparql#Feature"/>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/core/Device">
+    <rdfs:label>Device</rdfs:label>
+    <rdfs:comment>A tangible object designed to accomplish a particular task in households, common public buildings or offices. In order to accomplish this task, the device performs one or more functions. For example, a washing machine is designed to wash (task) and to accomplish this task it performs a start and stop function. Devices can be structured in categories (subclasses) that reflect the different domain in which a device is used, e.g., smart appliances domain (subclass FunctionRelated) vs. building domain (subclass BuildingRelated) vs. smart grid domain (subclass EnergyRelated). New categories can be defined,if needed, to reflect other differences, for example different points of view, such as the point of view of the device's user vs. the point of view of the device's manufacturer. We propose a list of devices that are relevant for the purpose of SAREF, but this list can be extended.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/core/Property"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/measuresProperty"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="https://saref.etsi.org/core/Measurement"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/makesMeasurement"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/core/Property"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/controlsProperty"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="http://www.opengis.net/ont/geosparql#Feature"/>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/Neighbourhood">
+    <rdfs:label xml:lang="en">Neighbourhood</rdfs:label>
+    <rdfs:comment xml:lang="en">A neighbourhood (British English), or neighborhood (American English; see spelling differences), is a geographically localised community within a larger city, town, suburb or rural area. (https://en.wikipedia.org/wiki/Neighbourhood)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="https://saref.etsi.org/saref4city/AdministrativeArea"/>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/core/Measurement">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/core/UnitOfMeasure"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isMeasuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/core/Device"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/measurementMadeBy"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:disjointWith rdf:resource="https://saref.etsi.org/core/UnitOfMeasure"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/core/FeatureOfInterest"/>
+        <owl:onProperty rdf:resource="https://saref.etsi.org/core/isMeasurementOf"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/core/Property"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/relatesToProperty"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <owl:disjointWith rdf:resource="https://saref.etsi.org/core/Property"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <owl:onProperty rdf:resource="https://saref.etsi.org/core/hasTimestamp"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">Represents the measured value made over a property. It is also linked to the unit of measure in which the value is expressed and the timestamp of the measurement.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty rdf:resource="https://saref.etsi.org/core/hasValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onClass rdf:resource="https://saref.etsi.org/core/UnitOfMeasure"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:qualifiedCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isMeasuredIn"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onClass rdf:resource="https://saref.etsi.org/core/Property"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:qualifiedCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/relatesToProperty"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Measurement</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/City">
+    <rdfs:label xml:lang="en">City</rdfs:label>
+    <rdfs:comment xml:lang="en">A city is a large human settlement. A city is distinguished from other human settlements by its relatively great size, but also by its functions and its special symbolic status, which may be conferred by a central authority. (https://en.wikipedia.org/wiki/City)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="https://saref.etsi.org/saref4city/AdministrativeArea"/>
+  </owl:Class>
+  <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Agent">
+    <rdfs:label xml:lang="en">Agent</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://xmlns.com/foaf/0.1/"/>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/KeyPerformanceIndicator">
+    <rdfs:seeAlso rdf:resource="http://fiware-datamodels.readthedocs.io/en/latest/KeyPerformanceIndicator/doc/spec/index.html"/>
+    <rdfs:label xml:lang="en">Key Performance Indicator</rdfs:label>
+    <rdfs:comment xml:lang="en">A Key Performance Indicator (KPI) is a type of performance measurement. KPIs evaluate the success of an organization or of a particular activity in which it engages. (Definition taken from FIWARE)</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="https://saref.etsi.org/core/FeatureOfInterest"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isKPIOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2006/time#TemporalDuration"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/hasCalculationPeriod"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.w3.org/2003/01/geo/wgs84_pos#Point">
+    <rdfs:label xml:lang="en">Point</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#"/>
+    <rdfs:comment>A point, typically described using a coordinate system relative to Earth, such as WGS84.</rdfs:comment>
+    <rdfs:comment> 
+Uniquely identified by lat/long/alt. i.e.
+
+spaciallyIntersects(P1, P2) :- lat(P1, LAT), long(P1, LONG), alt(P1, ALT),
+  lat(P2, LAT), long(P2, LONG), alt(P2, ALT).
+
+sameThing(P1, P2) :- type(P1, Point), type(P2, Point), spaciallyIntersects(P1, P2).
+  </rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.opengis.net/ont/geosparql#Geometry"/>
+  </owl:Class>
+  <owl:Class rdf:about="https://saref.etsi.org/saref4city/Facility">
+    <rdfs:label xml:lang="en">Facility</rdfs:label>
+    <rdfs:comment xml:lang="en">A place, amenity, or piece of equipment provided for a particular purpose. (Definition taken from https://en.oxforddictionaries.com/definition/facility)</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.opengis.net/ont/geosparql#Feature"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/controlsProperty">
+    <rdfs:label xml:lang="en">controls property</rdfs:label>
+    <rdfs:comment xml:lang="en">controls property</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.w3.org/2003/01/geo/wgs84_pos#location">
+    <rdfs:label>location</rdfs:label>
+    <rdfs:comment>The relation between something and the point, or other geometrical thing in space, where it is.  For example, the realtionship between a radio tower and a Point with a given lat and long. Or a relationship between a park and its outline as a closed arc of points, or a road and its location as a arc (a sequence of points). Clearly in practice there will be limit to the accuracy of any such statement, but one would expect an accuracy appropriate for the size of the object and uses such as mapping .</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isMeasuredIn">
+    <rdfs:label xml:lang="en">is measured in</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isSubEventOf">
+    <rdfs:label xml:lang="en">is subevent of</rdfs:label>
+    <rdfs:comment xml:lang="en">is subevent of</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/quantifiesKPI">
+    <rdfs:label xml:lang="en">quantifies KPI</rdfs:label>
+    <rdfs:comment xml:lang="en">quantifies KPI</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/hasCalculationPeriod">
+    <rdfs:label xml:lang="en">has calculation period</rdfs:label>
+    <rdfs:comment xml:lang="en">has calculation period</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.opengis.net/ont/geosparql#hasGeometry">
+    <rdfs:label xml:lang="en">has geometry</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql#"/>
+    <rdfs:comment xml:lang="en">A spatial representation for a given feature.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/measuresProperty">
+    <rdfs:label xml:lang="en">measures property</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.opengis.net/ont/geosparql#sfContains">
+    <rdfs:label xml:lang="en">contains</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql"/>
+    <rdfs:comment xml:lang="en">Exists if the subject SpatialObject spatially contains the object SpatialObject. DE-9IM: T*****FF*</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/assesses">
+    <rdfs:label xml:lang="en">assesses</rdfs:label>
+    <rdfs:comment xml:lang="en">assesses</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.opengis.net/ont/geosparql#sfWithin">
+    <rdfs:label xml:lang="en">within</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://www.opengis.net/ont/geosparql"/>
+    <rdfs:comment xml:lang="en">Exists if the subject SpatialObject is spatially within the object SpatialObject. DE-9IM: T*F**F***</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/hasProperty">
+    <rdfs:label xml:lang="en">has property</rdfs:label>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isPropertyOf"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/makesMeasurement">
+    <rdfs:label xml:lang="en">makes measurement</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+    <owl:inverseOf rdf:resource="https://saref.etsi.org/core/measurementMadeBy"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isAssessedBy">
+    <rdfs:label xml:lang="en">is assessed by</rdfs:label>
+    <rdfs:comment xml:lang="en">is assessed by</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/refersToTime">
+    <rdfs:label xml:lang="en">refers to time</rdfs:label>
+    <rdfs:comment xml:lang="en">refers to time</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/takesPlaceAtFacility">
+    <rdfs:label xml:lang="en">takes place at facility</rdfs:label>
+    <rdfs:comment xml:lang="en">takes place at facility</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://purl.org/vocab/cpsv#uses">
+    <rdfs:label xml:lang="en">uses</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/vocab/cpsv#"/>
+    <rdfs:comment xml:lang="en">The uses property links an Agent to a Public Service in which it plays the specific role of user, meaning that it provides the input and receives the output but does not play any direct role in providing the service. This will typically be an individual citizen or an outside organisation.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isKPIOf">
+    <rdfs:label xml:lang="en">is key performance indicator of</rdfs:label>
+    <rdfs:comment xml:lang="en">is key performance indicator of</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://purl.org/vocab/cpsv#physicallyAvailableAt">
+    <rdfs:label xml:lang="en">physically available at</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/vocab/cpsv#"/>
+    <rdfs:comment xml:lang="en">A physical location at which a user may interact with the Public Service.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isOrganizedBy">
+    <rdfs:label xml:lang="en">is organized by</rdfs:label>
+    <rdfs:comment xml:lang="en">is organized by</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/refersToFeature">
+    <rdfs:label xml:lang="en">refers to feature</rdfs:label>
+    <rdfs:comment xml:lang="en">Relation between a KPI assessment and the geographical feature it refers to</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/involvesFacility">
+    <rdfs:label xml:lang="en">involves facility</rdfs:label>
+    <rdfs:comment xml:lang="en">involves facility</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/takesPlaceAtTime">
+    <rdfs:label xml:lang="en">takes place at time</rdfs:label>
+    <rdfs:comment xml:lang="en">takes place at time</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/hasAccesibility">
+    <rdfs:label xml:lang="en">has accesibility</rdfs:label>
+    <rdfs:comment xml:lang="en">has accesibility</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/relatesToProperty">
+    <rdfs:label xml:lang="en">relates to property</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isMeasuredByDevice">
+    <rdfs:label xml:lang="en">is measured by device</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isDerivedFrom">
+    <rdfs:label xml:lang="en">is derived from</rdfs:label>
+    <rdfs:comment xml:lang="en">is derived from</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/relatesToMeasurement">
+    <rdfs:label xml:lang="en">relates to measurement</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/hasKPI">
+    <rdfs:label xml:lang="en">has key performance indicator</rdfs:label>
+    <rdfs:comment xml:lang="en">has key performance indicator</rdfs:comment>
+    <owl:inverseOf rdf:resource="https://saref.etsi.org/saref4city/isKPIOf"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isPropertyOf">
+    <rdfs:label xml:lang="en">is property of</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://purl.org/vocab/cpsv#provides">
+    <rdfs:label xml:lang="en">provides</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="http://purl.org/vocab/cpsv#"/>
+    <rdfs:comment xml:lang="en">The provides property links an Agent to a Public Service for which it is responsible. Whether it provides the service directly or outsources it is not relevant, the Agent that provides the service is the one that is ultimately responsible for its provision.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/core/isControlledByDevice">
+    <rdfs:label xml:lang="en">is controlled by device</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource="https://saref.etsi.org/core/"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="https://saref.etsi.org/saref4city/isAvailableInLanguage">
+    <rdfs:label xml:lang="en">is available in language</rdfs:label>
+    <rdfs:comment xml:lang="en">is available in language</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://www.w3.org/2003/01/geo/wgs84_pos#lat">
+    <rdfs:domain rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"/>
+    <rdfs:label>latitude</rdfs:label>
+    <rdfs:comment>The WGS84 latitude of a SpatialThing (decimal degrees).</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="https://saref.etsi.org/saref4city/hasExpirationDate">
+    <rdfs:label xml:lang="en">has expiration date</rdfs:label>
+    <rdfs:comment xml:lang="en">has expiration date</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.w3.org/2003/01/geo/wgs84_pos#long">
+    <rdfs:domain rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"/>
+    <rdfs:label>longitude</rdfs:label>
+    <rdfs:comment>The WGS84 longitude of a SpatialThing (decimal degrees).</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="https://saref.etsi.org/saref4city/hasLastUpdateDate">
+    <rdfs:label xml:lang="en">has last update date</rdfs:label>
+    <rdfs:comment xml:lang="en">has last update date</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.w3.org/2003/01/geo/wgs84_pos#alt">
+    <rdfs:domain rdf:resource="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing"/>
+    <rdfs:label>altitude</rdfs:label>
+    <rdfs:comment>The WGS84 altitude of a SpatialThing (decimal meters above the local reference ellipsoid).</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="https://saref.etsi.org/saref4city/hasCreationDate">
+    <rdfs:label xml:lang="en">has creation date</rdfs:label>
+    <rdfs:comment xml:lang="en">has creation date</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+  </owl:DatatypeProperty>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/description"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/publisher"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/source"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespaceUri"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/issued"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/license"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/title"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/vocab/vann/preferredNamespacePrefix"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/creator"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/contributor"/>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/modified"/>
+</rdf:RDF>

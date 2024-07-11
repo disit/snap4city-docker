@@ -5,7 +5,9 @@ ontologies/dctype.rdf
 ontologies/foaf.rdf
 ontologies/geosparql_vocab_all.rdf
 ontologies/gtfs.ttl
-ontologies/km4c Virtuoso 1.6.5-RDF.rdf
+ontologies/km4c Virtuoso 1.6.8-RDF.rdf
+ontologies/bot.ttl
+ontologies/saref4city.rdf
 ontologies/OTN.owl
 ontologies/rdf.xml
 ontologies/rdfs-namespace.xml
