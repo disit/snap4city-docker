@@ -5,6 +5,7 @@
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:gr="http://purl.org/goodrelations/v1#"
      xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+     xmlns:DUL="http://www.loa-cnr.it/ontologies/DUL.owl#"
      xmlns:dct="http://purl.org/dc/terms/"
      xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
      xmlns:gis="http://www.opengis.net/ont/geosparql#"
@@ -2427,10 +2428,6 @@
             </Class>
         </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">Mappati o non mappati.</rdfs:comment>
-        <rdfs:comment xml:lang="en">Whether thay are mapped or not.</rdfs:comment>
-        <rdfs:label xml:lang="en">Attributes status</rdfs:label>
-        <rdfs:label xml:lang="it">Stato degli attributi</rdfs:label>
     </DatatypeProperty>
     
 
@@ -3277,10 +3274,6 @@
             </Class>
         </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">Il formato in cui sono rappresentati i dati prodotti dal dispositivo.</rdfs:comment>
-        <rdfs:comment xml:lang="en">The format in which the data produced by the device is represented.</rdfs:comment>
-        <rdfs:label xml:lang="en">Format</rdfs:label>
-        <rdfs:label xml:lang="it">Formato</rdfs:label>
     </DatatypeProperty>
     
 
@@ -3735,10 +3728,6 @@ For stop-time entries without specified arrival and departure times, feed consum
             </Class>
         </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">L&apos;indirizzo MAC del dispositivo.</rdfs:comment>
-        <rdfs:comment xml:lang="en">The MAC address of the device.</rdfs:comment>
-        <rdfs:label xml:lang="it">Indirizzo MAC</rdfs:label>
-        <rdfs:label xml:lang="en">MAC address</rdfs:label>
     </DatatypeProperty>
     
 
@@ -3876,10 +3865,6 @@ For stop-time entries without specified arrival and departure times, feed consum
             </Class>
         </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">Il modello di dispositivo.</rdfs:comment>
-        <rdfs:comment xml:lang="en">The model of the device.</rdfs:comment>
-        <rdfs:label xml:lang="en">Model</rdfs:label>
-        <rdfs:label xml:lang="it">Modello</rdfs:label>
     </DatatypeProperty>
     
 
@@ -4207,10 +4192,6 @@ For stop-time entries without specified arrival and departure times, feed consum
     <DatatypeProperty rdf:about="http://www.disit.org/km4city/schema#password">
         <rdfs:domain rdf:resource="http://www.disit.org/km4city/schema#IoTBroker"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">La password che dovrebbe essere utilizzata per accedere al broker.</rdfs:comment>
-        <rdfs:comment xml:lang="en">The password that should be used for accessing the broker.</rdfs:comment>
-        <rdfs:label xml:lang="en">Password</rdfs:label>
-        <rdfs:label xml:lang="it">Password</rdfs:label>
     </DatatypeProperty>
     
 
@@ -4388,10 +4369,6 @@ For stop-time entries without specified arrival and departure times, feed consum
             </Class>
         </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">L&apos;azienda produttrice del dispositivo.</rdfs:comment>
-        <rdfs:comment xml:lang="en">The company that produces the device.</rdfs:comment>
-        <rdfs:label xml:lang="en">Producer</rdfs:label>
-        <rdfs:label xml:lang="it">Produttore</rdfs:label>
     </DatatypeProperty>
     
 
@@ -4408,10 +4385,6 @@ For stop-time entries without specified arrival and departure times, feed consum
             </Class>
         </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">Mappate o non mappate.</rdfs:comment>
-        <rdfs:comment xml:lang="en">Whether they are mapped or not.</rdfs:comment>
-        <rdfs:label xml:lang="en">Properties status</rdfs:label>
-        <rdfs:label xml:lang="it">Stato delle proprietà</rdfs:label>
     </DatatypeProperty>
     
 
@@ -4428,10 +4401,6 @@ For stop-time entries without specified arrival and departure times, feed consum
             </Class>
         </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">Il protocollo di comunicazione con il broker.</rdfs:comment>
-        <rdfs:comment xml:lang="en">The protocol for communicating with the broker.</rdfs:comment>
-        <rdfs:label xml:lang="en">Protocol</rdfs:label>
-        <rdfs:label xml:lang="it">Protocollo</rdfs:label>
     </DatatypeProperty>
     
 
@@ -5603,10 +5572,6 @@ For stop-time entries without specified arrival and departure times, feed consum
     <DatatypeProperty rdf:about="http://www.disit.org/km4city/schema#username">
         <rdfs:domain rdf:resource="http://www.disit.org/km4city/schema#IoTBroker"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment xml:lang="it">Il nome utente che dovrebbe essere utilizzato per accedere al broker.</rdfs:comment>
-        <rdfs:comment xml:lang="en">The username that should be used for accessing the broker.</rdfs:comment>
-        <rdfs:label xml:lang="it">Nome utente</rdfs:label>
-        <rdfs:label xml:lang="en">Username</rdfs:label>
     </DatatypeProperty>
     
 
@@ -9533,48 +9498,8 @@ Each instance represents a specific detector, of a specific type, located in a s
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/Actuator"/>
         <rdfs:subClassOf>
             <Restriction>
-                <onProperty rdf:resource="http://www.w3.org/ns/ssn/systems/hasSystemCapability"/>
-                <allValuesFrom rdf:resource="http://www.w3.org/ns/ssn/systems/SystemCapability"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
-                <minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</minQualifiedCardinality>
-                <onClass rdf:resource="http://www.w3.org/ns/ssn/Property"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="http://www.disit.org/km4city/schema#hasAttribute"/>
-                <minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</minQualifiedCardinality>
-                <onClass rdf:resource="http://www.disit.org/km4city/schema#DeviceAttribute"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="http://purl.oclc.org/NET/UNIS/fiware/iot-lite#exposedBy"/>
-                <qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</qualifiedCardinality>
-                <onClass rdf:resource="http://www.disit.org/km4city/schema#IoTBroker"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="http://www.w3.org/ns/ssn/implements"/>
-                <qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</qualifiedCardinality>
-                <onClass rdf:resource="http://www.w3.org/ns/sosa/Procedure"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
                 <onProperty rdf:resource="http://www.disit.org/km4city/schema#attributesStatus"/>
                 <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="http://www.disit.org/km4city/schema#created"/>
-                <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
             </Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -9613,6 +9538,46 @@ Each instance represents a specific detector, of a specific type, located in a s
                 <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
             </Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://www.w3.org/ns/ssn/systems/hasSystemCapability"/>
+                <allValuesFrom rdf:resource="http://www.w3.org/ns/ssn/systems/SystemCapability"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
+                <minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</minQualifiedCardinality>
+                <onClass rdf:resource="http://www.w3.org/ns/ssn/Property"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://www.disit.org/km4city/schema#hasAttribute"/>
+                <minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</minQualifiedCardinality>
+                <onClass rdf:resource="http://www.disit.org/km4city/schema#DeviceAttribute"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://purl.oclc.org/NET/UNIS/fiware/iot-lite#exposedBy"/>
+                <qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</qualifiedCardinality>
+                <onClass rdf:resource="http://www.disit.org/km4city/schema#IoTBroker"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://www.w3.org/ns/ssn/implements"/>
+                <qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</qualifiedCardinality>
+                <onClass rdf:resource="http://www.w3.org/ns/sosa/Procedure"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://www.disit.org/km4city/schema#created"/>
+                <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+            </Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment xml:lang="it">Le istanze di questa classe rappresentano ciascuna un attuatore.</rdfs:comment>
         <rdfs:comment xml:lang="en">The instances of this class represent each an actuator.</rdfs:comment>
         <rdfs:label xml:lang="en">Actuator</rdfs:label>
@@ -9627,12 +9592,6 @@ Each instance represents a specific detector, of a specific type, located in a s
         <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/UNIS/fiware/iot-lite#Service"/>
         <rdfs:subClassOf>
             <Restriction>
-                <onProperty rdf:resource="http://www.disit.org/km4city/schema#created"/>
-                <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
                 <onProperty rdf:resource="http://www.disit.org/km4city/schema#password"/>
                 <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
             </Restriction>
@@ -9641,6 +9600,12 @@ Each instance represents a specific detector, of a specific type, located in a s
             <Restriction>
                 <onProperty rdf:resource="http://www.disit.org/km4city/schema#username"/>
                 <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://www.disit.org/km4city/schema#created"/>
+                <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
             </Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -9677,48 +9642,8 @@ Each instance represents a specific detector, of a specific type, located in a s
         <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/sosa/Sensor"/>
         <rdfs:subClassOf>
             <Restriction>
-                <onProperty rdf:resource="http://www.w3.org/ns/ssn/systems/hasSystemCapability"/>
-                <allValuesFrom rdf:resource="http://www.w3.org/ns/ssn/systems/SystemCapability"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
-                <minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</minQualifiedCardinality>
-                <onClass rdf:resource="http://www.w3.org/ns/ssn/Property"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="http://www.disit.org/km4city/schema#hasAttribute"/>
-                <minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</minQualifiedCardinality>
-                <onClass rdf:resource="http://www.disit.org/km4city/schema#DeviceAttribute"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="http://purl.oclc.org/NET/UNIS/fiware/iot-lite#exposedBy"/>
-                <qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</qualifiedCardinality>
-                <onClass rdf:resource="http://www.disit.org/km4city/schema#IoTBroker"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="http://www.w3.org/ns/ssn/implements"/>
-                <qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</qualifiedCardinality>
-                <onClass rdf:resource="http://www.w3.org/ns/sosa/Procedure"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
                 <onProperty rdf:resource="http://www.disit.org/km4city/schema#attributesStatus"/>
                 <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-            </Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <Restriction>
-                <onProperty rdf:resource="http://www.disit.org/km4city/schema#created"/>
-                <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
             </Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -9755,6 +9680,46 @@ Each instance represents a specific detector, of a specific type, located in a s
             <Restriction>
                 <onProperty rdf:resource="http://www.disit.org/km4city/schema#protocol"/>
                 <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://www.w3.org/ns/ssn/systems/hasSystemCapability"/>
+                <allValuesFrom rdf:resource="http://www.w3.org/ns/ssn/systems/SystemCapability"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
+                <minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</minQualifiedCardinality>
+                <onClass rdf:resource="http://www.w3.org/ns/ssn/Property"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://www.disit.org/km4city/schema#hasAttribute"/>
+                <minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</minQualifiedCardinality>
+                <onClass rdf:resource="http://www.disit.org/km4city/schema#DeviceAttribute"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://purl.oclc.org/NET/UNIS/fiware/iot-lite#exposedBy"/>
+                <qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</qualifiedCardinality>
+                <onClass rdf:resource="http://www.disit.org/km4city/schema#IoTBroker"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://www.w3.org/ns/ssn/implements"/>
+                <qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</qualifiedCardinality>
+                <onClass rdf:resource="http://www.w3.org/ns/sosa/Procedure"/>
+            </Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <Restriction>
+                <onProperty rdf:resource="http://www.disit.org/km4city/schema#created"/>
+                <allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
             </Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="it">Le istanze di questa classe rappresentano ciascuna un sensore.</rdfs:comment>
@@ -14068,6 +14033,7 @@ Each instance represents a specific detector, of a specific type, located in a s
 
     <Class rdf:about="http://www.disit.org/km4city/schema#Traffic_flow">
         <rdfs:subClassOf rdf:resource="http://www.disit.org/km4city/schema#HighLevelType"/>
+        <rdfs:subClassOf rdf:resource="http://www.disit.org/km4city/schema#TransferServiceAndRenting"/>
         <rdfs:comment xml:lang="it">Sottoclasse delle osservazioni relative alla flusso auto.</rdfs:comment>
         <rdfs:comment xml:lang="en">Subclass of auto flow observations.</rdfs:comment>
         <rdfs:label xml:lang="it">Osservazione sul flusso</rdfs:label>
@@ -14087,6 +14053,15 @@ Each instance represents a specific detector, of a specific type, located in a s
         <rdfs:label xml:lang="en">Traffic light</rdfs:label>
     </Class>
     
+    <!-- http://www.disit.org/km4city/schema#Traffic_sensor -->
+
+    <Class rdf:about="http://www.disit.org/km4city/schema#Traffic_sensor">
+        <rdfs:label xml:lang="en">Traffic sensor</rdfs:label>
+        <rdfs:label xml:lang="it">Sensore del traffico</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.disit.org/km4city/schema#TransferServiceAndRenting"/>
+        <rdfs:comment xml:lang="en">Single sensor for observing speed, traffic, concentration or density</rdfs:comment>
+        <rdfs:comment xml:lang="it">Singolo sensore per osservare velocità, traffico, concentrazione o densità</rdfs:comment>
+    </Class>
 
 
     <!-- http://www.disit.org/km4city/schema#TrainStation -->
@@ -15361,6 +15336,60 @@ Each instance represents a specific detector, of a specific type, located in a s
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    <rdf:Description rdf:about="http://www.disit.org/km4city/schema#attributesStatus">
+        <rdfs:comment xml:lang="it">Mappati o non mappati.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Whether thay are mapped or not.</rdfs:comment>
+        <rdfs:label xml:lang="en">Attributes status</rdfs:label>
+        <rdfs:label xml:lang="it">Stato degli attributi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.disit.org/km4city/schema#format">
+        <rdfs:comment xml:lang="it">Il formato in cui sono rappresentati i dati prodotti dal dispositivo.</rdfs:comment>
+        <rdfs:comment xml:lang="en">The format in which the data produced by the device is represented.</rdfs:comment>
+        <rdfs:label xml:lang="en">Format</rdfs:label>
+        <rdfs:label xml:lang="it">Formato</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.disit.org/km4city/schema#macaddress">
+        <rdfs:comment xml:lang="it">L&apos;indirizzo MAC del dispositivo.</rdfs:comment>
+        <rdfs:comment xml:lang="en">The MAC address of the device.</rdfs:comment>
+        <rdfs:label xml:lang="it">Indirizzo MAC</rdfs:label>
+        <rdfs:label xml:lang="en">MAC address</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.disit.org/km4city/schema#model">
+        <rdfs:comment xml:lang="it">Il modello di dispositivo.</rdfs:comment>
+        <rdfs:comment xml:lang="en">The model of the device.</rdfs:comment>
+        <rdfs:label xml:lang="en">Model</rdfs:label>
+        <rdfs:label xml:lang="it">Modello</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.disit.org/km4city/schema#password">
+        <rdfs:comment xml:lang="it">La password che dovrebbe essere utilizzata per accedere al broker.</rdfs:comment>
+        <rdfs:comment xml:lang="en">The password that should be used for accessing the broker.</rdfs:comment>
+        <rdfs:label xml:lang="en">Password</rdfs:label>
+        <rdfs:label xml:lang="it">Password</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.disit.org/km4city/schema#producer">
+        <rdfs:comment xml:lang="it">L&apos;azienda produttrice del dispositivo.</rdfs:comment>
+        <rdfs:comment xml:lang="en">The company that produces the device.</rdfs:comment>
+        <rdfs:label xml:lang="en">Producer</rdfs:label>
+        <rdfs:label xml:lang="it">Produttore</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.disit.org/km4city/schema#propertiesStatus">
+        <rdfs:comment xml:lang="it">Mappate o non mappate.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Whether they are mapped or not.</rdfs:comment>
+        <rdfs:label xml:lang="en">Properties status</rdfs:label>
+        <rdfs:label xml:lang="it">Stato delle proprietà</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.disit.org/km4city/schema#protocol">
+        <rdfs:comment xml:lang="it">Il protocollo di comunicazione con il broker.</rdfs:comment>
+        <rdfs:comment xml:lang="en">The protocol for communicating with the broker.</rdfs:comment>
+        <rdfs:label xml:lang="en">Protocol</rdfs:label>
+        <rdfs:label xml:lang="it">Protocollo</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.disit.org/km4city/schema#username">
+        <rdfs:comment xml:lang="it">Il nome utente che dovrebbe essere utilizzato per accedere al broker.</rdfs:comment>
+        <rdfs:comment xml:lang="en">The username that should be used for accessing the broker.</rdfs:comment>
+        <rdfs:label xml:lang="it">Nome utente</rdfs:label>
+        <rdfs:label xml:lang="en">Username</rdfs:label>
+    </rdf:Description>
     <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/name">
         <rdfs:comment xml:lang="it">La proprietà indica il nome dell&apos;ente pubblico.</rdfs:comment>
         <rdfs:comment xml:lang="en">The property indicates the name of the PA.</rdfs:comment>
