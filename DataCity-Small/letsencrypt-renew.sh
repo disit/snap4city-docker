@@ -30,7 +30,7 @@ esac
 # Enable staging mode if needed
 if [ $staging != "0" ]; then staging_arg="--staging"; fi
 
-docker-compose run --user=1000 --rm --entrypoint "certbot renew" certbot
+docker-compose run --user=1000:1000 --rm --entrypoint "certbot renew" certbot
 echo
 
 echo "### Reloading nginx ..."
