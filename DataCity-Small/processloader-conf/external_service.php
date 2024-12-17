@@ -60,4 +60,9 @@ $username_od = 'postgres';
 $password_od = 'pgpassword';
 $dbname_od = 'postgres';
 
+$host_dashboardbuilder = $host;
+$username_dashboardbuilder = $username;
+$password_dashboardbuilder = $password;
+$db_dashboardbuilder = 'Dashboard';
+
 ?>

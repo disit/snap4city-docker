@@ -26,6 +26,35 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `heatmap` /*!40100 DEFAULT CHARACTER SE
 USE `heatmap`;
 
 --
+-- Table structure for table `authorizedUsers`
+--
+
+DROP TABLE IF EXISTS `authorizedUsers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `authorizedUsers` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `colormapUsers`
+--
+
+DROP TABLE IF EXISTS `colormapUsers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `colormapUsers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `colormap` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `colors`
 --
 
@@ -207,7 +236,7 @@ CREATE TABLE `stats` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24 18:05:49
+-- Dump completed on 2024-12-16 16:52:41
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: heatmap
@@ -242,4 +271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24 18:05:49
+-- Dump completed on 2024-12-16 16:52:41

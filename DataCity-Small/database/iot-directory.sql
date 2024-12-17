@@ -280,6 +280,9 @@ CREATE TABLE `deleted_devices` (
   `servicePath` varchar(96) DEFAULT NULL,
   `wktGeometry` mediumtext DEFAULT NULL,
   `hlt` varchar(30) DEFAULT NULL,
+  `is_in_kb` varchar(45) DEFAULT NULL,
+  `is_in_db` varchar(45) DEFAULT NULL,
+  `is_in_broker` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`,`contextBroker`),
   KEY `contextBroker` (`contextBroker`),
   KEY `protocol` (`protocol`),
@@ -353,6 +356,9 @@ CREATE TABLE `devices` (
   `servicePath` varchar(96) DEFAULT NULL,
   `wktGeometry` mediumtext DEFAULT NULL,
   `hlt` varchar(30) DEFAULT NULL,
+  `is_in_kb` varchar(45) DEFAULT NULL,
+  `is_in_db` varchar(45) DEFAULT NULL,
+  `is_in_broker` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`,`contextBroker`),
   KEY `contextBroker` (`contextBroker`),
   KEY `protocol` (`protocol`),
@@ -783,7 +789,7 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24 18:05:48
+-- Dump completed on 2024-12-16 16:52:40
 -- MySQL dump 10.16  Distrib 10.1.48-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: 192.168.1.119    Database: iotdb
@@ -878,4 +884,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-24 18:05:48
+-- Dump completed on 2024-12-16 16:52:40

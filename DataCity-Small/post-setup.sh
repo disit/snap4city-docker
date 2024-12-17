@@ -109,6 +109,7 @@ echo add dashboard
 curl -u admin:admin -XPOST "http://localhost:5601/api/saved_objects/_import?overwrite=true" -H "osd-xsrf: true" -H "securitytenant: global" --form file=@osd-dashboard.ndjson
 echo
 
+docker-compose exec dashboard-builder bash -c "cd /var/www/html/dashboardSmartCity/sql; php updateDb.php"
 docker-compose exec dashboard-cron bash -c "cd /var/www/html/dashboardSmartCity/opensearch; php IngestData.php"
 
 echo add geoserver workspace Snap4City

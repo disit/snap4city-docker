@@ -64,6 +64,10 @@ $access_token_userinfo = "http://www.snap4city.org/auth/realms/master/protocol/o
 //R PARAMETERS
 $r_path = '/usr/bin/Rscript';
 
+$colormap_external_path = '/var/www/html/dashboardSmartCity/img/';
+$colormap_external_link = 'http://dashboard/dashboardSmartCity/img/';
+$colormap_external_directory = 'heatmapsGradientLegends/';
+
 $connessione_al_server= mysqli_connect($host, $username, $password) or die("Errore di Connessione!!");
 if(!$connessione_al_server){
 die ('Non riesco a connettermi: errore '.mysqli_error()); // questo apparirà solo se ci sarà un errore

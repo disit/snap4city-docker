@@ -43,7 +43,7 @@ services:
     - ./certbot/www:/var/www/certbot
 
   dashboard-builder:
-    image: disitlab/dashboard-builder:v8.4
+    image: disitlab/dashboard-builder:v9.1
     #build: ./build/dashboard-builder
     ports:
       - "70:80"
@@ -115,6 +115,12 @@ services:
       options:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
+  memcached:
+    image: memcached:1.6.33-alpine
+    #command: -vv
+    restart: unless-stopped
+    ports:
+      - 11211:11211
   personaldata:
     image: disitlab/personaldata:v5.2
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
@@ -674,9 +680,9 @@ services:
 
 ###############HEATMAP
   heatmap2geosrv:
-    image: disitlab/heatmap2geoserver:v0
+    image: disitlab/heatmap2geoserver:v1.2.1
     volumes:
-      - ./heatmap-tmp:/go/src/heatmap2geoserver/data/
+      - ./heatmap-tmp:/heatmap2geoserver/data/
     environment:
       MySQL_hostname: dashboarddb
       MySQL_username: user
