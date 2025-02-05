@@ -43,7 +43,7 @@ services:
     - ./certbot/www:/var/www/certbot
 
   dashboard-builder:
-    image: disitlab/dashboard-builder:v9.1
+    image: disitlab/dashboard-builder:v9.2
     #build: ./build/dashboard-builder
     ports:
       - "70:80"
@@ -429,7 +429,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
 #KBSSM ################################################################      
   servicemap:
-    image: disitlab/servicemap:v5.8.5
+    image: disitlab/servicemap:v5.10
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     build: ./build/servicemap
     volumes:

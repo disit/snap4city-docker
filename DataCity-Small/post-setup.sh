@@ -116,6 +116,8 @@ echo add geoserver workspace Snap4City
 curl -u admin:snap4geo -XPOST -H "Content-type: text/xml" -d "<workspace><name>Snap4City</name></workspace>"  http://localhost/geoserver/rest/workspaces
 echo add geoserver workspace traffic
 curl -u admin:snap4geo -XPOST -H "Content-type: text/xml" -d "<workspace><name>traffic</name></workspace>"  http://localhost/geoserver/rest/workspaces
+echo add geoserver road traffic style
+curl -u admin:snap4geo -XPOST -H "Content-type: application/vnd.ogc.sld+xml" -d @servicemap-trafficflowmanager/road_traffic_style.sld  http://localhost/geoserver/rest/styles?name=road_traffic_style
 
 echo restart some services
 docker-compose restart wsserver personaldata orionbrokerfilter opensearch-dashboards iot-fiware-harvester proxy varnish
