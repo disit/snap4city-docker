@@ -250,7 +250,7 @@ services:
         max-file: "${S4C_LOG_MAX_FILE:-10}"
 
   iotapp-nr1:
-    image: disitlab/snap4city-nodered-v2.2.2-adv:v5
+    image: disitlab/snap4city-nodered-v2.2.2-adv:v14
     volumes:
       - ./iotapp-nr1:/data
     ports:
@@ -267,7 +267,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   iotapp-nr2:
-    image: disitlab/snap4city-nodered-v2.2.2-adv:v5
+    image: disitlab/snap4city-nodered-v2.2.2-adv:v14
     volumes:
       - ./iotapp-nr2:/data
     ports:
