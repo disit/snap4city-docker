@@ -69,6 +69,7 @@ $colormap_external_link = 'http://dashboard/dashboardSmartCity/img/';
 $colormap_external_directory = 'heatmapsGradientLegends/';
 
 $preview_path = '/dashboardSmartCity/view/preview.php';
+$host_trafficflowmanager = 'http://dashboard/';
 
 $connessione_al_server= mysqli_connect($host, $username, $password) or die("Errore di Connessione!!");
 if(!$connessione_al_server){
