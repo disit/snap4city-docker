@@ -43,7 +43,7 @@ services:
     - ./certbot/www:/var/www/certbot
 
   dashboard-builder:
-    image: disitlab/dashboard-builder:v9.2
+    image: disitlab/dashboard-builder:v9.3.15
     #build: ./build/dashboard-builder
     ports:
       - "70:80"
@@ -103,7 +103,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   dashboard-cron:
-    image: disitlab/dashboard-builder:v8.4
+    image: disitlab/dashboard-builder:v9.3.15
     volumes:
        - ./dashboard-builder-conf:/var/www/html/dashboardSmartCity/conf
        - ./dashboard-cron-conf/crontab:/crontab
@@ -196,7 +196,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   synoptics:
-    image: disitlab/synoptics:v2
+    image: disitlab/synoptics:v2.5.3
     volumes:
       - ./synoptics-conf/config.js:/usr/src/synoptics/new-config.js
       - ./synoptics-conf/v2-config.js:/usr/src/synoptics/v2/new-config.js
@@ -303,7 +303,6 @@ services:
         - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092
         - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
         - JMX_PORT=9000
-        - KAFKA_JMX_OPTS=-Djava.rmi.server.hostname=192.168.1.119 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.rmi.port=9000 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
     volumes:
       - kafka:/bitnami/kafka
     restart: unless-stopped
@@ -429,7 +428,7 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
 #KBSSM ################################################################      
   servicemap:
-    image: disitlab/servicemap:v5.10
+    image: disitlab/servicemap:v5.11
 #    image: tomcat:9.0.26-jdk8-openjdk-slim
     build: ./build/servicemap
     volumes:
@@ -483,7 +482,7 @@ services:
     ports:
      - "8983:8983"
     volumes:
-      - solr-data:/var/solr    
+      - solr-data:/opt/solr/server/solr/mycores
     command:
       - solr-precreate
       - km4c-index
@@ -525,7 +524,7 @@ services:
     image: varnish:stable
     hostname: cache
     environment:
-      - VARNISH_SIZE=100MB
+      - VARNISH_SIZE=200MB
       - VARNISHNCSA=true
       - VARNISH_HTTP_PORTS=6081
     ports:
@@ -670,6 +669,7 @@ services:
       - od-postgis-data:/var/lib/postgresql/data
       - ./od-postgis/od-matrix-db-schema.sql:/docker-entrypoint-initdb.d/20-od-matrix-db-schema.sql
       - ./od-postgis/italy_rx.sql:/docker-entrypoint-initdb.d/30-italy_rx.sql
+      - ./od-postgis/gadm36.sql:/docker-entrypoint-initdb.d/40-gadm36.sql
       - ./od-postgis:/od-postgis
     restart: unless-stopped
     logging:

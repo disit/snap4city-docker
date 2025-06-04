@@ -13,6 +13,9 @@
             }
           }
         },
+        "entry_date": {
+          "type": "date"
+        },
         "dataTime": {
           "type": "date"
         },
