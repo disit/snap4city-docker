@@ -110,6 +110,7 @@ curl -u admin:admin -XPOST "http://localhost:5601/api/saved_objects/_import?over
 echo
 
 docker-compose exec dashboard-builder bash -c "cd /var/www/html/dashboardSmartCity/sql; php updateDb.php"
+docker-compose exec dashboard-builder bash -c "cd /var/www/html/iot-directory/sql; php updateDb.php"
 docker-compose exec dashboard-cron bash -c "cd /var/www/html/dashboardSmartCity/opensearch; php IngestData.php"
 
 echo add geoserver workspace Snap4City
