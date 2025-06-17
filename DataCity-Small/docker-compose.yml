@@ -43,7 +43,7 @@ services:
     - ./certbot/www:/var/www/certbot
 
   dashboard-builder:
-    image: disitlab/dashboard-builder:v9.3.15
+    image: disitlab/dashboard-builder:v9.4.0
     #build: ./build/dashboard-builder
     ports:
       - "70:80"
@@ -303,6 +303,7 @@ services:
         - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092
         - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
         - JMX_PORT=9000
+        - KAFKA_JMX_OPTS=-Djava.rmi.server.hostname=192.168.1.119 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9000 -Dcom.sun.management.jmxremote.rmi.port=9000 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false
     volumes:
       - kafka:/bitnami/kafka
     restart: unless-stopped
@@ -620,9 +621,11 @@ services:
 ########## OD ########################################################
 
   od-insert-api:
-    image: disitlab/od-matrix-api:v1
+    image: disitlab/od-matrix-api:v2.2
     ports:
       - 3100:3100
+    environment:
+      BASE_URL: 'http://dashboard'
     command: python -u ./od-insert.py
     volumes:
       - ./od-matrix-conf/config.yaml:/usr/src/app/config.yaml
@@ -633,9 +636,11 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   od-get-api:
-    image: disitlab/od-matrix-api:v1
+    image: disitlab/od-matrix-api:v2.2
     ports:
       - 3200:3200
+    environment:
+      BASE_URL: 'http://dashboard'
     command: python -u ./od-get.py
     volumes:
       - ./od-matrix-conf/config.yaml:/usr/src/app/config.yaml
@@ -646,7 +651,9 @@ services:
         max-size: "${S4C_LOG_MAX_SIZE:-100m}"
         max-file: "${S4C_LOG_MAX_FILE:-10}"
   od-build-api:
-    image: disitlab/od-matrix-api:v1
+    image: disitlab/od-matrix-api:v2.2
+    environment:
+      BASE_URL: 'http://dashboard'
     ports:
       - 3000:3000
     command: python -u ./od-build.py
